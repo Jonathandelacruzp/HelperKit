@@ -11,12 +11,12 @@
     <TargetFrameworks>netstandard2.0;</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <PackageId>HelperKit</PackageId>
-    <Version>1.1</Version>
+    <Version>1.1.1</Version>
     <Authors>jonathan.delacruzp</Authors>
     <Company>jonathan.delacruzp</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.1</AssemblyVersion>
-    <FileVersion>1.1</FileVersion>
+    <AssemblyVersion>1.1.1</AssemblyVersion>
+    <FileVersion>1.1.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Copyright>jonathan.delacruzp, 2019</Copyright>
     <RepositoryType>git</RepositoryType>

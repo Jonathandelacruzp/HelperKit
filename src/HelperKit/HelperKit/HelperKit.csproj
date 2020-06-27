@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <PackageId>HelperKit</PackageId>
+    <Version>1.1</Version>
+    <Authors>jonathan.delacruzp</Authors>
+    <Company>jonathan.delacruzp</Company>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>1.1</AssemblyVersion>
+    <FileVersion>1.1</FileVersion>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Copyright>jonathan.delacruzp, 2019</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <Description>Small library of general purpose utilities for .NET development that almost every application can use.</Description>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <PackageProjectUrl>https://github.com/Jonathandelacruzp/HelperKit</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\Workspaces\jonathan\HelperKit\HelperKit\HelperKit\HelperKit.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="HelperKit.csproj.vspscc" />
+  </ItemGroup>
+
+</Project>

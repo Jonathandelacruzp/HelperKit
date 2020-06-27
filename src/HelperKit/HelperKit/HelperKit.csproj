@@ -11,20 +11,21 @@
     <TargetFrameworks>netstandard2.0;</TargetFrameworks>
     <LangVersion>latest</LangVersion>
     <PackageId>HelperKit</PackageId>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <Authors>jonathan.delacruzp</Authors>
     <Company>jonathan.delacruzp</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <AssemblyVersion>1.1.1</AssemblyVersion>
+    <AssemblyVersion>1.1.2</AssemblyVersion>
     <FileVersion>1.1.0</FileVersion>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Copyright>jonathan.delacruzp, 2019</Copyright>
-    <RepositoryType>git</RepositoryType>
+    <RepositoryType>GitHub</RepositoryType>
     <Description>Small library of general purpose utilities for .NET development that almost every application can use.</Description>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <PackageProjectUrl>https://github.com/Jonathandelacruzp/HelperKit</PackageProjectUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

@@ -11,7 +11,8 @@ namespace HelperKit
         private static IDictionary<string, string> BuildMappings()
         {
             var mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
-                #region Big freaking list of mime types            
+                #region Big freaking list of mime types
+
                 // maps both ways,
                 // extension -> mime type
                 //   and
@@ -21,7 +22,7 @@ namespace HelperKit
                 // some mime types can map to multiple extensions, so to get a deterministic mapping,
                 // add those to the dictionary specifcially
                 //
-                // combination of values from Windows 7 Registry and 
+                // combination of values from Windows 7 Registry and
                 // from C:\Windows\System32\inetsrv\config\applicationHost.config
                 // some added, including .7z and .dat
                 //
@@ -677,7 +678,6 @@ namespace HelperKit
                 {"x-world/x-vrml", ".xof"},
 
                 #endregion
-
                 };
             var cache = mappings.ToList(); // need ToList() to avoid modifying while still enumerating
 

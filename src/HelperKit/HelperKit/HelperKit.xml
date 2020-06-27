@@ -31,12 +31,11 @@
         </member>
         <member name="T:HelperKit.Extensions">
             <summary>
-            Funciones de Extension 
+            Funciones de Extension
             </summary>
         </member>
         <member name="M:HelperKit.Extensions.ToBoolean(System.Object,System.Boolean)">
             <summary>
-            
             </summary>
             <param name="val"></param>
             <param name="def"></param>
@@ -44,7 +43,6 @@
         </member>
         <member name="M:HelperKit.Extensions.IsBetween(System.DateTime,System.DateTime,System.DateTime)">
             <summary>
-            
             </summary>
             <param name="val"></param>
             <param name="Start"></param>
@@ -97,7 +95,6 @@
         </member>
         <member name="M:HelperKit.Extensions.HasAny``1(System.Collections.Generic.IEnumerable{``0},``0[])">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="array"></param>
@@ -106,7 +103,6 @@
         </member>
         <member name="M:HelperKit.Extensions.HasAnySingle``1(``0,``0[])">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="value"></param>
@@ -115,7 +111,6 @@
         </member>
         <member name="M:HelperKit.Extensions.IsContainedOn``1(``0,``0[])">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="value"></param>
@@ -137,7 +132,6 @@
         </member>
         <member name="M:HelperKit.Extensions.ToEnum``1(System.String)">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="value"></param>
@@ -145,14 +139,13 @@
         </member>
         <member name="M:HelperKit.Extensions.EnumNamedValues``1">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToValue``1(System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
             <summary>
-            Retorna un objeto según su tipo de dato (T) guardado en un diccionario, 
+            Retorna un objeto según su tipo de dato (T) guardado en un diccionario,
             en caso el objeto no exista se crea una nueva instancia del mismo
             </summary>
             <param name="dictionary">Diccionario tipo string-object</param>
@@ -161,7 +154,6 @@
         </member>
         <member name="M:HelperKit.Extensions.ToNameValueCollection``1(``0)">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="t"></param>
@@ -169,7 +161,6 @@
         </member>
         <member name="M:HelperKit.Extensions.ToKeyValuePair``1(``0)">
             <summary>
-            
             </summary>
             <typeparam name="T"></typeparam>
             <param name="t"></param>
@@ -228,7 +219,7 @@
         </member>
         <member name="M:HelperKit.Extensions.DeleteSlashAndBackslash(System.String)">
             <summary>
-            Deletes all slash / y backslash \ from string 
+            Deletes all slash / y backslash \ from string
             </summary>
             <param name="val"></param>
             <returns></returns>
@@ -250,7 +241,6 @@
         </member>
         <member name="M:HelperKit.Extensions.TostringUTF(System.String)">
             <summary>
-            
             </summary>
             <param name="val"></param>
             <returns></returns>
@@ -265,14 +255,12 @@
         </member>
         <member name="M:HelperKit.Security.HashHelper.ComputeMD5Hash(System.String)">
             <summary>
-            
             </summary>
             <param name="rawData"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Security.HashHelper.AreEqualMD5(System.String,System.String)">
             <summary>
-            
             </summary>
             <param name="text"></param>
             <param name="valorEncriptado"></param>
@@ -287,7 +275,6 @@
         </member>
         <member name="M:HelperKit.Security.HashHelper.AreEqualSha256Hash(System.String,System.String)">
             <summary>
-            
             </summary>
             <param name="text"></param>
             <param name="valorEncriptado"></param>

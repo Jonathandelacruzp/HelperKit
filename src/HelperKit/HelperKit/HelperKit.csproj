@@ -8,15 +8,15 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net45;net46;net47</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<PackageId>HelperKit</PackageId>
-		<Version>1.1.4</Version>
+		<Version>1.1.5</Version>
 		<Authors>jonathan.delacruzp</Authors>
 		<Company>jonathan.delacruzp</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>1.1.4</AssemblyVersion>
-		<FileVersion>1.1.0</FileVersion>
+		<AssemblyVersion>1.1.5</AssemblyVersion>
+		<FileVersion>1.1.1</FileVersion>
 		<PackageReleaseNotes></PackageReleaseNotes>
 		<Copyright>jonathan.delacruzp, 2019</Copyright>
 		<RepositoryType>git</RepositoryType>

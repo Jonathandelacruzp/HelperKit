@@ -1,0 +1,7 @@
+﻿<div class="form-group">
+    @Html.LabelRequiredFor(x => x, new { @class = "col-sm-3 control-label" })
+    <div class="col-sm-9">
+        @RenderBody()
+        @Html.ValidationMessageFor(x => x)
+    </div>
+</div>

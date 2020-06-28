@@ -1,0 +1,6 @@
+﻿@model object
+@{
+    Layout = ConstantHelpers.LAYOUT.EDITOR_TEMPLATE_LAYOUT_PATH;
+}
+
+@Html.DropDownListFor(m => m, ViewData.Get<SelectList>("selectList"), "[ Seleccione ]", new { @class = "form-control" })

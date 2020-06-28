@@ -1,0 +1,158 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;net46;net47</TargetFrameworks>
+    <Authors>jonathan.delacruzp</Authors>
+    <Company>jonathan.delacruzp</Company>
+    <Version>1.1.4</Version>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <AssemblyVersion>1.1.4</AssemblyVersion>
+    <FileVersion>1.1.4</FileVersion>
+    <Copyright>jonathan.delacruzp, 2019</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <Description>.NET utility library that includes Application Configuration, MVC helpers and more. Utility classes include: StringUtils, ReflectionUtils, DataUtils, SerializationUtils, SecurityUtils and XmlUtils. These classes are useful in any kind of .NET MVC project.</Description>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <PackageTags>Mvc</PackageTags>
+    <RepositoryUrl>https://github.com/Jonathandelacruzp/HelperKit</RepositoryUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net45|AnyCPU'">
+    <DocumentationFile>D:\Workspaces\jonathan\HelperKit\HelperKit\HelperKit.Mvc\HelperKit.Mvc.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Mail\MailSendGrid.cs" />
+    <Compile Remove="ViewModels\BitFilterViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="HelperKit.Mvc.csproj.vspscc" />
+    <None Remove="Scripts\shared\bit-filter.js" />
+    <None Remove="Scripts\shared\bit-filter.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HelperKit" Version="1.1.5" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
+    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Ajax" Version="3.2.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="PagedList.Mvc" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Scripts\shared\global.min.js">
+      <PackagePath>content\Scripts\shared\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>   
+    <Content Include="Scripts\shared\rebind.js">
+      <PackagePath>content\Scripts\shared\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Error\_Index.cshtml">
+      <PackagePath>content\Views\Error\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Decimal.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Email.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\FileInput.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Int32.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\ReadOnly.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\SelectList.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\String.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\EditorTemplates\_Layout.cshtml">
+      <PackagePath>content\Views\Shared\EditorTemplates\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\Error.cshtml">
+      <PackagePath>content\Views\Shared\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <PackagePath>content\Views\Shared\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Shared\_ModalTemplate.cshtml">
+      <PackagePath>content\Views\Shared\</PackagePath>
+      <CopyToOutputDirectory>true</CopyToOutputDirectory>
+    </Content>
+
+    <Content Include="Transforms\Views\web.config.install.xdt">
+      <PackagePath>content\Views\</PackagePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Transforms\web.config.install.xdt">
+      <PackagePath>content\</PackagePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Controllers\BaseController.cs.pp">
+      <PackagePath>content\Controllers\</PackagePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Controllers\ErrorController.cs.pp">
+      <PackagePath>content\Controllers\</PackagePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Models\Base\DataContext.cs.pp">
+      <PackagePath>content\Models\Base\</PackagePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    
+  </ItemGroup>
+
+
+</Project>

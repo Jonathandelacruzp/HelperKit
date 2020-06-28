@@ -1,0 +1,6 @@
+﻿@model String
+@{
+    Layout = ConstantHelpers.LAYOUT.EDITOR_TEMPLATE_LAYOUT_PATH;
+}
+
+@Html.TextAreaFor(x => x, new { @class = "form-control", @rows = "4" })

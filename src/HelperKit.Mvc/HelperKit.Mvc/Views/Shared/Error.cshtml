@@ -1,0 +1,14 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+<div class="four-zero" style="background:transparent">
+    <div class="fz-inner palette-Red-800 bg z-depth-3">
+        <h2>500!</h2>
+        <p><small> Error, recurso no disponible. Por favor inténtelo más tarde. </small></p>
+        <p class="hidden"> @Model.Exception.Message </p>
+        @if (Model.Exception.InnerException != null)
+        {
+            <p class="hidden"> @Model.Exception.InnerException.Message </p>
+        }
+        <p class="hidden"> @Model.Exception.StackTrace </p>
+        <a class="btn btn-default" href="@Url.Action("Dashboard","Login", new { Area = string.Empty})"><i class="zmdi zmdi-home zmdi-hc-lg"></i> Ir al Inicio</a>
+    </div>
+</div>

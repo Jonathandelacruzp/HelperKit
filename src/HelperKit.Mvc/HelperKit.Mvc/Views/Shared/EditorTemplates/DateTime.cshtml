@@ -1,0 +1,6 @@
+﻿@model DateTime?
+@{
+    Layout = ConstantHelpers.LAYOUT.EDITOR_TEMPLATE_LAYOUT_PATH;
+}
+
+@Html.TextBoxFor(x => x, "{0:dd/MM/yyyy}", new { @class = "form-control datetimepicker" })

@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings xdt:Transform="InsertIfMissing" >
+
+    <add key="RENDER_PATH" value="~/Templates/" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+    
+    <add key="SERVICE_URL" value="$Value" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+
+    <add key="SMTP_FROM" value="$SMTP_FROM" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+    <add key="SMTP_FROM_PWD" value="$SMTP_FROM_PWD" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+    <add key="SMTP_FROM_NAME" value="$SMTP_FROM_NAME" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+    <add key="SMTP_HOST" value="$SMTP_HOST" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+    <add key="SMTP_PORT" value="25" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+
+    <add key="Google.Analytics" value="$Value" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+    <add key="Google.Captcha.SiteKey" value="$Value" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+    <add key="Google.Captcha.SecretKey" value="$Value" xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" />
+
+  </appSettings>
+</configuration>

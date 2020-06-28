@@ -1,0 +1,6 @@
+﻿@model HttpPostedFileBase
+@{
+    Layout = ConstantHelpers.LAYOUT.EDITOR_TEMPLATE_LAYOUT_PATH;
+}
+
+@Html.TextBoxFor(x => x.FileName, new { @class = "form-control", @Type = "file" })

@@ -1,0 +1,645 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HelperKit.Mvc</name>
+    </assembly>
+    <members>
+        <member name="M:HelperKit.Mvc.HttpClientServiceHelper.#ctor">
+            <summary>
+            AppSettings SERVICE_URL
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.WebClientServiceHelper.#ctor">
+            <summary>
+            AppSettings SERVICE_URL
+            </summary>
+        </member>
+        <member name="T:HelperKit.Mvc.AsyncHelperController">
+            <summary>
+            Base AsyncController
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.AsyncHelperController.PostMessage(HelperKit.Mvc.IAlertMessage)">
+            <summary>
+            Generate Alert
+            </summary>
+            <param name="alertMessage"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.AsyncHelperController.PostMessage(HelperKit.Mvc.MessageType)">
+            <summary>
+            Generate Alert
+            </summary>
+            <param name="messageType"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.AsyncHelperController.PostMessage(HelperKit.Mvc.MessageType,System.String)">
+            <summary>
+            Generate Alert
+            </summary>
+            <param name="messageType"></param>
+            <param name="body"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.AsyncHelperController.PostMessage(HelperKit.Mvc.MessageType,System.String,System.String)">
+            <summary>
+            Generate Alert
+            </summary>
+            <param name="messageType"></param>
+            <param name="title"></param>
+            <param name="body"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.AsyncHelperController.PostMessage(System.Exception)">
+            <summary>
+            Generate Alert
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="T:HelperKit.Mvc.HelperController">
+            <summary>
+            Base Controller
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.HelperController.PostMessage(HelperKit.Mvc.IAlertMessage)">
+            <summary>
+            Generate Alerts
+            </summary>
+            <param name="alertMessage"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.HelperController.PostMessage(HelperKit.Mvc.MessageType)">
+            <summary>
+            Generate Alert
+            </summary>
+            <param name="messageType"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.HelperController.PostMessage(HelperKit.Mvc.MessageType,System.String)">
+            <summary>
+            Generate Alert
+            </summary>
+            <param name="messageType"></param>
+            <param name="body"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.HelperController.PostMessage(HelperKit.Mvc.MessageType,System.String,System.String)">
+            <summary>
+            Generate Alert
+            </summary>
+            <param name="messageType"></param>
+            <param name="title"></param>
+            <param name="body"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.HelperController.PostMessage(System.Exception)">
+            <summary>
+            Generate Alert
+            </summary>
+            <param name="ex"></param>
+        </member>
+        <member name="T:HelperKit.Mvc.DataAnnotation.FileSizeAttribute">
+            <summary>
+            Validate file size of HttpPostedFileBase
+            </summary>
+        </member>
+        <member name="T:HelperKit.Mvc.DataAnnotation.FileTypesAttribute">
+            <summary>
+            Validate for filetype of HttpPostedFileBase
+            </summary>
+        </member>
+        <member name="T:HelperKit.Mvc.Filters.GoogleRecaptchaAttribute">
+            <summary>
+            Filtro para Google Recaptcha
+            AppSetting Google.Captcha.SecretKey
+            </summary>
+        </member>
+        <member name="T:HelperKit.Mvc.Filters.ModalViewExceptionAttribute">
+            <summary>
+            redirects Modal Errors to /Error/_Index
+            </summary>
+        </member>
+        <member name="T:HelperKit.Mvc.ModalAjaxFormBuilder">
+            <summary>
+            Modal Ajax Form
+            </summary>
+        </member>
+        <member name="P:HelperKit.Mvc.ModalAjaxFormBuilder.AjaxOptions">
+            <summary>
+            AjaxOptions
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.Web.Mvc.Ajax.AjaxOptions)">
+            <summary>
+            </summary>
+            <param name="ajaxOptions"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.Object,System.Web.Mvc.Ajax.AjaxOptions)">
+            <summary>
+            </summary>
+            <param name="routeValues"></param>
+            <param name="ajaxOptions"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.String,System.Object)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="htmlAttributes"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.String,System.Web.Mvc.Ajax.AjaxOptions)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="ajaxOptions"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.String,System.Object,System.Web.Mvc.Ajax.AjaxOptions)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="htmlAttributes"></param>
+            <param name="ajaxOptions"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.String,System.String)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.String,System.String,System.Object)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+            <param name="htmlAttributes"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.String,System.String,System.Web.Mvc.Ajax.AjaxOptions)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+            <param name="ajaxOptions"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.#ctor(System.String,System.String,System.Object,System.Web.Mvc.Ajax.AjaxOptions)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+            <param name="ajaxOptions"></param>
+            <param name="htmlAttributes"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalAjaxFormBuilder.BeginForm(System.Object)">
+            <summary>
+            </summary>
+            <param name="obj">Type AjaxHelper</param>
+            <returns></returns>
+        </member>
+        <member name="T:HelperKit.Mvc.ModalFormBuilder">
+            <summary>
+            Modal Form
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalFormBuilder.#ctor(System.Object)">
+            <summary>
+            </summary>
+            <param name="routeValues"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalFormBuilder.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalFormBuilder.#ctor(System.String,System.Web.Mvc.FormMethod)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="method"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalFormBuilder.#ctor(System.String,System.Object)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="htmlAttributes"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalFormBuilder.#ctor(System.String,System.String)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalFormBuilder.#ctor(System.String,System.String,System.Web.Mvc.FormMethod)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+            <param name="method"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalFormBuilder.#ctor(System.String,System.String,System.Object)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+            <param name="htmlAttributes"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalFormBuilder.#ctor(System.String,System.String,System.Web.Mvc.FormMethod,System.Object)">
+            <summary>
+            </summary>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+            <param name="method"></param>
+            <param name="htmlAttributes"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.ModalFormBuilder.BeginForm(System.Object)">
+            <summary>
+            </summary>
+            <param name="obj">Type HtmlHelper</param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.AjaxExtensions.RawActionLink(System.Web.Mvc.AjaxHelper,System.String,System.String,System.String,System.Object,System.Web.Mvc.Ajax.AjaxOptions,System.Object)">
+            <summary>
+            Returns an html element that contains the URL to the specified action method;
+            when the action link is clicked, the action method is invoked asynchronously
+            by using JavaScript.
+            </summary>
+            <param name="ajax"></param>
+            <param name="innerHtml"></param>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+            <param name="routeValues"></param>
+            <param name="ajaxOptions"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.AjaxExtensions.RawActionLink(System.Web.Mvc.AjaxHelper,System.String,System.String,System.Object,System.Web.Mvc.Ajax.AjaxOptions,System.Object)">
+            <summary>
+            Returns an html element that contains the URL to the specified action method;
+            when the action link is clicked, the action method is invoked asynchronously
+            by using JavaScript.
+            </summary>
+            <param name="ajax"></param>
+            <param name="innerHtml"></param>
+            <param name="actionName"></param>
+            <param name="routeValues"></param>
+            <param name="ajaxOptions"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.DataExtensions.GoogleTagManagerScript``1(HelperKit.Mvc.DataHelper{``0})">
+            <summary>
+            Inserta script de Tag manager con AppSetting Google.Analytics
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.DataExtensions.GoogleReCaptcha``1(HelperKit.Mvc.DataHelper{``0})">
+            <summary>
+            AppSettings Google.Captcha.SiteKey
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.DataExtensions.GoogleRecaptchaScript``1(HelperKit.Mvc.DataHelper{``0})">
+            <summary>
+            script de llamado a Google Recaptcha https://www.google.com/recaptcha/api.js
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.DataExtensions.GoogleInvisibleReCaptcha``1(HelperKit.Mvc.DataHelper{``0},System.String,System.Object)">
+            <summary>
+            Invisible Recaptcha button generator con funcion javascript onSubmit
+            </summary>
+            <param name="data"></param>
+            <param name="innerHtml"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.DataExtensions.GoogleInvisibleReCaptcha``1(HelperKit.Mvc.DataHelper{``0},System.String,System.String,System.Object)">
+            <summary>
+            Invisible Recaptcha button generator con funcion javascript onSubmit
+            </summary>
+            <param name="data"></param>
+            <param name="innerHtml"></param>
+            <param name="classNames"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.DataExtensions.GoogleInvisibleReCaptcha``1(HelperKit.Mvc.DataHelper{``0},System.String,System.String,System.String,System.Object)">
+            <summary>
+            Invisible Recaptcha button generator
+            </summary>
+            <param name="data"></param>
+            <param name="innerHtml"></param>
+            <param name="classNames"></param>
+            <param name="callBack"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Alert(System.Web.Mvc.HtmlHelper,HelperKit.Mvc.MessageType,System.String,System.String,System.Boolean)">
+            <summary>
+            Genera Mensaje de Alerta Html Boostrap Dimissable
+            </summary>
+            <param name="html"></param>
+            <param name="type">Tipo de Alerta</param>
+            <param name="title"></param>
+            <param name="message">Mensaje</param>
+            <param name="hasIcon"></param>
+            <returns>MvcHtmlString</returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Alert(System.Web.Mvc.HtmlHelper,HelperKit.Mvc.MessageType,System.String,System.Boolean)">
+            <summary>
+            Genera Mensaje de Alerta Html Boostrap Dimissable
+            </summary>
+            <param name="html"></param>
+            <param name="type"></param>
+            <param name="message"></param>
+            <param name="hasIcon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Alert(System.Web.Mvc.HtmlHelper,HelperKit.Mvc.IAlertMessage,System.Boolean)">
+            <summary>
+            Genera Mensaje de Alerta Html Boostrap Dimissable
+            </summary>
+            <param name="html"></param>
+            <param name="alertMessage"></param>
+            <param name="hasIcon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Alert(System.Web.Mvc.HtmlHelper,System.Web.Mvc.TempDataDictionary,System.Boolean)">
+            <summary>
+            Genera Mensaje de Alerta Html Boostrap Dimissable
+            </summary>
+            <param name="html"></param>
+            <param name="tempData">TempData["AlertMessage"] required</param>
+            <param name="hasIcon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Badge(System.Web.Mvc.HtmlHelper,HelperKit.Mvc.MessageType,System.String,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="html"></param>
+            <param name="type"></param>
+            <param name="content"></param>
+            <param name="isPill"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Image(System.Web.Mvc.HtmlHelper,System.String,System.String,System.String)">
+            <summary>
+            Devuelne un tag html <img />
+            </summary>
+            <param name="html"></param>
+            <param name="src"></param>
+            <param name="alt"></param>
+            <param name="Class"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Image(System.Web.Mvc.HtmlHelper,System.String,System.String)">
+            <summary>
+            Devuelne un tag html <img />
+            </summary>
+            <param name="html"></param>
+            <param name="src"></param>
+            <param name="alt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.ImageFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Object)">
+            <summary>
+            Genera una imagen para un objeto
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TProperty"></typeparam>
+            <param name="html"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.LabelRequiredFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Object)">
+            <summary>
+            Retorna un mvc label con el * de requerido
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="html"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.CacheTag(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Genera una ruta en la cache de aplicacion para una ruta de archivo
+            </summary>
+            <param name="rootRelativePath"></param>
+            <param name="cacheTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Content(System.Web.Mvc.HtmlHelper,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Devuelve definiciones Html para definir estilos y scripts
+            </summary>
+            <param name="html"></param>
+            <param name="contentRoute"></param>
+            <param name="areaName"></param>
+            <param name="isScripts"></param>
+            <param name="hasCache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Content(System.Web.Mvc.HtmlHelper,System.String,System.String)">
+            <summary>
+            Devuelve definiciones Html para definir estilos y scripts
+            </summary>
+            <param name="html"></param>
+            <param name="contentName"></param>
+            <param name="areaName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Content(System.Web.Mvc.HtmlHelper,System.String,System.Boolean)">
+            <summary>
+            Devuelve definiciones Html para definir estilos y scripts
+            </summary>
+            <param name="html"></param>
+            <param name="contentName"></param>
+            <param name="isScripts"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.Content(System.Web.Mvc.HtmlHelper,System.String)">
+            <summary>
+            Devuelve definiciones Html para definir estilos y scripts
+            </summary>
+            <param name="html"></param>
+            <param name="contentName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.FormGroup(System.Web.Mvc.HtmlHelper,System.String,System.Web.Mvc.MvcHtmlString,System.Boolean,System.Web.Mvc.MvcHtmlString,System.Int32)">
+            <summary>
+            Devuelve la clásica estructura de un "from group" de bootstrap indicando el label y el control
+            </summary>
+            <param name="html"></param>
+            <param name="LabelText"></param>
+            <param name="FormControl"></param>
+            <param name="Inline"></param>
+            <param name="validateMessage"></param>
+            <param name="colMd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.HtmlExtensions.HelpTextFor``2(System.Web.Mvc.HtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Object)">
+            <summary>
+            </summary>
+            <typeparam name="TModel"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <param name="html"></param>
+            <param name="expression"></param>
+            <param name="htmlAttributes"></param>
+            <returns></returns>
+        </member>
+        <member name="P:HelperKit.Mvc.Html.PaginationExtensions.Bootstrap3Pager">
+            <summary>
+            Bootstrap3Pager
+            </summary>
+        </member>
+        <member name="P:HelperKit.Mvc.Html.PaginationExtensions.Bootstrap3PagerZmdi">
+            <summary>
+            Bootstrap 3 pager with zmdi
+            </summary>
+        </member>
+        <member name="P:HelperKit.Mvc.Html.PaginationExtensions.Bootstrap4Pager">
+            <summary>
+            Bootstrap4Pager
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.PaginationExtensions.AjaxPagerOptions(System.String,System.String,System.String)">
+            <summary>
+            </summary>
+            <param name="id">Tag Id</param>
+            <param name="onBegin">Begin Function name</param>
+            <param name="onComplete"> Complete Funcion name</param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.PaginationExtensions.AjaxPagerOptionsById(System.String)">
+            <summary>
+            </summary>
+            <param name="id">Tag Id</param>
+            <returns></returns>
+        </member>
+        <member name="P:HelperKit.Mvc.Html.PaginationExtensions.AjaxPagerOptionsDefault">
+            <summary>
+            UpdateTargetId = "paged-section", OnBegin = "pagedLoading", OnFailure = "pageFailure", OnComplete = "pagedLoaded"
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.UrlExtensions.AbsoluteAction(System.Web.Mvc.UrlHelper,System.String,System.String,System.Object)">
+            <summary>
+            Genera la url ansoluta del la accion
+            especificando el controller y atributos adicionales.
+            </summary>
+            <param name="url"></param>
+            <param name="actionName">Nombre de la accion</param>
+            <param name="controllerName">Nombre del controlador</param>
+            <param name="routeValues">route values</param>
+            <returns>URL Absoluta</returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.UrlExtensions.AbsoluteAction(System.Web.Mvc.UrlHelper,System.String,System.Object)">
+            <summary>
+            Genera la url ansoluta del la accion
+            especificando el controller y atributos adicionales.
+            </summary>
+            <param name="url"></param>
+            <param name="actionName"></param>
+            <param name="routeValues"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.UrlExtensions.AbsoluteAction(System.Web.Mvc.UrlHelper,System.String,System.String)">
+            <summary>
+            Genera la url ansoluta del la accion
+            especificando el controller y atributos adicionales.
+            </summary>
+            <param name="url"></param>
+            <param name="actionName"></param>
+            <param name="controllerName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Html.UrlExtensions.Content(System.Web.Mvc.UrlHelper,System.String,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="url"></param>
+            <param name="contentPath"></param>
+            <param name="hasCache"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Mail.MailSMTP.#ctor">
+            <summary>
+            "SMTP_FROM", "SMTP_FROM_PWD", "SMTP_FROM_NAME", "SMTP_HOST", "SMTP_PORT"
+            </summary>
+        </member>
+        <member name="T:HelperKit.Mvc.AppWebViewPage`1">
+            <summary>
+            </summary>
+            <typeparam name="TModel"></typeparam>
+        </member>
+        <member name="P:HelperKit.Mvc.AppWebViewPage`1.Data">
+            <summary>
+            Data Helper Instance
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.Render.TemplateRender.#ctor">
+            <summary>
+            Get filepaht from AppSettings RENDER_PATH, default path "~/Templates/"
+            </summary>
+        </member>
+        <member name="M:HelperKit.Mvc.Render.TemplateRender.#ctor(System.String)">
+            <summary>
+            </summary>
+            <param name="path"></param>
+        </member>
+        <member name="M:HelperKit.Mvc.Render.TemplateRender.Render``1(System.String,System.Object)">
+            <summary>
+            Render an external cshtml page without controller
+            </summary>
+            <param name="template">Template name </param>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Mvc.Render.TemplateRender.CreateController``1(System.Web.Routing.RouteData)">
+            <summary>
+            Simulate a Controller Creation for render a page
+            </summary>
+            <typeparam name="C"></typeparam>
+            <param name="routeData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Web.Extensions.ConvertHelper.SaveImageToServer(System.Web.HttpPostedFileBase,System.Web.HttpServerUtilityBase,System.Int32,System.String)">
+            <summary>
+            Guarda la imagen en una ruta especifica del servidor
+            </summary>
+            <param name="file">Archivo a guardar</param>
+            <param name="server"></param>
+            <param name="size">Tamaño de la imagen a guardar</param>
+            <param name="folder">Ruta en el servidor</param>
+            <returns>Ruta del de la imagen</returns>
+        </member>
+        <member name="M:HelperKit.Web.Extensions.ConvertHelper.SaveImageToServer(System.Web.HttpPostedFileBase,System.Web.HttpServerUtility,System.Int32,System.String)">
+            <summary>
+            Guarda la imagen en una ruta especifica del servidor
+            </summary>
+            <param name="file">Archivo a guardar</param>
+            <param name="server"></param>
+            <param name="size">Tamaño de la imagen a guardar</param>
+            <param name="folder">Ruta en el servidor</param>
+            <returns>Ruta del de la imagen</returns>
+        </member>
+        <member name="M:HelperKit.Web.Extensions.ConvertHelper.SaveImageToServer(System.Web.HttpPostedFileBase,System.Web.HttpServerUtility)">
+            <summary>
+            Guarda la imagen en una ruta "~/Files/images" del servidor
+            </summary>
+            <param name="file">Archivo a guardar</param>
+            <param name="server"></param>
+            <returns>Ruta del de la imagen</returns>
+        </member>
+        <member name="M:HelperKit.Web.Extensions.ConvertHelper.SaveImageToServer(System.Web.HttpPostedFileBase,System.Web.HttpServerUtilityBase)">
+            <summary>
+            Guarda la imagen en una ruta "~/Files/images" del servidor
+            </summary>
+            <param name="file">Archivo a guardar</param>
+            <param name="server"></param>
+            <returns>Ruta del de la imagen</returns>
+        </member>
+    </members>
+</doc>

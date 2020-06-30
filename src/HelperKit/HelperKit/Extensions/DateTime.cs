@@ -11,10 +11,13 @@ namespace HelperKit
         /// Validates if the given date is between 2 dates
         /// </summary>
         /// <param name="val"></param>
-        /// <param name="Start"></param>
-        /// <param name="End"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
         /// <returns></returns>
-        public static Boolean IsBetween(this DateTime val, DateTime Start, DateTime End) => val >= Start && val <= End;
+        public static bool IsBetween(this DateTime val, DateTime start, DateTime end)
+        {
+            return val >= start && val <= end;
+        }
 
         #endregion
 
@@ -22,15 +25,18 @@ namespace HelperKit
 
         public static DateTime ToDateTime(this object val, DateTime def)
         {
-            if (DateTime.TryParse(val.ToString(), out DateTime reval))
-                return reval;
-
-            return def;
+            return DateTime.TryParse(val.ToString(), out var result) ? result : def;
         }
 
-        public static DateTime ToDateTime(this object val) => ToDateTime(val, DateTime.MinValue);
+        public static DateTime ToDateTime(this object val)
+        {
+            return ToDateTime(val, DateTime.MinValue);
+        }
 
-        public static string ToFullCallendarDate(this DateTime val) => val.ToString("yyyy-MM-dd hh:mm:ss");
+        public static string ToFullCalendarDate(this DateTime val)
+        {
+            return val.ToString("yyyy-MM-dd hh:mm:ss");
+        }
 
         public static string ToDateTimeFormatByCulture(this DateTime val, CultureInfo culture)
         {
@@ -40,7 +46,7 @@ namespace HelperKit
 
         public static int GetWeekNumber(this DateTime date)
         {
-            CultureInfo ci = CultureInfo.CurrentCulture;
+            var ci = CultureInfo.CurrentCulture;
             var weekNum = ci.Calendar.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
             return weekNum;
         }
@@ -49,7 +55,7 @@ namespace HelperKit
         {
             culture ??= CultureInfo.CurrentCulture;
             var jan1 = new DateTime(year, 1, 1);
-            var daysOffset = (int)culture.DateTimeFormat.FirstDayOfWeek - (int)jan1.DayOfWeek;
+            var daysOffset = (int) culture.DateTimeFormat.FirstDayOfWeek - (int) jan1.DayOfWeek;
             var firstWeekDay = jan1.AddDays(daysOffset);
             var firstWeek = culture.Calendar.GetWeekOfYear(jan1, culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
             if (firstWeek <= 1 || firstWeek > 50)

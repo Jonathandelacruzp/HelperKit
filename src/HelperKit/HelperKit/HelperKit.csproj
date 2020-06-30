@@ -5,6 +5,7 @@
 		<SccProvider>SAK</SccProvider>
 		<SccAuxPath>SAK</SccAuxPath>
 		<SccLocalPath>SAK</SccLocalPath>
+		<PackageVersion>1.2.0</PackageVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -15,8 +16,8 @@
 		<Authors>jonathan.delacruzp</Authors>
 		<Company>jonathan.delacruzp</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>1.1.5</AssemblyVersion>
-		<FileVersion>1.1.1</FileVersion>
+		<AssemblyVersion>1.2.0</AssemblyVersion>
+		<FileVersion>1.2.0</FileVersion>
 		<PackageReleaseNotes></PackageReleaseNotes>
 		<Copyright>jonathan.delacruzp, 2019</Copyright>
 		<RepositoryType>git</RepositoryType>
@@ -24,7 +25,7 @@
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
 		<DelaySign>false</DelaySign>
-		<PackageProjectUrl>https://github.com/Jonathandelacruzp/HelperKit.git</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/Jonathandelacruzp/HelperKit</PackageProjectUrl>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

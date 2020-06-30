@@ -14,7 +14,7 @@ namespace HelperKit
         {
             _ = stream ?? throw new ArgumentNullException(nameof(stream));
 
-            using MemoryStream ms = new MemoryStream();
+            using var ms = new MemoryStream();
             stream.CopyTo(ms);
             return ms.ToArray();
         }

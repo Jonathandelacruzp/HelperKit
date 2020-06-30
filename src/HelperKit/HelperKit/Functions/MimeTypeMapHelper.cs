@@ -10,7 +10,8 @@ namespace HelperKit
 
         private static IDictionary<string, string> BuildMappings()
         {
-            var mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) {
+            var mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            {
                 #region Big freaking list of mime types
 
                 // maps both ways,
@@ -20,7 +21,7 @@ namespace HelperKit
                 //
                 // any mime types on left side not pre-loaded on right side, are added automatically
                 // some mime types can map to multiple extensions, so to get a deterministic mapping,
-                // add those to the dictionary specifcially
+                // add those to the dictionary specifically
                 //
                 // combination of values from Windows 7 Registry and
                 // from C:\Windows\System32\inetsrv\config\applicationHost.config
@@ -64,7 +65,7 @@ namespace HelperKit
                 {".air", "application/vnd.adobe.air-application-installer-package+zip"},
                 {".amc", "application/mpeg"},
                 {".anx", "application/annodex"},
-                {".apk", "application/vnd.android.package-archive" },
+                {".apk", "application/vnd.android.package-archive"},
                 {".application", "application/x-ms-application"},
                 {".art", "image/x-jg"},
                 {".asa", "application/xml"},
@@ -644,7 +645,7 @@ namespace HelperKit
                 {"application/x-x509-ca-cert", ".cer"},
                 {"application/x-zip-compressed", ".zip"},
                 {"application/xhtml+xml", ".xhtml"},
-                {"application/xml", ".xml"},  // anomoly, .xml -> text/xml, but application/xml -> many thingss, but all are xml, so safest is .xml
+                {"application/xml", ".xml"}, // anomoly, .xml -> text/xml, but application/xml -> many thingss, but all are xml, so safest is .xml
                 {"audio/aac", ".AAC"},
                 {"audio/aiff", ".aiff"},
                 {"audio/basic", ".snd"},
@@ -678,14 +679,11 @@ namespace HelperKit
                 {"x-world/x-vrml", ".xof"},
 
                 #endregion
-                };
+            };
             var cache = mappings.ToList(); // need ToList() to avoid modifying while still enumerating
 
-            foreach (var mapping in cache)
-            {
-                if (!mappings.ContainsKey(mapping.Value))
-                    mappings.Add(mapping.Value, mapping.Key);
-            }
+            foreach (var mapping in cache.Where(mapping => !mappings.ContainsKey(mapping.Value)))
+                mappings.Add(mapping.Value, mapping.Key);
 
             return mappings;
         }

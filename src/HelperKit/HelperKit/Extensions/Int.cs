@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HelperKit
+﻿namespace HelperKit
 {
     public static partial class Extensions
     {
@@ -12,20 +10,10 @@ namespace HelperKit
         /// <param name="val"></param>
         /// <param name="def"></param>
         /// <returns>Int32</returns>
-        public static int ToInteger(this object val, int def)
+        public static int ToInteger(this object val, int def = 0)
         {
-            if (Int32.TryParse(val?.ToString(), out var reval))
-                return reval;
-
-            return def;
+            return int.TryParse(val?.ToString(), out var result) ? result : def;
         }
-
-        /// <summary>
-        /// Converts an object to int
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
-        public static int ToInteger(this object val) => ToInteger(val, 0);
 
         #endregion
     }

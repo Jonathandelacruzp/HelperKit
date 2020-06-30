@@ -21,7 +21,10 @@ namespace HelperKit
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static T ToEnum<T>(this string value) where T : struct, IConvertible => (T)Enum.Parse(typeof(T), value, true);
+        public static T ToEnum<T>(this string value) where T : struct, IConvertible
+        {
+            return (T) Enum.Parse(typeof(T), value, true);
+        }
 
         /// <summary>
         /// Gets the enums values and names as Distionary
@@ -30,12 +33,8 @@ namespace HelperKit
         /// <returns></returns>
         public static IDictionary<int, string> EnumNamedValues<T>() where T : struct, IConvertible
         {
-            var result = new Dictionary<int, string>();
             var values = Enum.GetValues(typeof(T));
-
-            foreach (int item in values)
-                result.Add(item, Enum.GetName(typeof(T), item));
-            return result;
+            return values.Cast<int>().ToDictionary(item => item, item => Enum.GetName(typeof(T), item));
         }
 
         #endregion
@@ -54,7 +53,7 @@ namespace HelperKit
             _ = key ?? throw new ArgumentNullException(nameof(key));
 
             var temp = dictionary[key];
-            return temp != null ? (T)temp : (T)Activator.CreateInstance(typeof(T));
+            return temp != null ? (T) temp : (T) Activator.CreateInstance(typeof(T));
         }
 
         ///// <summary>
@@ -70,9 +69,11 @@ namespace HelperKit
             var nameValueCollection = new NameValueCollection();
             foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(t))
             {
-                var value = propertyDescriptor.GetValue(t).ToString();
-                nameValueCollection.Add(propertyDescriptor.Name, value);
+                var value = propertyDescriptor.GetValue(t)?.ToString();
+                if (value != null)
+                    nameValueCollection.Add(propertyDescriptor.Name, value);
             }
+
             return nameValueCollection;
         }
 
@@ -87,9 +88,11 @@ namespace HelperKit
             var keyPair = new List<KeyValuePair<string, string>>();
             foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(t))
             {
-                var value = propertyDescriptor.GetValue(t).ToString();
-                keyPair.Add(new KeyValuePair<string, string>(propertyDescriptor.Name, value));
+                var value = propertyDescriptor.GetValue(t)?.ToString();
+                if (value != null)
+                    keyPair.Add(new KeyValuePair<string, string>(propertyDescriptor.Name, value));
             }
+
             return keyPair;
         }
 
@@ -98,55 +101,56 @@ namespace HelperKit
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static IDictionary<string, object> ToDictionary(this object obj) =>
-            obj?.GetType()
-            .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-            .Where(x => x.CanRead || x.CanWrite)
-            .ToDictionary(x => x.Name, x => x.GetValue(obj, null));
+        public static IDictionary<string, object> ToDictionary(this object obj)
+        {
+            return obj?.GetType()
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                .Where(x => x.CanRead || x.CanWrite)
+                .ToDictionary(x => x.Name, x => x.GetValue(obj, null));
+        }
 
         #endregion
 
         #region XML
 
-        public static string SerializeObjectToXML<T>(this T t)
+        public static string SerializeObjectToXml<T>(this T t)
         {
             var xmlDoc = new XmlDocument();
             var xmlSerializer = new XmlSerializer(t.GetType());
 
-            using MemoryStream xmlStream = new MemoryStream();
+            using var xmlStream = new MemoryStream();
             var xmlns = new XmlSerializerNamespaces();
             xmlns.Add(string.Empty, string.Empty);
 
             xmlSerializer.Serialize(xmlStream, t, xmlns);
             xmlStream.Position = 0;
             xmlDoc.Load(xmlStream);
-            return xmlDoc.InnerXml.Replace("<?xml version=\"1.0\"?>", String.Empty);
+            return xmlDoc.InnerXml.Replace("<?xml version=\"1.0\"?>", string.Empty);
         }
 
-        public static T DeserializerXMLToObject<T>(this string xml)
+        public static T DeserializerXmlToObject<T>(this string xml)
         {
             T instance;
             var xmlSerializer = new XmlSerializer(typeof(T));
-            using (var stringReader = new StringReader(xml))
-            {
-                instance = (T)xmlSerializer.Deserialize(stringReader);
-            }
+            using var stringReader = new StringReader(xml);
+            instance = (T) xmlSerializer.Deserialize(stringReader);
+
             return instance;
         }
 
-        public static string ConvertObjectToXMLText<T>(this T t)
+        public static string ConvertObjectToXmlText<T>(this T t)
         {
             var typeName = t.GetType().Name;
             var propertyInfos = t.GetType().GetProperties();
 
             var strBuilder = new StringBuilder();
             strBuilder.Append('<').Append(typeName);
-            for (var i = 0; i < propertyInfos.Length; i++)
+            foreach (var propertyInfo in propertyInfos)
             {
-                PropertyInfo propertyInfo = propertyInfos[i];
                 string startTag = $"<{propertyInfo.Name}>", endTag = $"</{propertyInfo.Name}>";
                 strBuilder.Append(startTag).Append(propertyInfo.GetValue(t, null)).Append(endTag);
             }
+
             strBuilder.Append("</").Append(typeName);
             return strBuilder.ToString();
         }

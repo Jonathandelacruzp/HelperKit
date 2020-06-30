@@ -11,24 +11,24 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void SaveAsXmlExtension_SaveAValidFile()
         {
-            string filename = "testClassFile.xml";
+            const string filename = "testClassFile.xml";
             var testClass = TestClassBuilder.GenerateTestClass();
 
-            System.IO.File.Delete(filename);
+            File.Delete(filename);
 
-            testClass.SaveAsXML(filename);
+            testClass.SaveAsXml(filename);
             var stream = new StreamReader(filename);
 
             Assert.IsNotNull(stream, "File exist");
 
             var xmlSerializer = new XmlSerializer(typeof(TestClass));
-            var testClassfromXml = xmlSerializer.Deserialize(stream) as TestClass;
+            var testClassFromXml = xmlSerializer.Deserialize(stream) as TestClass;
 
-            CollectionAssert.AreEqual(testClassfromXml.IntArray, testClass.IntArray);
-            CollectionAssert.AreEqual(testClassfromXml.IntList, testClass.IntList);
-            Assert.AreEqual(testClassfromXml.BooleanValue, testClass.BooleanValue);
-            Assert.AreEqual(testClassfromXml.IntValue, testClass.IntValue);
-            Assert.AreEqual(testClassfromXml.StringValue, testClass.StringValue);
+            CollectionAssert.AreEqual(testClassFromXml.IntArray, testClass.IntArray);
+            CollectionAssert.AreEqual(testClassFromXml.IntList, testClass.IntList);
+            Assert.AreEqual(testClassFromXml.BooleanValue, testClass.BooleanValue);
+            Assert.AreEqual(testClassFromXml.IntValue, testClass.IntValue);
+            Assert.AreEqual(testClassFromXml.StringValue, testClass.StringValue);
         }
     }
 }

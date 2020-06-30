@@ -9,32 +9,32 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void String_RemoveDiacritics()
         {
-            var stringWithDiacritics = "Je veux aller à Saint-Étienne";
+            const string stringWithDiacritics = "Je veux aller Ã  Saint-Ã‰tienne";
 
             Assert.AreEqual("Je veux aller a Saint-Etienne", stringWithDiacritics.RemoveDiacritics());
         }
 
         [Test]
-        public void DeleteDotandComa_DeleteThen()
+        public void DeleteDotAndComa_DeleteThen()
         {
-            var stringWithDotsAndComma = "Je veux ,,, aller à Saint-Étienne...";
+            const string stringWithDotsAndComma = "Je veux ,,, aller Ã  Saint-Ã‰tienne...";
 
-            Assert.AreEqual("Je veux  aller à Saint-Étienne", stringWithDotsAndComma.DeleteDotAndComma());
+            Assert.AreEqual("Je veux  aller Ã  Saint-Ã‰tienne", stringWithDotsAndComma.DeleteDotAndComma());
         }
 
         [Test]
-        public void ReplaceNoBbreakingSpace_Replace()
+        public void ReplaceNoBreakingSpace_Replace()
         {
             var stringWithDiacritics = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
             stringWithDiacritics = Regex.Replace(stringWithDiacritics, @"\u00A0", " ");
 
-            Assert.AreEqual("Lorem Ipsum is simply dummy text of the printing and typesetting industry", stringWithDiacritics.ReplaceNoBbreakingSpace());
+            Assert.AreEqual("Lorem Ipsum is simply dummy text of the printing and typesetting industry", stringWithDiacritics.ReplaceNonBreakingSpace());
         }
 
         [Test]
         public void ToSafeString_ReturnsValue()
         {
-            var stringTest = Color.Blue;
+            const Color stringTest = Color.Blue;
 
             Assert.AreEqual("Blue", stringTest.ToSafeString());
         }

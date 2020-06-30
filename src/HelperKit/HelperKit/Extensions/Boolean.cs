@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HelperKit
+﻿namespace HelperKit
 {
     public static partial class Extensions
     {
@@ -14,10 +12,7 @@ namespace HelperKit
         /// <returns></returns>
         public static bool ToBoolean(this string val, bool def = false)
         {
-            if (Boolean.TryParse(val, out var reval))
-                return reval;
-
-            return def;
+            return bool.TryParse(val, out var result) ? result : def;
         }
 
         #endregion

@@ -22,6 +22,7 @@ namespace HelperKit
                 if (unicodeCategory != UnicodeCategory.NonSpacingMark)
                     strBuilder.Append(character);
             }
+
             return strBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
 
@@ -31,7 +32,7 @@ namespace HelperKit
         /// <param name="val"></param>
         /// <param name="def"></param>
         /// <returns></returns>
-        public static string ReplaceNoBbreakingSpace(this string val, string def = " ")
+        public static string ReplaceNonBreakingSpace(this string val, string def = " ")
         {
             var nbsp = System.Convert.ToChar(160).ToString();
             return val.Replace(nbsp, def);
@@ -42,7 +43,10 @@ namespace HelperKit
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public static string DeleteSlashAndBackslash(this string val) => val.Replace("/", string.Empty).Replace(@"\", string.Empty);
+        public static string DeleteSlashAndBackslash(this string val)
+        {
+            return val.Replace("/", string.Empty).Replace(@"\", string.Empty);
+        }
 
         /// <summary>
         /// Deletes all dot and commas of a string
@@ -51,9 +55,7 @@ namespace HelperKit
         /// <returns></returns>
         public static string DeleteDotAndComma(this string val)
         {
-            val = val.Replace(".", string.Empty);
-            val = val.Replace(",", string.Empty);
-            return val;
+            return val.Replace(".", string.Empty).Replace(",", string.Empty);
         }
 
         #endregion
@@ -66,14 +68,20 @@ namespace HelperKit
         /// <param name="val"></param>
         /// <param name="def"></param>
         /// <returns>string</returns>
-        public static string ToSafeString(this object val, string def = "") => (val ?? def).ToString();
+        public static string ToSafeString(this object val, string def = "")
+        {
+            return (val ?? def).ToString();
+        }
 
         /// <summary>
         ///Converts o string UTF
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public static string TostringUTF(this string val) => Encoding.UTF8.GetString(Encoding.GetEncoding(1252).GetBytes(val ?? string.Empty));
+        public static string ToStringUtf8(this string val)
+        {
+            return Encoding.UTF8.GetString(Encoding.GetEncoding(1252).GetBytes(val ?? string.Empty));
+        }
 
         //public static string ToStringJavaScript(this string val) => HttpUtility.JavaScriptStringEncode(val ?? string.Empty);
 

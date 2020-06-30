@@ -32,28 +32,27 @@ namespace HelperKit.Security
         /// <param name="rawData"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static string ComputeMD5Hash(string rawData)
+        public static string ComputeMd5Hash(string rawData)
         {
             _ = rawData ?? throw new ArgumentNullException(nameof(rawData));
 
-            var result = string.Empty;
-            using (var md5 = new MD5CryptoServiceProvider())
-            {
-                result = md5.GenerateHashString(rawData);
-            }
-            return result;
+            using var md5 = new MD5CryptoServiceProvider();
+            return md5.GenerateHashString(rawData);
         }
 
         /// <summary>
-        /// Compare the actual value vs the encripted
+        /// Compare the actual value vs the encrypted
         /// </summary>
         /// <param name="text"></param>
         /// <param name="encryptedValue"></param>
         /// <returns></returns>
-        public static bool AreEqualMD5(string text, string encryptedValue) => ComputeMD5Hash(text) == encryptedValue;
+        public static bool AreEqualMd5(string text, string encryptedValue)
+        {
+            return ComputeMd5Hash(text) == encryptedValue;
+        }
 
         /// <summary>
-        /// dice que hashea pe
+        /// Computes Sha256
         /// </summary>
         /// <param name="rawData"></param>
         /// <returns></returns>
@@ -62,20 +61,19 @@ namespace HelperKit.Security
         {
             _ = rawData ?? throw new ArgumentNullException(nameof(rawData));
 
-            var result = string.Empty;
-            using (var sha256Hash = SHA256.Create())
-            {
-                result = sha256Hash.GenerateHashString(rawData);
-            }
-            return result;
+            using var sha256Hash = SHA256.Create();
+            return sha256Hash.GenerateHashString(rawData);
         }
 
         /// <summary>
-        /// Compare the actual value vs the encripted
+        /// Compare the actual value vs the encrypted
         /// </summary>
         /// <param name="text"></param>
-        /// <param name="encriptedValue"></param>
+        /// <param name="encryptedValue"></param>
         /// <returns></returns>
-        public static bool AreEqualSha256Hash(string text, string encriptedValue) => ComputeSha256Hash(text) == encriptedValue;
+        public static bool AreEqualSha256Hash(string text, string encryptedValue)
+        {
+            return ComputeSha256Hash(text) == encryptedValue;
+        }
     }
 }

@@ -20,14 +20,9 @@ namespace HelperKit
         /// <param name="array"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static Boolean HasAny<T>(this IEnumerable<T> array, params T[] values)
+        public static bool HasAny<T>(this IEnumerable<T> array, params T[] values)
         {
-            foreach (var item in values)
-            {
-                if (array.Contains(item))
-                    return true;
-            }
-            return false;
+            return values.Any(item => array?.Contains(item) == true);
         }
 
         ///// <summary>
@@ -90,7 +85,7 @@ namespace HelperKit
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="fileName"></param>
-        public static void SaveAsXML(this object obj, string fileName)
+        public static void SaveAsXml(this object obj, string fileName)
         {
             _ = fileName ?? throw new ArgumentNullException(nameof(fileName));
             var xmlRequest = new StreamWriter(fileName);

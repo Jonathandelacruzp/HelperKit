@@ -7,8 +7,8 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void IntegerExtension_IsValid()
         {
-            string stringNumber = "20";
-            string stringFloatLiteral = "10F";
+            const string stringNumber = "20";
+            const string stringFloatLiteral = "10F";
             string stringNumberNull = null;
 
             Assert.IsInstanceOf<int>(stringNumber.ToInteger());

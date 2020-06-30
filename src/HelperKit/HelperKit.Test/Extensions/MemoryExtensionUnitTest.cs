@@ -9,8 +9,8 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void MemoryExtension_ReturnTrue()
         {
-            string solution_dir = Directory.GetCurrentDirectory();
-            var stream = new StreamReader(solution_dir + "\\Files\\text2.txt");
+            var solutionDir = Directory.GetCurrentDirectory();
+            var stream = new StreamReader(solutionDir + "\\Files\\text2.txt");
 
             Assert.IsInstanceOf<byte[]>(stream.BaseStream.ToBytes());
 

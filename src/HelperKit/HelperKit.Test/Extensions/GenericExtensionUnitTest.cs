@@ -11,7 +11,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void EnumConvert_ReturnCorrectValue()
         {
-            string enumRed = "Red";
+            const string enumRed = "Red";
 
             Assert.IsInstanceOf<Color>(enumRed.ToEnum<Color>());
             Assert.AreEqual(Color.Red, enumRed.ToEnum<Color>());
@@ -36,7 +36,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToDictionary_WithPublicInstance()
         {
-            var intArray = new int[4] { 1, 2, 3, 4 };
+            var intArray = new int[4] {1, 2, 3, 4};
             var testClass = TestClassBuilder.GenerateTestClass();
 
             var result = testClass.ToDictionary();
@@ -46,8 +46,8 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToDictionary_GetOnlyGetInstances()
         {
-            var intArray = new int[4] { 1, 2, 3, 4 };
-            var testClass = new TestClassWithoutInstance()
+            var intArray = new int[4] {1, 2, 3, 4};
+            var testClass = new TestClassWithoutInstance
             {
                 IntValue = 3,
                 StringValue = "string value",
@@ -72,8 +72,8 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToNameValueCollection_GetOnlyGetInstances()
         {
-            var intArray = new int[4] { 1, 2, 3, 4 };
-            var testClass = new TestClassWithoutInstance()
+            var intArray = new int[4] {1, 2, 3, 4};
+            var testClass = new TestClassWithoutInstance
             {
                 IntValue = 3,
                 StringValue = "string value",
@@ -98,8 +98,8 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToKeyValuePair_GetOnlyGetInstances()
         {
-            var intArray = new int[4] { 1, 2, 3, 4 };
-            var testClass = new TestClassWithoutInstance()
+            var intArray = new int[4] {1, 2, 3, 4};
+            var testClass = new TestClassWithoutInstance
             {
                 IntValue = 3,
                 StringValue = "string value",

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace HelperKit
 {
@@ -28,7 +29,10 @@ namespace HelperKit
         /// <param name="val"></param>
         /// <param name="decimals"></param>
         /// <returns></returns>
-        public static Decimal Round(this Decimal val, int decimals = 2) => Decimal.Round(val, decimals, MidpointRounding.AwayFromZero);
+        public static decimal Round(this decimal val, int decimals = 2)
+        {
+            return decimal.Round(val, decimals, MidpointRounding.AwayFromZero);
+        }
 
         #endregion
 
@@ -40,20 +44,10 @@ namespace HelperKit
         /// <param name="val"></param>
         /// <param name="def"></param>
         /// <returns>Decimal</returns>
-        public static decimal ToDecimal(this object val, decimal def)
+        public static decimal ToDecimal(this object val, decimal def = 0)
         {
-            if (decimal.TryParse(val?.ToString(), out var reval))
-                return reval;
-
-            return def;
+            return decimal.TryParse(val?.ToString(), out var result) ? result : def;
         }
-
-        /// <summary>
-        /// Covierte un objeto a un entero tipo Decimal
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns>Decimal</returns>
-        public static decimal ToDecimal(this object val) => ToDecimal(val, 0);
 
         #endregion
 
@@ -65,20 +59,10 @@ namespace HelperKit
         /// <param name="val">Decimal</param>
         /// <param name="def"></param>
         /// <returns>long</returns>
-        public static long ToLong(this decimal val, long def)
+        public static long ToLong(this decimal val, long def = 0)
         {
-            if (long.TryParse(val.ToString(), out var reval))
-                return reval;
-
-            return def;
+            return long.TryParse(val.ToString(CultureInfo.CurrentCulture), out var result) ? result : def;
         }
-
-        /// <summary>
-        /// Covierte un decimal a un entero tipo long
-        /// </summary>
-        /// <param name="val">Decimal</param>
-        /// <returns>long</returns>
-        public static long ToLong(this decimal val) => ToLong(val, 0);
 
         #endregion
     }

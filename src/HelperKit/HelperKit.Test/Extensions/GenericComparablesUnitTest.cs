@@ -23,8 +23,6 @@ namespace HelperKit.Test.Extensions
                 Color.Red
             };
 
-            string colorNull = null;
-
             Assert.IsTrue(colorList.HasAny(Color.Blue));
             Assert.IsTrue(colorList.HasAny(Color.Yellow));
             Assert.IsFalse(colorList.HasAny(Color.Red));
@@ -32,8 +30,9 @@ namespace HelperKit.Test.Extensions
             void action() => colorList.IsContainedOn(colorListToFind);
             Assert.Throws<ArgumentException>(action);
 
-            var stringValues = new string[] { "rojo", "verde" };
-            void actionNull() => colorNull.IsContainedOn(stringValues);
+            var stringValues = new[] {"rojo", "verde"};
+
+            void actionNull() => ((string) null).IsContainedOn(stringValues);
             Assert.Throws<ArgumentNullException>(actionNull);
         }
     }

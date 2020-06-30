@@ -1,4 +1,3 @@
-using HelperKit.Test.Builders;
 using HelperKit.Test.Models;
 using NUnit.Framework;
 using System.IO;
@@ -12,7 +11,7 @@ namespace HelperKit.Test.Extensions
         public void SaveAsXmlExtension_SaveAValidFile()
         {
             const string filename = "testClassFile.xml";
-            var testClass = TestClassBuilder.GenerateTestClass();
+            var testClass = TestClass.Create();
 
             File.Delete(filename);
 

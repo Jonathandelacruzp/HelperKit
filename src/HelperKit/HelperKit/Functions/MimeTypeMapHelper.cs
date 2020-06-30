@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace HelperKit
 {
+    /// <summary>
+    /// MimeType map helper
+    /// </summary>
     public static class MimeTypeMapHelper
     {
         private static readonly Lazy<IDictionary<string, string>> _mappings = new Lazy<IDictionary<string, string>>(BuildMappings);
@@ -688,6 +691,11 @@ namespace HelperKit
             return mappings;
         }
 
+        /// <summary>
+        /// Gets the MimeType
+        /// </summary>
+        /// <param name="extension"></param>
+        /// <returns></returns>
         public static string GetMimeType(string extension)
         {
             _ = extension ?? throw new ArgumentNullException(nameof(extension));
@@ -698,6 +706,12 @@ namespace HelperKit
             return _mappings.Value.TryGetValue(extension, out var mime) ? mime : "application/octet-stream";
         }
 
+        /// <summary>
+        /// Get the extension
+        /// </summary>
+        /// <param name="mimeType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string GetExtension(string mimeType)
         {
             _ = mimeType ?? throw new ArgumentNullException(nameof(mimeType));

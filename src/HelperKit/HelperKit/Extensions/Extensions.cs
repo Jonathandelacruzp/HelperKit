@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 namespace HelperKit
 {
     /// <summary>
-    /// Funciones de Extension
+    /// Extension functions
     /// </summary>
     public static partial class Extensions
     {
@@ -24,25 +24,6 @@ namespace HelperKit
         {
             return values.Any(item => array?.Contains(item) == true);
         }
-
-        ///// <summary>
-        /////
-        ///// </summary>
-        ///// <typeparam name="T"></typeparam>
-        ///// <param name="value"></param>
-        ///// <param name="values"></param>
-        ///// <returns></returns>
-        //public static Boolean IsContainedOn<T>(this T value, params T[] values)
-        //{
-        //    if (typeof(T).GetInterface("IEnumerable") != null)
-        //        throw new ArgumentException("Requested value could not be an Enumerable.");
-
-        //    foreach (var item in values)
-        //        if (value.Equals((T)item))
-        //            return true;
-
-        //    return false;
-        //}
 
         /// <summary>
         /// Validates if at least one item exist on other collection
@@ -81,7 +62,7 @@ namespace HelperKit
         #endregion
 
         /// <summary>
-        /// Guarda archivo xml dependiendo del objeto y el tipo definido.
+        /// Saves an object as xml file
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="fileName"></param>
@@ -95,7 +76,7 @@ namespace HelperKit
         }
 
         /// <summary>
-        /// Crea nuevo directorio
+        /// Creates a new Directory
         /// </summary>
         /// <param name="directory"></param>
         public static void CreateDirectory(this DirectoryInfo directory)

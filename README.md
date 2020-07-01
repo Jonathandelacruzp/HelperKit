@@ -5,7 +5,7 @@
 
 ### Installing HelperKit
 
-You should install [HelperKit with NuGet](https://www.nuget.org/packages/HelperKit):
+Install [HelperKit with NuGet](https://www.nuget.org/packages/HelperKit):
 
     Install-Package HelperKit
     

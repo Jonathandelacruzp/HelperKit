@@ -12,3 +12,15 @@ Install [HelperKit with NuGet](https://www.nuget.org/packages/HelperKit):
 Or via the .NET Core command line interface:
 
     dotnet add package HelperKit
+
+### Installing HelperKit.Web
+
+Install [HelperKit.Web with NuGet](https://www.nuget.org/packages/HelperKit.Web):
+
+    Install-Package HelperKit.Web
+
+### Installing HelperKit
+
+Install [HelperKit.Mvc with NuGet](https://www.nuget.org/packages/HelperKit.Mvc):
+
+    Install-Package HelperKit.Mvc

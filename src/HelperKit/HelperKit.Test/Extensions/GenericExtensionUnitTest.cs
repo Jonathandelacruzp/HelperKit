@@ -43,7 +43,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToDictionary_GetOnlyGetInstances()
         {
-            var intArray = new int[] {1, 2, 3, 4};
+            var intArray = new[] {1, 2, 3, 4};
             var testClass = TestClassWithoutInstance.Create();
 
             var result = testClass.ToDictionary();
@@ -62,7 +62,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToNameValueCollection_GetOnlyGetInstances()
         {
-            var intArray = new int[] {1, 2, 3, 4};
+            var intArray = new[] {1, 2, 3, 4};
             var testClass = new TestClassWithoutInstance
             {
                 IntValue = 3,
@@ -88,7 +88,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToKeyValuePair_GetOnlyGetInstances()
         {
-            var intArray = new int[] {1, 2, 3, 4};
+            var intArray = new[] {1, 2, 3, 4};
             var testClass = new TestClassWithoutInstance
             {
                 IntValue = 3,

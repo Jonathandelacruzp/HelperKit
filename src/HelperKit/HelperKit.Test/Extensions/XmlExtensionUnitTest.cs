@@ -23,11 +23,11 @@ namespace HelperKit.Test.Extensions
             var xmlSerializer = new XmlSerializer(typeof(TestClass));
             var testClassFromXml = xmlSerializer.Deserialize(stream) as TestClass;
 
-            CollectionAssert.AreEqual(testClassFromXml.IntArray, testClass.IntArray);
-            CollectionAssert.AreEqual(testClassFromXml.IntList, testClass.IntList);
-            Assert.AreEqual(testClassFromXml.BooleanValue, testClass.BooleanValue);
-            Assert.AreEqual(testClassFromXml.IntValue, testClass.IntValue);
-            Assert.AreEqual(testClassFromXml.StringValue, testClass.StringValue);
+            CollectionAssert.AreEqual(testClassFromXml?.IntArray, testClass.IntArray);
+            CollectionAssert.AreEqual(testClassFromXml?.IntList, testClass.IntList);
+            Assert.AreEqual(testClassFromXml?.BooleanValue, testClass.BooleanValue);
+            Assert.AreEqual(testClassFromXml?.IntValue, testClass.IntValue);
+            Assert.AreEqual(testClassFromXml?.StringValue, testClass.StringValue);
         }
     }
 }

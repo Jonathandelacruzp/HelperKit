@@ -1,9 +1,6 @@
 name: NetFrameWork.Legacy.CI
 
-on:
-  pull_request:
-    types: [closed]
-    branches: [ master ]
+on: [push]
 
 jobs:
   build:
@@ -23,11 +20,3 @@ jobs:
       run: | 
           cd src/HelperKit/HelperKit/
           dotnet test --no-restore --verbosity normal
-    - name: dotnet pack
-      run: | 
-          cd src/HelperKit/HelperKit/
-          dotnet pack -c Release -o out
-    - name: Push generated package to Nuget registry
-      run: | 
-          cd src/HelperKit/HelperKit/out
-          dotnet nuget push *.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate

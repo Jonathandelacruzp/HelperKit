@@ -20,7 +20,7 @@ namespace HelperKit
         /// <param name="array"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static bool HasAny<T>(this IEnumerable<T> array, params T[] values)
+        public static bool ContainsAny<T>(this IEnumerable<T> array, params T[] values)
         {
             _ = array ?? throw new ArgumentNullException(nameof(array));
             return values.Any(array.Contains);

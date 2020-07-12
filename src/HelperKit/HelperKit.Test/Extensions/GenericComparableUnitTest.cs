@@ -7,30 +7,27 @@ namespace HelperKit.Test.Extensions
 {
     public class GenericComparableUnitTest
     {
-        private List<Color> colorList = new List<Color>
-        {
-            Color.Blue,
-            Color.Yellow,
-            Color.Yellow
-        };
+        private readonly IEnumerable<Color> _colorList = new[] {Color.Blue, Color.Yellow, Color.Yellow};
 
-        private List<Color> colorListToFind = new List<Color>
-        {
-            Color.Blue,
-            Color.Red
-        };
+        private readonly ICollection<Color> _colorListToFind = new List<Color> {Color.Blue, Color.Red};
 
         [Test]
         public void HasAnyExtension_ShouldReturn_Valid_Result()
         {
-            Assert.IsTrue(colorList.HasAny(Color.Blue));
-            Assert.IsTrue(colorList.HasAny(Color.Yellow));
+            Assert.IsTrue(_colorList.ContainsAny(Color.Blue));
+            Assert.IsTrue(_colorList.ContainsAny(Color.Yellow));
+        }
+
+        [Test]
+        public void HasAnyExtension_ShouldReturn_ValidResult_FromParams()
+        {
+            Assert.IsTrue(_colorList.ContainsAny(Color.Blue, Color.Yellow));
         }
 
         [Test]
         public void HasAnyExtension_ShouldReturn_Valid_False_Result()
         {
-            Assert.IsFalse(colorList.HasAny(Color.Red));
+            Assert.IsFalse(_colorList.ContainsAny(Color.Red));
         }
 
         [Test]
@@ -41,22 +38,22 @@ namespace HelperKit.Test.Extensions
             var paramTest = colorBlue.IsContainedOn(Color.Blue, Color.Yellow, Color.Red);
             Assert.IsTrue(paramTest);
 
-            var enumerableTest = colorBlue.IsContainedOn(colorListToFind);
+            var enumerableTest = colorBlue.IsContainedOn(_colorListToFind);
             Assert.IsTrue(enumerableTest);
         }
 
         [Test]
-        public void IsContainedOnExtension_ShouldTrowAnArgumentException()
+        public void IsContainedOnExtension_ShouldTrow_AnArgumentException()
         {
-            void action() => colorListToFind.IsContainedOn(colorList);
-            Assert.Throws<ArgumentException>(action);
+            void @Action() => _colorListToFind.IsContainedOn(_colorList);
+            Assert.Throws<ArgumentException>(@Action);
         }
 
         [Test]
-        public void IsContainedOnExtension_ShouldTrowAnArgumentNUllException()
+        public void IsContainedOnExtension_ShouldTrow_AnArgumentNUllException()
         {
-            void actionNull() => ((string) null).IsContainedOn("rojo", "verde");
-            Assert.Throws<ArgumentNullException>(actionNull);
+            void ActionNull() => ((string) null).IsContainedOn("rojo", "verde");
+            Assert.Throws<ArgumentNullException>(ActionNull);
         }
     }
 }

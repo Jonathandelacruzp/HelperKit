@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace HelperKit
 {
+    /// <summary>
+    /// MimeType map helper
+    /// </summary>
     public static class MimeTypeMapHelper
     {
         private static readonly Lazy<IDictionary<string, string>> _mappings = new Lazy<IDictionary<string, string>>(BuildMappings);
@@ -680,7 +683,7 @@ namespace HelperKit
 
                 #endregion
             };
-            var cache = mappings.ToList(); // need ToList() to avoid modifying while still enumerating
+            var cache = mappings.ToArray(); // need ToArray() to avoid modifying while still enumerating
 
             foreach (var mapping in cache.Where(mapping => !mappings.ContainsKey(mapping.Value)))
                 mappings.Add(mapping.Value, mapping.Key);
@@ -688,6 +691,11 @@ namespace HelperKit
             return mappings;
         }
 
+        /// <summary>
+        /// Gets the MimeType
+        /// </summary>
+        /// <param name="extension"></param>
+        /// <returns></returns>
         public static string GetMimeType(string extension)
         {
             _ = extension ?? throw new ArgumentNullException(nameof(extension));
@@ -698,6 +706,12 @@ namespace HelperKit
             return _mappings.Value.TryGetValue(extension, out var mime) ? mime : "application/octet-stream";
         }
 
+        /// <summary>
+        /// Get the extension
+        /// </summary>
+        /// <param name="mimeType"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static string GetExtension(string mimeType)
         {
             _ = mimeType ?? throw new ArgumentNullException(nameof(mimeType));
@@ -705,10 +719,9 @@ namespace HelperKit
             if (mimeType.StartsWith("."))
                 throw new ArgumentException("Requested mime type is not valid: " + mimeType);
 
-            if (_mappings.Value.TryGetValue(mimeType, out var extension))
-                return extension;
-
-            throw new ArgumentException("Requested mime type is not registered: " + mimeType);
+            return _mappings.Value.TryGetValue(mimeType, out var extension)
+                ? extension
+                : throw new ArgumentException("Requested mime type is not registered: " + mimeType);
         }
     }
 }

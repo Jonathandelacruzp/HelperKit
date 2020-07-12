@@ -23,6 +23,22 @@ namespace HelperKit.Test.Extensions
         }
 
         [Test]
+        public void DeleteSlashes_DeleteThen()
+        {
+            const string stringWithDotsAndComma = @"Je veux /// aller \ Saint-Etienne...";
+
+            Assert.AreEqual("Je veux  aller  Saint-Etienne...", stringWithDotsAndComma.DeleteSlashAndBackslash());
+        }
+
+        [Test]
+        public void DeleteCustomStrings_DeleteThen()
+        {
+            const string stringWithDotsAndComma = @"Je veux /// aller \ Saint-Etienne...";
+
+            Assert.AreEqual("Je veux  aller  Saint-Etienne", stringWithDotsAndComma.CustomReplaceOn(@"\", "/", "."));
+        }
+
+        [Test]
         public void ReplaceNoBreakingSpace_Replace()
         {
             var stringWithDiacritics = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
@@ -42,9 +58,17 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ToSafeString_ReturnsDefaultValue_WithNullParameter()
         {
-            string stringTest = null;
-
-            Assert.IsTrue(string.IsNullOrEmpty(stringTest.ToSafeString()));
+            Assert.IsTrue(string.IsNullOrEmpty(((string) null).ToSafeString()));
         }
+
+        //[Test]
+        //public void ToStringUtf_ReturnsDefaultValue_WithNullParameter()
+        //{
+        //    string stringTest = "\xf0\x90\x8c\xbc";
+
+        //    string expected = "U+1F601";
+
+        //    Assert.AreEqual(expected, stringTest.ToStringUtf8());
+        //}
     }
 }

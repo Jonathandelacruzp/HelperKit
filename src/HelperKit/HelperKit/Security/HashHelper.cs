@@ -19,11 +19,11 @@ namespace HelperKit.Security
 
             hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(text));
             var hash = hashAlgorithm.Hash;
-            var strBuilder = new StringBuilder();
-            for (var i = 0; i < hash.Length; i++)
-                strBuilder.Append(hash[i].ToString("x2"));
+            var sb = new StringBuilder();
+            foreach (var hashItem in hash)
+                sb.Append(hashItem.ToString("x2"));
 
-            return strBuilder.ToString();
+            return sb.ToString();
         }
 
         /// <summary>

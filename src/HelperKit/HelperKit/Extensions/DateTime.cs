@@ -23,41 +23,75 @@ namespace HelperKit
 
         #region DateTime Convert
 
+        /// <summary>
+        /// Converts a value to DateTime 
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="def"></param>
+        /// <returns></returns>
         public static DateTime ToDateTime(this object val, DateTime def)
         {
             return DateTime.TryParse(val.ToString(), out var result) ? result : def;
         }
 
+        /// <summary>
+        /// Converts a value to DateTime 
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
         public static DateTime ToDateTime(this object val)
         {
             return ToDateTime(val, DateTime.MinValue);
         }
 
+        /// <summary>
+        /// Get the full calendar format string 
+        /// </summary>
+        /// <param name="val"></param>
+        /// <returns></returns>
         public static string ToFullCalendarDate(this DateTime val)
         {
             return val.ToString("yyyy-MM-dd hh:mm:ss");
         }
 
-        public static string ToDateTimeFormatByCulture(this DateTime val, CultureInfo culture)
+        /// <summary>
+        /// Get the short calendar format string 
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="cultureInfo"></param>
+        /// <returns></returns>
+        public static string ToDateTimeFormatByCulture(this DateTime val, CultureInfo cultureInfo = null)
         {
-            var format = culture.DateTimeFormat.ShortDatePattern;
-            return val.ToString(format);
+            cultureInfo ??= CultureInfo.CurrentCulture;
+            return val.ToString(cultureInfo.DateTimeFormat.ShortDatePattern);
         }
 
-        public static int GetWeekNumber(this DateTime date)
+        /// <summary>
+        /// Gets the week number
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="cultureInfo"></param>
+        /// <returns></returns>
+        public static int GetWeekNumber(this DateTime date, CultureInfo cultureInfo = null)
         {
-            var ci = CultureInfo.CurrentCulture;
-            var weekNum = ci.Calendar.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
-            return weekNum;
+            cultureInfo ??= CultureInfo.CurrentCulture;
+            return cultureInfo.Calendar.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
         }
 
-        public static DateTime FirstDateOfWeek(int year, int weekOfYear, CultureInfo culture = null)
+        /// <summary>
+        /// Gets the default fist day of week
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="weekOfYear"></param>
+        /// <param name="cultureInfo"></param>
+        /// <returns></returns>
+        public static DateTime FirstDateOfWeek(int year, int weekOfYear, CultureInfo cultureInfo = null)
         {
-            culture ??= CultureInfo.CurrentCulture;
+            cultureInfo ??= CultureInfo.CurrentCulture;
             var jan1 = new DateTime(year, 1, 1);
-            var daysOffset = (int) culture.DateTimeFormat.FirstDayOfWeek - (int) jan1.DayOfWeek;
+            var daysOffset = (int) cultureInfo.DateTimeFormat.FirstDayOfWeek - (int) jan1.DayOfWeek;
             var firstWeekDay = jan1.AddDays(daysOffset);
-            var firstWeek = culture.Calendar.GetWeekOfYear(jan1, culture.DateTimeFormat.CalendarWeekRule, culture.DateTimeFormat.FirstDayOfWeek);
+            var firstWeek = cultureInfo.Calendar.GetWeekOfYear(jan1, cultureInfo.DateTimeFormat.CalendarWeekRule, cultureInfo.DateTimeFormat.FirstDayOfWeek);
             if (firstWeek <= 1 || firstWeek > 50)
                 weekOfYear--;
 

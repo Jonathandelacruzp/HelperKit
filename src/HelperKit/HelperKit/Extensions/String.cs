@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Linq;
 using System.Text;
 
 namespace HelperKit
@@ -58,6 +59,17 @@ namespace HelperKit
             return val.Replace(".", string.Empty).Replace(",", string.Empty);
         }
 
+        /// <summary>
+        /// Replace all the values set it on param with a empty string
+        /// </summary>
+        /// <param name="val"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public static string CustomReplaceOn(this string val, params string[] param)
+        {
+            return param.Aggregate(val, (current, item) => current.Replace(item, string.Empty));
+        }
+
         #endregion
 
         #region String Convert Helper
@@ -73,15 +85,15 @@ namespace HelperKit
             return (val ?? def).ToString();
         }
 
-        /// <summary>
-        ///Converts o string UTF
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
-        public static string ToStringUtf8(this string val)
-        {
-            return Encoding.UTF8.GetString(Encoding.GetEncoding(1252).GetBytes(val ?? string.Empty));
-        }
+        ///// <summary>
+        /////Converts o string UTF
+        ///// </summary>
+        ///// <param name="val"></param>
+        ///// <returns></returns>
+        //public static string ToStringUtf8(this string val)
+        //{
+        //    return Encoding.UTF8.GetString(Encoding.GetEncoding(1252).GetBytes(val ?? string.Empty));
+        //}
 
         //public static string ToStringJavaScript(this string val) => HttpUtility.JavaScriptStringEncode(val ?? string.Empty);
 

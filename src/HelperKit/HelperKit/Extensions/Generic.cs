@@ -27,7 +27,7 @@ namespace HelperKit
         }
 
         /// <summary>
-        /// Gets the enums values and names as Distionary
+        /// Gets the enums values and names as Dictionary
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -42,12 +42,12 @@ namespace HelperKit
         #region Dictionary Convert Helper
 
         /// <summary>
-        /// Retorna un objeto según su tipo de dato (T) guardado en un diccionario,
-        /// en caso el objeto no exista se crea una nueva instancia del mismo
+        /// Returns the object of type T
         /// </summary>
-        /// <param name="dictionary">Diccionario tipo string-object</param>
-        /// <param name="key">Nombre del Key a buscar en el TempData</param>
-        /// <returns>Object</returns>
+        /// <param name="dictionary"></param>
+        /// <param name="key"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static T ToValue<T>(this IDictionary<string, object> dictionary, string key)
         {
             _ = key ?? throw new ArgumentNullException(nameof(key));
@@ -56,14 +56,24 @@ namespace HelperKit
             return temp != null ? (T) temp : (T) Activator.CreateInstance(typeof(T));
         }
 
-        ///// <summary>
-        /////
-        ///// </summary>
-        ///// <param name="namevalueCollection"></param>
-        ///// <param name="name"></param>
-        ///// <param name="def">Default value</param>
-        ///// <returns></returns>
-        //public static string GetValue(this NameValueCollection namevalueCollection, string name, string def = "") => namevalueCollection[name] ?? def;
+        // /// <summary>
+        // /// 
+        // /// </summary>
+        // /// <param name="nameValueCollection"></param>
+        // /// <param name="name"></param>
+        // /// <param name="def"></param>
+        // /// <returns></returns>
+        // public static string GetValue(this NameValueCollection nameValueCollection, string name, string def = "")
+        // {
+        //     return nameValueCollection[name] ?? def;
+        // }
+
+        /// <summary>
+        /// Converts an object to named value collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <returns></returns>
         public static NameValueCollection ToNameValueCollection<T>(this T t)
         {
             var nameValueCollection = new NameValueCollection();
@@ -113,6 +123,12 @@ namespace HelperKit
 
         #region XML
 
+        /// <summary>
+        /// Serialize an object to xml
+        /// </summary>
+        /// <param name="t"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static string SerializeObjectToXml<T>(this T t)
         {
             var xmlDoc = new XmlDocument();
@@ -128,17 +144,27 @@ namespace HelperKit
             return xmlDoc.InnerXml.Replace("<?xml version=\"1.0\"?>", string.Empty);
         }
 
-        public static T DeserializerXmlToObject<T>(this string xml)
+        /// <summary>
+        /// Deserialize an string to and object
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <returns></returns>
+        public static T DeserializeXmlToObject<T>(this string xml)
         {
-            T instance;
             var xmlSerializer = new XmlSerializer(typeof(T));
             using var stringReader = new StringReader(xml);
-            instance = (T) xmlSerializer.Deserialize(stringReader);
+            var instance = (T) xmlSerializer.Deserialize(stringReader);
 
             return instance;
         }
 
-        public static string ConvertObjectToXmlText<T>(this T t)
+        /// <summary>
+        /// Converts an object to xml text
+        /// </summary>
+        /// <param name="t"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static string ConvertObjectToXmlString<T>(this T t)
         {
             var typeName = t.GetType().Name;
             var propertyInfos = t.GetType().GetProperties();

@@ -7,27 +7,27 @@ namespace HelperKit
     {
         #region Decimal
 
-        ///// <summary>
-        ///// Calcula la cifra de recondeo para la moneda peruana con la regla .05 centimos
-        ///// </summary>
-        ///// <returns></returns>
-        //public static Decimal GetPeruMoneyRound(this Decimal val)
-        //{
-        //    val = val.Round();
-        //    var value = val.ToString().Split('.')[1].Substring(1).ToDecimal();
-        //    if (value == 5 || value == 0)
-        //        return new Decimal(0);
-        //    else if (value < 5)
-        //        return value / (new Decimal(100));
-        //    else
-        //        return (value - 5) / (new Decimal(100));
-        //}
+        // /// <summary>
+        // /// Calcula la cifra de recondeo para la moneda peruana con la regla .05 centimos
+        // /// </summary>
+        // /// <param name="val"></param>
+        // /// <returns></returns>
+        // public static decimal GetPeruMoneyRound(this decimal val)
+        // {
+        //     val = val.Round();
+        //     var value = val.ToString(CultureInfo.InvariantCulture).Split('.')[1].Substring(1).ToDecimal();
+        //     if (value == 5 || value == 0)
+        //         return new decimal(0);
+        //     if (value < 5)
+        //         return value / (new decimal(100));
+        //     return (value - 5) / (new decimal(100));
+        // }
 
         /// <summary>
-        /// Redondea decimal a n campos
+        /// Round a decimal value by a number of decimals
         /// </summary>
         /// <param name="val"></param>
-        /// <param name="decimals"></param>
+        /// <param name="decimals">Number of decimals (default 2)</param>
         /// <returns></returns>
         public static decimal Round(this decimal val, int decimals = 2)
         {
@@ -39,7 +39,7 @@ namespace HelperKit
         #region Decimal Convert Helper
 
         /// <summary>
-        /// Covierte un objeto a un entero tipo Decimal
+        /// Converts a value to decimal 
         /// </summary>
         /// <param name="val"></param>
         /// <param name="def"></param>
@@ -54,7 +54,7 @@ namespace HelperKit
         #region Long Convert Helper
 
         /// <summary>
-        /// Covierte un decimal a un entero tipo long
+        /// Converts a value to long 
         /// </summary>
         /// <param name="val">Decimal</param>
         /// <param name="def"></param>

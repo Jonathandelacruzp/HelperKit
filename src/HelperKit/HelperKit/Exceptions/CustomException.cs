@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 
 namespace HelperKit.Exceptions
 {
+    /// <inheritdoc />
     public class CustomException<T> : Exception where T : Exception
     {
         public T Exception { get; set; }

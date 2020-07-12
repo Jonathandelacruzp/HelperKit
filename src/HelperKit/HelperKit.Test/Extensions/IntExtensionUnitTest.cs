@@ -9,21 +9,19 @@ namespace HelperKit.Test.Extensions
         {
             const string stringNumber = "20";
             const string stringFloatLiteral = "10F";
-            string stringNumberNull = null;
 
             Assert.IsInstanceOf<int>(stringNumber.ToInteger());
 
             Assert.AreEqual(20, stringNumber.ToInteger());
             Assert.AreNotEqual(10, stringFloatLiteral.ToInteger());
-            Assert.AreEqual(0, stringNumberNull.ToInteger());
+            Assert.AreEqual(0, ((string) null).ToInteger());
         }
 
         [Test]
         public void IntegerExtension_ReturnDefaultValue_WithNullValue()
         {
-            var defaultValue = 5;
-            string stringNumber = null;
-            Assert.AreEqual(5, stringNumber.ToInteger(defaultValue));
+            const int defaultValue = 5;
+            Assert.AreEqual(5, ((string) null).ToInteger(defaultValue));
         }
     }
 }

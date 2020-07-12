@@ -5,7 +5,7 @@
         #region bool Convert Helper
 
         /// <summary>
-        /// Convetrs to Bolean
+        /// Converts to Boolean
         /// </summary>
         /// <param name="val"></param>
         /// <param name="def"></param>

@@ -1,9 +1,6 @@
 name: NetFrameWork.Legacy.CI
 
-on: 
-  push:
-    branches: 
-      - develop
+on: [push]
 
 jobs:
   build:

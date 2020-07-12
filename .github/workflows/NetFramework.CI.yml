@@ -16,11 +16,11 @@ jobs:
       uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build with MSBuild
       run: msbuild src/HelperKit/HelperKit.sln -p:Configuration=Release
-    - name: Test
+    - name: dotnet test
       run: | 
           cd src/HelperKit/HelperKit/
           dotnet test --no-restore --verbosity normal
-    - name: Pack
+    - name: dotnet pack
       run: | 
           cd src/HelperKit/HelperKit/
           dotnet pack -c Release -o out

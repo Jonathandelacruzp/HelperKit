@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HelperKit.Test.Extensions
 {
-    public class GenericComparablesUnitTest
+    public class GenericComparableUnitTest
     {
         [Test]
         public void HasAnyExtension_ShouldReturn_Valid_Result()
@@ -30,9 +30,7 @@ namespace HelperKit.Test.Extensions
             void action() => colorList.IsContainedOn(colorListToFind);
             Assert.Throws<ArgumentException>(action);
 
-            var stringValues = new[] {"rojo", "verde"};
-
-            void actionNull() => ((string) null).IsContainedOn(stringValues);
+            void actionNull() => ((string) null).IsContainedOn("rojo", "verde");
             Assert.Throws<ArgumentNullException>(actionNull);
         }
     }

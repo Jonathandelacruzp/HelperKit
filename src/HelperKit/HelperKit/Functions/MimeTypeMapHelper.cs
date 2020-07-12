@@ -683,7 +683,7 @@ namespace HelperKit
 
                 #endregion
             };
-            var cache = mappings.ToList(); // need ToList() to avoid modifying while still enumerating
+            var cache = mappings.ToArray(); // need ToArray() to avoid modifying while still enumerating
 
             foreach (var mapping in cache.Where(mapping => !mappings.ContainsKey(mapping.Value)))
                 mappings.Add(mapping.Value, mapping.Key);
@@ -719,10 +719,9 @@ namespace HelperKit
             if (mimeType.StartsWith("."))
                 throw new ArgumentException("Requested mime type is not valid: " + mimeType);
 
-            if (_mappings.Value.TryGetValue(mimeType, out var extension))
-                return extension;
-
-            throw new ArgumentException("Requested mime type is not registered: " + mimeType);
+            return _mappings.Value.TryGetValue(mimeType, out var extension)
+                ? extension
+                : throw new ArgumentException("Requested mime type is not registered: " + mimeType);
         }
     }
 }

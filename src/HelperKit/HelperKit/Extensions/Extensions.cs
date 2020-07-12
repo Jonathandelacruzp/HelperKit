@@ -22,24 +22,8 @@ namespace HelperKit
         /// <returns></returns>
         public static bool HasAny<T>(this IEnumerable<T> array, params T[] values)
         {
+            _ = array ?? throw new ArgumentNullException(nameof(array));
             return values.Any(item => array?.Contains(item) == true);
-        }
-
-        /// <summary>
-        /// Validates if at least one item exist on other collection
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
-        /// <param name="values"></param>
-        /// <returns></returns>
-        public static bool IsContainedOn<T>(this T value, IEnumerable<T> values)
-        {
-            _ = value ?? throw new ArgumentNullException(nameof(value));
-
-            if (typeof(T).GetInterface("IEnumerable") != null)
-                throw new ArgumentException("Requested value could not be an Enumerable.");
-
-            return values.Contains(value);
         }
 
         /// <summary>
@@ -53,10 +37,9 @@ namespace HelperKit
         {
             _ = value ?? throw new ArgumentNullException(nameof(value));
 
-            if (typeof(T).GetInterface("IEnumerable") != null)
-                throw new ArgumentException("Requested value could not be an Enumerable.");
-
-            return values.Contains(value);
+            return typeof(T).GetInterface("IEnumerable") != null
+                ? throw new ArgumentException("Requested value could not be an Enumerable.")
+                : values.Contains(value);
         }
 
         #endregion

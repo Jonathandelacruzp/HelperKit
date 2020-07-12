@@ -24,7 +24,7 @@ namespace HelperKit.Test.Extensions
 
             var exception = Assert.Throws<ArgumentNullException>(() => stream.ToBytes());
 
-            Assert.AreEqual(exception.Message, $"Value cannot be null.{Environment.NewLine}Parameter name: {nameof(stream)}");
+            Assert.AreEqual($"Value cannot be null. (Parameter '{nameof(stream)}')", exception.Message);
         }
     }
 }

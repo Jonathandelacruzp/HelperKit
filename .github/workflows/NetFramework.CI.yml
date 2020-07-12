@@ -16,6 +16,10 @@ jobs:
       uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build with MSBuild
       run: msbuild src/HelperKit/HelperKit.sln -p:Configuration=Release
+    - name: Test
+      run: | 
+          cd src/HelperKit/HelperKit/
+          dotnet test --no-restore --verbosity normal
     - name: Pack
       run: | 
           cd src/HelperKit/HelperKit/
@@ -23,4 +27,4 @@ jobs:
     - name: Push generated package to Nuget registry
       run: | 
           cd src/HelperKit/HelperKit/out
-          dotnet nuget push ./*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate
+          dotnet nuget push *.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate

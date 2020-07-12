@@ -1,10 +1,8 @@
 name: NetFramework.NugetPublish.CI
 
 on:
- page_build:
   release:
-    types:
-      - created
+    types: [ created ]
 
 jobs:
   build:

@@ -41,8 +41,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void BooleanExtension_ReturnFalseNullValue()
         {
-            string nullString = null;
-            Assert.AreEqual(false, nullString.ToBoolean());
+            Assert.AreEqual(false, ((string) null).ToBoolean());
         }
     }
 }

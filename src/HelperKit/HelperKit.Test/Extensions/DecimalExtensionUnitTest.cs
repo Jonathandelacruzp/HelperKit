@@ -25,9 +25,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void DecimalExtension_ReturnZeroFromNullValue()
         {
-            string nullString = null;
-            Assert.AreEqual(0, nullString.ToDecimal());
-            //Assert.ThrowsException(nullString.ToDecimal(),"value is null",);
+            Assert.AreEqual(0, ((string) null).ToDecimal());
         }
 
         [Test]

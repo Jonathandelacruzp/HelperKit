@@ -24,7 +24,7 @@ Install [HelperKit.Web with NuGet](https://www.nuget.org/packages/HelperKit.Web)
 
     Install-Package HelperKit.Web
 
-### Installing HelperKit
+### Installing HelperKit.Mvc
 
 Install [HelperKit.Mvc with NuGet](https://www.nuget.org/packages/HelperKit.Mvc):
 

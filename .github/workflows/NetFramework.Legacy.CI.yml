@@ -27,4 +27,5 @@ jobs:
     - name: dotnet test
       run: | 
           cd src/HelperKit/HelperKit/
+          dotnet restore
           dotnet test --no-restore --verbosity normal

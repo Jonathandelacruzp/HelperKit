@@ -1,6 +1,7 @@
 
 HelperKit
 =======
+![NetFrameWork.Legacy.CI](https://github.com/Jonathandelacruzp/HelperKit/workflows/NetFrameWork.Legacy.CI/badge.svg)
 [![NuGet](https://img.shields.io/nuget/dt/helperkit.svg)](https://www.nuget.org/packages/helperkit) 
 [![NuGet](https://img.shields.io/nuget/vpre/helperkit.svg)](https://www.nuget.org/packages/helperkit)
 

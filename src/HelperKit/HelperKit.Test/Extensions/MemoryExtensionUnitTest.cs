@@ -20,11 +20,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void MemoryExtension_ThrowError_WithNullParameter()
         {
-            Stream stream = null;
-
-            var exception = Assert.Throws<ArgumentNullException>(() => stream.ToBytes());
-
-            Assert.AreEqual($"Value cannot be null. (Parameter '{nameof(stream)}')", exception.Message);
+            Assert.Throws<ArgumentNullException>(() => ((Stream) null).ToBytes());
         }
     }
 }

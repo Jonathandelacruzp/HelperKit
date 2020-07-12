@@ -1,8 +1,6 @@
 name: .NET Core
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
     types: [closed]
     branches: [ master ]
@@ -23,8 +21,10 @@ jobs:
           cd src/HelperKit/HelperKit/
           dotnet restore
     - name: Build
-      run: dotnet build --c Release --no-restore -o out
+      run: dotnet build -c Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Pack
+      run: dotnet pack -c Release -o out
     - name: Push generated package to Nuget registry
       run: dotnet nuget push ./<project>/out/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate

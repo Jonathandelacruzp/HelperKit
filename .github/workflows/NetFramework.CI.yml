@@ -1,0 +1,24 @@
+name: NetFrameWork.Legacy.CI
+
+on: [push]
+ 
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Restore packages
+      run: nuget restore src/HelperKit/HelperKit.sln
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
+    - name: Build with MSBuild
+      run: msbuild src/HelperKit/HelperKit.sln -p:Configuration=Release
+    - name: Pack
+      run: | 
+          cd src/HelperKit/HelperKit/
+          dotnet pack -c Release -o out
+    - name: Push generated package to Nuget registry
+      run: dotnet nuget push ./<project>/out/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate

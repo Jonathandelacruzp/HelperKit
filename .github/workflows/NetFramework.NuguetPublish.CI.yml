@@ -1,4 +1,4 @@
-name: NetFramework.NuguetPublish.CI
+name: NetFramework.NugetPublish.CI
 
 on:
   pull_request:

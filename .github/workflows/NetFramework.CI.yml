@@ -1,7 +1,10 @@
 name: NetFrameWork.Legacy.CI
 
-on: [push]
- 
+on:
+  pull_request:
+    types: [closed]
+    branches: [ master ]
+
 jobs:
   build:
     runs-on: windows-latest

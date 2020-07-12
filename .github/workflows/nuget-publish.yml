@@ -19,11 +19,11 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Install dependencies
-      run: dotnet restore
-    - name: Build
       run: | 
           cd src/HelperKit/HelperKit/
-          dotnet build --c Release --no-restore -o out
+          dotnet restore
+    - name: Build
+      run: dotnet build --c Release --no-restore -o out
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Push generated package to Nuget registry

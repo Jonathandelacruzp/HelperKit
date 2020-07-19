@@ -1,8 +1,8 @@
+using System;
 using HelperKit.Test.Models;
 using NUnit.Framework;
-using System;
 
-namespace HelperKit.Test.Extensions
+namespace HelperKit.Test.TestExtensions
 {
     public class GenericExtensionUnitTest
     {

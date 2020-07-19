@@ -1,9 +1,9 @@
-using HelperKit.Test.Models;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using HelperKit.Test.Models;
+using NUnit.Framework;
 
-namespace HelperKit.Test.Extensions
+namespace HelperKit.Test.TestExtensions
 {
     public class GenericComparableUnitTest
     {

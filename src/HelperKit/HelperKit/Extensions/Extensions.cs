@@ -39,7 +39,7 @@ namespace HelperKit
 
             return typeof(T).GetInterface("IEnumerable") != null
                 ? throw new ArgumentException("Requested value could not be an Enumerable.")
-                : values.Any(x => x.Equals(value));
+                : values.Contains(value);
         }
 
         /// <summary>

@@ -124,7 +124,7 @@ namespace HelperKit.Test.Extensions
                 StringValue = "string value",
                 BooleanValue = true,
                 IntArray = intArray,
-                IntList = intArray
+                IntEnum = intArray
             };
 
             var result = testClass.ToNameValueCollection();
@@ -150,7 +150,7 @@ namespace HelperKit.Test.Extensions
                 StringValue = "string value",
                 BooleanValue = true,
                 IntArray = intArray,
-                IntList = intArray
+                IntEnum = intArray
             };
 
             var result = testClass.ToKeyValuePair();

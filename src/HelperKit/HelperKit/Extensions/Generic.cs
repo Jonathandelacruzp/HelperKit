@@ -20,11 +20,20 @@ namespace HelperKit
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
+        /// <param name="def"></param>
         /// <returns></returns>
-        public static T ToEnum<T>(this string value) where T : struct, IConvertible
+        public static T ToEnum<T>(this string value, T def = default) where T : struct, IConvertible
         {
-            return (T) Enum.Parse(typeof(T), value, true);
+            try
+            {
+                return (T) Enum.Parse(typeof(T), value, true);
+            }
+            catch (Exception)
+            {
+                return def;
+            }
         }
+
 
         /// <summary>
         /// Gets the enums values and names as Dictionary
@@ -119,6 +128,19 @@ namespace HelperKit
                 .ToDictionary(x => x.Name, x => x.GetValue(obj, null));
         }
 
+        /// <summary>
+        /// Convert any object to dictionary with Type 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static IDictionary<string, Tuple<Type, object>> ToDictionaryWithType(this object obj)
+        {
+            return obj?.GetType()
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                .Where(x => x.CanRead || x.CanWrite)
+                .ToDictionary(x => x.Name, x => new Tuple<Type, object>(x.PropertyType, x.GetValue(obj, null)));
+        }
+
         #endregion
 
         #region XML
@@ -134,13 +156,13 @@ namespace HelperKit
             var xmlDoc = new XmlDocument();
             var xmlSerializer = new XmlSerializer(t.GetType());
 
-            using var xmlStream = new MemoryStream();
+            using var ms = new MemoryStream();
             var xmlns = new XmlSerializerNamespaces();
             xmlns.Add(string.Empty, string.Empty);
 
-            xmlSerializer.Serialize(xmlStream, t, xmlns);
-            xmlStream.Position = 0;
-            xmlDoc.Load(xmlStream);
+            xmlSerializer.Serialize(ms, t, xmlns);
+            ms.Position = 0;
+            xmlDoc.Load(ms);
             return xmlDoc.InnerXml.Replace("<?xml version=\"1.0\"?>", string.Empty);
         }
 
@@ -158,28 +180,28 @@ namespace HelperKit
             return instance;
         }
 
-        /// <summary>
-        /// Converts an object to xml text
-        /// </summary>
-        /// <param name="t"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static string ConvertObjectToXmlString<T>(this T t)
-        {
-            var typeName = t.GetType().Name;
-            var propertyInfos = t.GetType().GetProperties();
-
-            var strBuilder = new StringBuilder();
-            strBuilder.Append('<').Append(typeName);
-            foreach (var propertyInfo in propertyInfos)
-            {
-                string startTag = $"<{propertyInfo.Name}>", endTag = $"</{propertyInfo.Name}>";
-                strBuilder.Append(startTag).Append(propertyInfo.GetValue(t, null)).Append(endTag);
-            }
-
-            strBuilder.Append("</").Append(typeName);
-            return strBuilder.ToString();
-        }
+        // /// <summary>
+        // /// Converts an object to xml text
+        // /// </summary>
+        // /// <param name="t"></param>
+        // /// <typeparam name="T"></typeparam>
+        // /// <returns></returns>
+        // public static string ConvertObjectToXmlString<T>(this T t)
+        // {
+        //     var typeName = t.GetType().Name;
+        //     var propertyInfos = t.GetType().GetProperties();
+        //
+        //     var sb = new StringBuilder();
+        //     sb.Append("<").Append(typeName).AppendLine(">");
+        //     foreach (var propertyInfo in propertyInfos)
+        //     {
+        //         string startTag = $"<{propertyInfo.Name}>", endTag = $"</{propertyInfo.Name}>";
+        //         sb.Append(startTag).Append(propertyInfo.GetValue(t, null)).AppendLine(endTag);
+        //     }
+        //
+        //     sb.Append("</").Append(typeName).Append(">");
+        //     return sb.ToString();
+        // }
 
         #endregion
     }

@@ -4,6 +4,10 @@ using System.Linq.Expressions;
 
 namespace HelperKit.Builders
 {
+    /// <summary>
+    /// This class won't work with net core v3 and +
+    /// See http://www.albahari.com/expressions for information and examples.
+    /// </summary>
     public static class PredicateBuilder
     {
         public static Expression<Func<T, bool>> True<T>()

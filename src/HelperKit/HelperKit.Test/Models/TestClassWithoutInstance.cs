@@ -1,39 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
+using HelperKit.Test.Builders;
 
 namespace HelperKit.Test.Models
 {
     public class TestClassWithoutInstance
     {
-        public int IntValue { get; set; }
-        public string StringValue;
         public bool BooleanValue;
         public int[] IntArray;
-        public IEnumerable<int> IntList;
-
-        public static IEnumerable<TestClassWithoutInstance> CreateElements(int number)
-        {
-            var testClassList = new List<TestClassWithoutInstance>();
-            for (var i = 0; i < number; i++) testClassList.Add(Create());
-
-            return testClassList;
-        }
+        public IEnumerable<int> IntEnum;
+        public string StringValue;
+        public int IntValue { get; set; }
 
         public static TestClassWithoutInstance Create()
         {
-            var random = new Random();
-            var arraySize = random.Next() % 20;
-            var guid = Guid.NewGuid().ToString().Split('-')[0];
-            var testClass = new TestClassWithoutInstance()
-            {
-                IntValue = random.Next(),
-                BooleanValue = random.Next(200) % 4 == 0,
-                IntArray = Enumerable.Repeat(0, arraySize).Select(_ => random.Next(0, 100)).ToArray(),
-                IntList = Enumerable.Repeat(0, arraySize).Select(_ => random.Next(0, 100)).ToList(),
-                StringValue = guid
-            };
-            return testClass;
+            return TestClassWithoutInstanceBuilder.Faker().Generate();
         }
     }
 }

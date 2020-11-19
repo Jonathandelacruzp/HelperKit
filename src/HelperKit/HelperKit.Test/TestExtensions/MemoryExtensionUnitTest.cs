@@ -1,8 +1,8 @@
-using NUnit.Framework;
 using System;
 using System.IO;
+using NUnit.Framework;
 
-namespace HelperKit.Test.Extensions
+namespace HelperKit.Test.TestExtensions
 {
     public class MemoryExtensionUnitTest
     {

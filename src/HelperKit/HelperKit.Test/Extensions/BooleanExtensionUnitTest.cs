@@ -1,20 +1,21 @@
 using NUnit.Framework;
 
-namespace HelperKit.Test.TestExtensions
+namespace HelperKit.Test.Extensions
 {
     public class BooleanExtensionUnitTest
     {
         [Test]
-        public void BooleanExtension_AcceptLiteralStringBooleanValue()
+        public void BooleanExtension_AcceptLiteralStringBoleanValue()
         {
-            const string stringTrue = "true";
-            const string stringTrueUpper = "TRUE";
-            const string stringTrueCapital = "True";
+            var stringTrue = "true";
+            var stringTrueUpper = "TRUE";
+            var stringTrueCapital = "True";
 
-            const string stringFalse = "false";
-            const string stringFalseUpper = "FALSE";
-            const string stringFalseCapital = "False";
+            var stringFalse = "false";
+            var stringFalseUpper = "FALSE";
+            var stringFalseCapital = "False";
 
+            Assert.IsInstanceOf<bool>(stringTrue.ToBoolean());
 
             Assert.AreEqual(true, stringTrue.ToBoolean());
             Assert.AreEqual(true, stringTrueUpper.ToBoolean());
@@ -28,9 +29,9 @@ namespace HelperKit.Test.TestExtensions
         [Test]
         public void BooleanExtension_ReturnFalseWithWrongValues()
         {
-            const string anyString = "asads";
-            const string anyStringUpper = "ASADSADSDAS";
-            const string anyStringCapital = "Aasdadsasd";
+            var anyString = "asads";
+            var anyStringUpper = "ASADSADSDAS";
+            var anyStringCapital = "Aasdadsasd";
 
             Assert.AreEqual(false, anyString.ToBoolean());
             Assert.AreEqual(false, anyStringUpper.ToBoolean());

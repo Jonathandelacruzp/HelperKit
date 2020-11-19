@@ -4,9 +4,6 @@ using System.Text;
 
 namespace HelperKit.Security
 {
-    /// <summary>
-    /// Contains most repetitive code for hash generation
-    /// </summary>
     public static class HashHelper
     {
         /// <summary>
@@ -44,6 +41,17 @@ namespace HelperKit.Security
         }
 
         /// <summary>
+        /// Compare the actual value vs the encrypted
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="encryptedValue"></param>
+        /// <returns></returns>
+        public static bool AreEqualMd5(string text, string encryptedValue)
+        {
+            return ComputeMd5Hash(text) == encryptedValue;
+        }
+
+        /// <summary>
         /// Computes Sha256
         /// </summary>
         /// <param name="rawData"></param>
@@ -60,13 +68,12 @@ namespace HelperKit.Security
         /// <summary>
         /// Compare the actual value vs the encrypted
         /// </summary>
-        /// <param name="hashAlgorithm"></param>
-        /// <param name="rawData"></param>
+        /// <param name="text"></param>
         /// <param name="encryptedValue"></param>
         /// <returns></returns>
-        public static bool Matches(this HashAlgorithm hashAlgorithm, string rawData, string encryptedValue)
+        public static bool AreEqualSha256Hash(string text, string encryptedValue)
         {
-            return hashAlgorithm.GenerateHashString(rawData) == encryptedValue;
+            return ComputeSha256Hash(text) == encryptedValue;
         }
     }
 }

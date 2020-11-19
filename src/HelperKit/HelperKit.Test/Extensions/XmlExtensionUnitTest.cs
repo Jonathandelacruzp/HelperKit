@@ -1,9 +1,9 @@
-using System.IO;
-using System.Xml.Serialization;
 using HelperKit.Test.Models;
 using NUnit.Framework;
+using System.IO;
+using System.Xml.Serialization;
 
-namespace HelperKit.Test.TestExtensions
+namespace HelperKit.Test.Extensions
 {
     public class XmlExtensionUnitTest
     {

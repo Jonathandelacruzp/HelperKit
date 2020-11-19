@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -36,7 +35,7 @@ namespace HelperKit
         /// <returns></returns>
         public static string ReplaceNonBreakingSpace(this string val, string def = " ")
         {
-            var nbsp = Convert.ToChar(160).ToString();
+            var nbsp = System.Convert.ToChar(160).ToString();
             return val.Replace(nbsp, def);
         }
 

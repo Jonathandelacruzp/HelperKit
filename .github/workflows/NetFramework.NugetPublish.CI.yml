@@ -2,7 +2,7 @@ name: NetFramework.NugetPublish.CI
 
 on:
   release:
-    types: [ created ]
+    types: [published, created]
 
 jobs:
   build:

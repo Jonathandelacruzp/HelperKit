@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace HelperKit.Test.TestExtensions
+namespace HelperKit.Test.Extensions
 {
     public class IntExtensionUnitTest
     {

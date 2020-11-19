@@ -1,8 +1,8 @@
-using System.Text.RegularExpressions;
 using HelperKit.Test.Models;
 using NUnit.Framework;
+using System.Text.RegularExpressions;
 
-namespace HelperKit.Test.TestExtensions
+namespace HelperKit.Test.Extensions
 {
     public class StringExtensionUnitTest
     {

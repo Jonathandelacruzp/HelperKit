@@ -39,7 +39,7 @@ namespace HelperKit
         #region Decimal Convert Helper
 
         /// <summary>
-        /// Converts a value to decimal
+        /// Converts a value to decimal 
         /// </summary>
         /// <param name="val"></param>
         /// <param name="def"></param>
@@ -54,7 +54,7 @@ namespace HelperKit
         #region Long Convert Helper
 
         /// <summary>
-        /// Converts a value to long
+        /// Converts a value to long 
         /// </summary>
         /// <param name="val">Decimal</param>
         /// <param name="def"></param>

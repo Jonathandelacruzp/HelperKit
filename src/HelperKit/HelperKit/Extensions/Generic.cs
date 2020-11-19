@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -33,7 +32,6 @@ namespace HelperKit
                 return def;
             }
         }
-
 
         /// <summary>
         /// Gets the enums values and names as Dictionary
@@ -66,7 +64,7 @@ namespace HelperKit
         }
 
         // /// <summary>
-        // /// 
+        // ///
         // /// </summary>
         // /// <param name="nameValueCollection"></param>
         // /// <param name="name"></param>
@@ -129,7 +127,7 @@ namespace HelperKit
         }
 
         /// <summary>
-        /// Convert any object to dictionary with Type 
+        /// Convert any object to dictionary with Type
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>

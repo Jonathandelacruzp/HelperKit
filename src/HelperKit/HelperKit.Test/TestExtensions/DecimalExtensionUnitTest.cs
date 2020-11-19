@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace HelperKit.Test.TestExtensions
 {
-    public class DeimalExtensionUnitTest
+    public class DecimalExtensionUnitTest
     {
         [Test]
         public void DecimalExtension_ReturnTrue()

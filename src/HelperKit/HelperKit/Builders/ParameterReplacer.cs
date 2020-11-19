@@ -14,7 +14,7 @@ namespace HelperKit.Builders
             _ = newBody ?? throw new ArgumentNullException(nameof(newBody));
             return expression is LambdaExpression
                 ? throw new InvalidOperationException("The search & replace operation must be performed on the body of the lambda.")
-                : (new ParameterReplacerVisitor(oldParameter, newBody)).Visit(expression);
+                : new ParameterReplacerVisitor(oldParameter, newBody).Visit(expression);
         }
 
         //Chains two lambda expressions together as in the following example:

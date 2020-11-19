@@ -15,7 +15,6 @@ namespace HelperKit.Test.TestExtensions
             const string stringFalseUpper = "FALSE";
             const string stringFalseCapital = "False";
 
-            Assert.IsInstanceOf<bool>(stringTrue.ToBoolean());
 
             Assert.AreEqual(true, stringTrue.ToBoolean());
             Assert.AreEqual(true, stringTrueUpper.ToBoolean());

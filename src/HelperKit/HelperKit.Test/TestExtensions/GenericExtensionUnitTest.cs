@@ -39,7 +39,7 @@ namespace HelperKit.Test.TestExtensions
         [Test]
         public void EnumToDictionary_GetCorrectItems()
         {
-            var enumResult = HelperKit.Extensions.EnumNamedValues<Color>();
+            var enumResult = Extensions.EnumNamedValues<Color>();
             Assert.AreEqual(5, enumResult.Count);
         }
 

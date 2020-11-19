@@ -17,7 +17,7 @@ jobs:
     - name: Restore packages
       run: nuget restore src/HelperKit/HelperKit.sln
     - name: Setup MSBuild.exe
-      uses: warrenbuckley/Setup-MSBuild@v1
+      uses: microsoft/setup-msbuild@v1.0.2
     - name: Build with MSBuild
       run: msbuild src/HelperKit/HelperKit.sln -p:Configuration=Release
     - name: dotnet test

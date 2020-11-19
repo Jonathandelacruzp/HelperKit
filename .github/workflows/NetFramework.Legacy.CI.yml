@@ -26,5 +26,3 @@ jobs:
       run: msbuild src/HelperKit/HelperKit.sln -p:Configuration=Release
     - name: dotnet test
       run: dotnet test src/HelperKit/HelperKit.sln --no-restore --verbosity normal
-    env:
-      ACTIONS_ALLOW_UNSECURE_COMMANDS:true

@@ -12,12 +12,12 @@
 		<TargetFrameworks>netstandard2.0;netstandard2.1;net45;net46;net47</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<PackageId>HelperKit</PackageId>
-		<Version>1.3.0</Version>
+		<Version>1.3.1</Version>
 		<Authors>jonathan.delacruzp</Authors>
 		<Company>jonathan.delacruzp</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>1.3.0</AssemblyVersion>
-		<FileVersion>1.3.0</FileVersion>
+		<AssemblyVersion>1.3.1</AssemblyVersion>
+		<FileVersion>1.3.1</FileVersion>
 		<Copyright>jonathan.delacruzp, 2019</Copyright>
 		<RepositoryType>git</RepositoryType>
 		<Description>Small library of general purpose utilities for .NET development that almost every application can use.</Description>

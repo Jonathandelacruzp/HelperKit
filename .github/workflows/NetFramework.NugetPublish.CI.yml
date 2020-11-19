@@ -1,0 +1,30 @@
+name: NetFramework.NugetPublish.CI
+
+on:
+  release:
+    types: [ created ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Restore packages
+      run: nuget restore src/HelperKit/HelperKit.sln
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
+    - name: Build with MSBuild
+      run: msbuild src/HelperKit/HelperKit.sln -p:Configuration=Release
+    - name: dotnet test
+      run: dotnet test src/HelperKit/HelperKit.sln --no-restore --verbosity normal
+    - name: dotnet pack
+      run: | 
+          cd src/HelperKit/HelperKit/
+          dotnet pack -c Release -o out
+    - name: Push generated package to Nuget registry
+      run: | 
+          cd src/HelperKit/HelperKit/out
+          dotnet nuget push *.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json --skip-duplicate

@@ -1,0 +1,30 @@
+name: NetFrameWork.Legacy.CI
+
+on: 
+  push:
+    branches: 
+    - master
+    - develop
+  pull_request:
+    branches:
+    - master
+    - develop
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Nuget.exe
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: '5.x'
+    - name: Restore packages
+      run: nuget restore src/HelperKit/HelperKit.sln
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
+    - name: Build with MSBuild
+      run: msbuild src/HelperKit/HelperKit.sln -p:Configuration=Release
+    - name: dotnet test
+      run: dotnet test src/HelperKit/HelperKit.sln --no-restore --verbosity normal

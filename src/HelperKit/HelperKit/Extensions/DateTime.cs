@@ -24,7 +24,7 @@ namespace HelperKit
         #region DateTime Convert
 
         /// <summary>
-        /// Converts a value to DateTime 
+        /// Converts a value to DateTime
         /// </summary>
         /// <param name="val"></param>
         /// <param name="def"></param>
@@ -35,7 +35,7 @@ namespace HelperKit
         }
 
         /// <summary>
-        /// Converts a value to DateTime 
+        /// Converts a value to DateTime
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
@@ -45,7 +45,7 @@ namespace HelperKit
         }
 
         /// <summary>
-        /// Get the full calendar format string 
+        /// Get the full calendar format string
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
@@ -55,7 +55,7 @@ namespace HelperKit
         }
 
         /// <summary>
-        /// Get the short calendar format string 
+        /// Get the short calendar format string
         /// </summary>
         /// <param name="val"></param>
         /// <param name="cultureInfo"></param>
@@ -96,6 +96,18 @@ namespace HelperKit
                 weekOfYear--;
 
             return firstWeekDay.AddDays(weekOfYear * 7);
+        }
+
+        /// <summary>
+        /// Gets the default fist day of week
+        /// </summary>
+        /// <param name="date">Only gets the year of this parameter</param>
+        /// <param name="weekOfYear"></param>
+        /// <param name="cultureInfo"></param>
+        /// <returns></returns>
+        public static DateTime FirstDateOfWeek(this DateTime date, int weekOfYear, CultureInfo cultureInfo = null)
+        {
+            return FirstDateOfWeek(date.Year, weekOfYear, cultureInfo);
         }
 
         #endregion

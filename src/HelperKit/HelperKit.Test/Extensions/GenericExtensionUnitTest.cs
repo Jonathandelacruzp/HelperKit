@@ -6,6 +6,8 @@ namespace HelperKit.Test.Extensions
 {
     public class GenericExtensionUnitTest
     {
+        private readonly int[] _intArray = new[] { 1, 2, 3, 4 };
+
         [Test]
         public void EnumConvert_ReturnCorrectValue()
         {
@@ -18,7 +20,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void EnumConvert_ReturnError_FromNotExistingValue()
         {
-            var pinkColor = "Pink";
+            const string pinkColor = "Pink";
 
             var ex = Assert.Throws<ArgumentException>(() => pinkColor.ToEnum<Color>());
             Assert.AreEqual(ex.Message, $"Requested value '{pinkColor}' was not found.");
@@ -43,7 +45,6 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToDictionary_GetOnlyGetInstances()
         {
-            var intArray = new[] {1, 2, 3, 4};
             var testClass = TestClassWithoutInstance.Create();
 
             var result = testClass.ToDictionary();
@@ -62,14 +63,13 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToNameValueCollection_GetOnlyGetInstances()
         {
-            var intArray = new[] {1, 2, 3, 4};
             var testClass = new TestClassWithoutInstance
             {
                 IntValue = 3,
                 StringValue = "string value",
                 BooleanValue = true,
-                IntArray = intArray,
-                IntList = intArray
+                IntArray = _intArray,
+                IntList = _intArray
             };
 
             var result = testClass.ToNameValueCollection();
@@ -88,14 +88,13 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ClassToKeyValuePair_GetOnlyGetInstances()
         {
-            var intArray = new[] {1, 2, 3, 4};
             var testClass = new TestClassWithoutInstance
             {
                 IntValue = 3,
                 StringValue = "string value",
                 BooleanValue = true,
-                IntArray = intArray,
-                IntList = intArray
+                IntArray = _intArray,
+                IntList = _intArray
             };
 
             var result = testClass.ToKeyValuePair();

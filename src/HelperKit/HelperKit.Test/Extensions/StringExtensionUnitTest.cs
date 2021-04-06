@@ -58,7 +58,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ToSafeString_ReturnsDefaultValue_WithNullParameter()
         {
-            Assert.IsTrue(((string) null).ToSafeString() == string.Empty);
+            Assert.IsTrue(((string) null).ToSafeString().Length == 0);
         }
 
         //[Test]

@@ -8,10 +8,10 @@ namespace HelperKit.Test.Extensions
         public void DecimalExtension_ReturnTrue()
         {
             var decimalValue = new decimal(5);
-            var stringValue = "5";
-            var intValue = 5;
-            double doubleValue = 5F;
-            float floatValue = 5;
+            const string stringValue = "5";
+            const int intValue = 5;
+            const double doubleValue = 5F;
+            const float floatValue = 5;
 
             Assert.IsInstanceOf<decimal>(intValue.ToDecimal());
 

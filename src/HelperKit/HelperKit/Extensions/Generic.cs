@@ -23,7 +23,7 @@ namespace HelperKit
         /// <returns></returns>
         public static T ToEnum<T>(this string value) where T : struct, IConvertible
         {
-            return (T) Enum.Parse(typeof(T), value, true);
+            return (T)Enum.Parse(typeof(T), value, true);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace HelperKit
         #region Dictionary Convert Helper
 
         /// <summary>
-        /// Returns the object of type T
+        /// Returns the object of type T from a dictitionary
         /// </summary>
         /// <param name="dictionary"></param>
         /// <param name="key"></param>
@@ -52,12 +52,13 @@ namespace HelperKit
         {
             _ = key ?? throw new ArgumentNullException(nameof(key));
 
-            var temp = dictionary[key];
-            return temp != null ? (T) temp : (T) Activator.CreateInstance(typeof(T));
+            return dictionary.TryGetValue(key, out var temp)
+                ? (T)temp
+                : (T)Activator.CreateInstance(typeof(T));
         }
 
         // /// <summary>
-        // /// 
+        // ///
         // /// </summary>
         // /// <param name="nameValueCollection"></param>
         // /// <param name="name"></param>
@@ -74,7 +75,7 @@ namespace HelperKit
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        public static NameValueCollection ToNameValueCollection<T>(this T t)
+        public static NameValueCollection ToNameValueCollection<T>(this T t) where T : class
         {
             var nameValueCollection = new NameValueCollection();
             foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(t))
@@ -93,7 +94,7 @@ namespace HelperKit
         /// <typeparam name="T"></typeparam>
         /// <param name="t"></param>
         /// <returns></returns>
-        public static ICollection<KeyValuePair<string, string>> ToKeyValuePair<T>(this T t)
+        public static ICollection<KeyValuePair<string, string>> ToKeyValuePair<T>(this T t) where T : class
         {
             var keyPair = new List<KeyValuePair<string, string>>();
             foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(t))
@@ -129,7 +130,7 @@ namespace HelperKit
         /// <param name="t"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static string SerializeObjectToXml<T>(this T t)
+        public static string SerializeObjectToXml<T>(this T t) where T : class
         {
             var xmlDoc = new XmlDocument();
             var xmlSerializer = new XmlSerializer(t.GetType());
@@ -149,13 +150,11 @@ namespace HelperKit
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static T DeserializeXmlToObject<T>(this string xml)
+        public static T DeserializeXmlToObject<T>(this string xml) where T : class
         {
             var xmlSerializer = new XmlSerializer(typeof(T));
             using var stringReader = new StringReader(xml);
-            var instance = (T) xmlSerializer.Deserialize(stringReader);
-
-            return instance;
+            return (T)xmlSerializer.Deserialize(stringReader);
         }
 
         /// <summary>
@@ -164,20 +163,21 @@ namespace HelperKit
         /// <param name="t"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static string ConvertObjectToXmlString<T>(this T t)
+        public static string ConvertObjectToXmlString<T>(this T t) where T : class
         {
             var typeName = t.GetType().Name;
             var propertyInfos = t.GetType().GetProperties();
 
             var strBuilder = new StringBuilder();
-            strBuilder.Append('<').Append(typeName);
-            foreach (var propertyInfo in propertyInfos)
+            strBuilder.Append('<').Append(typeName).Append('>');
+            foreach (var propertyInfo in propertyInfos.Where(x => x.CanRead))
             {
-                string startTag = $"<{propertyInfo.Name}>", endTag = $"</{propertyInfo.Name}>";
-                strBuilder.Append(startTag).Append(propertyInfo.GetValue(t, null)).Append(endTag);
+                strBuilder.Append('<').Append(propertyInfo.Name).Append('>')
+                    .Append(propertyInfo.GetValue(t, null)?.ToString() ?? string.Empty)
+                    .Append("</").Append(propertyInfo.Name).Append('>');
             }
 
-            strBuilder.Append("</").Append(typeName);
+            strBuilder.Append("</").Append(typeName).Append('>');
             return strBuilder.ToString();
         }
 

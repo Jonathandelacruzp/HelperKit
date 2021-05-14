@@ -631,7 +631,6 @@ namespace HelperKit
                 {".xwd", "image/x-xwindowdump"},
                 {".z", "application/x-compress"},
                 {".zip", "application/zip"},
-
                 {"application/fsharp-script", ".fsx"},
                 {"application/msaccess", ".adp"},
                 {"application/msword", ".doc"},
@@ -648,7 +647,7 @@ namespace HelperKit
                 {"application/x-x509-ca-cert", ".cer"},
                 {"application/x-zip-compressed", ".zip"},
                 {"application/xhtml+xml", ".xhtml"},
-                {"application/xml", ".xml"}, // anomoly, .xml -> text/xml, but application/xml -> many thingss, but all are xml, so safest is .xml
+                {"application/xml", ".xml"}, // anomoly, .xml -> text/xml, but application/xml -> many things, but all are xml, so safest is .xml
                 {"audio/aac", ".AAC"},
                 {"audio/aiff", ".aiff"},
                 {"audio/basic", ".snd"},

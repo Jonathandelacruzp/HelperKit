@@ -36,7 +36,7 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void IsContainedOnExtension_ShouldReturn_Valid_Result()
         {
-            var colorBlue = Color.Blue;
+            const Color colorBlue = Color.Blue;
 
             var paramTest = colorBlue.IsContainedOn(Color.Blue, Color.Yellow, Color.Red);
             Assert.IsTrue(paramTest);
@@ -55,8 +55,8 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void IsContainedOnExtension_ShouldTrowAnArgumentNUllException()
         {
-            static void actionNull() => ((string) null).IsContainedOn("rojo", "verde");
-            Assert.Throws<ArgumentNullException>(actionNull);
+            static void nullAction() => ((string) null).IsContainedOn("rojo", "verde");
+            Assert.Throws<ArgumentNullException>(nullAction);
         }
     }
 }

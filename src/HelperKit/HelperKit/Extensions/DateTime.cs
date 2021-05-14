@@ -29,19 +29,9 @@ namespace HelperKit
         /// <param name="val"></param>
         /// <param name="def"></param>
         /// <returns></returns>
-        public static DateTime ToDateTime(this object val, DateTime def)
+        public static DateTime ToDateTime(this object val, DateTime def = default)
         {
             return DateTime.TryParse(val.ToString(), out var result) ? result : def;
-        }
-
-        /// <summary>
-        /// Converts a value to DateTime
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
-        public static DateTime ToDateTime(this object val)
-        {
-            return ToDateTime(val, DateTime.MinValue);
         }
 
         /// <summary>

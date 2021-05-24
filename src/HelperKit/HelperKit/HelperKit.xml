@@ -49,39 +49,6 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="T:HelperKit.Exceptions.CustomException`1">
-            <inheritdoc />
-        </member>
-        <member name="P:HelperKit.Exceptions.CustomException`1.Exception">
-            <summary>
-            Exception
-            </summary>
-        </member>
-        <member name="M:HelperKit.Exceptions.CustomException`1.#ctor">
-            <summary>
-            constructor
-            </summary>
-        </member>
-        <member name="M:HelperKit.Exceptions.CustomException`1.#ctor(System.String)">
-            <summary>
-            constructor
-            </summary>
-            <param name="message"></param>
-        </member>
-        <member name="M:HelperKit.Exceptions.CustomException`1.#ctor(System.String,System.Exception)">
-            <summary>
-            constructor
-            </summary>
-            <param name="message"></param>
-            <param name="innerException"></param>
-        </member>
-        <member name="M:HelperKit.Exceptions.CustomException`1.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            constructor
-            </summary>
-            <param name="info"></param>
-            <param name="context"></param>
-        </member>
         <member name="T:HelperKit.Extensions">
             <summary>
             Extension functions

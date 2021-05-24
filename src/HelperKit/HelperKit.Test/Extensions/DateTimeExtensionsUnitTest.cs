@@ -51,10 +51,10 @@ namespace HelperKit.Test.Extensions
         {
             var hours = Math.Abs(_localTimeProvider.TimeZoneInfo.BaseUtcOffset.TotalHours);
             var result = _localTimeProvider.ConvertTime(_utcTimeProvider);
-            var resultHour = new DateTime(result.Ticks - _localTimeProvider.Now.Ticks).Hour + 1;
+            int resultHour = new DateTime(Math.Abs(result.Ticks - _localTimeProvider.Now.Ticks)).Hour + 1;
             // + 1 because the ticks on the provider keeps advancing and is close to the time difference
 
-            Assert.AreEqual((int) hours, resultHour);
+            Assert.AreEqual((int)hours, resultHour);
         }
     }
 }

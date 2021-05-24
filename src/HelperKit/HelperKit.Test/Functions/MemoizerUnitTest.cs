@@ -1,16 +1,14 @@
 ﻿using HelperKit.Functions;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HelperKit.Test.Functions
 {
     public class MemoizerUnitTest
     {
-        private static int value = 0;
-        private static int numberOfCallsMemoizer = 0;
-        private static int numberOfCalls = 0;
+        private static int _value;
+        private static int _numberOfCallsMemoizer;
+        private static int _numberOfCalls;
 
         [Test]
         public void SimpleMemoizerFunction_ReturnCachedFunction()
@@ -22,10 +20,10 @@ namespace HelperKit.Test.Functions
             Assert.AreEqual(3, result);
         }
 
-        private int SimpleValueFunction(Func<int> simpleValueFunction)
+        private static int SimpleValueFunction(Func<int> simpleValueFunction)
         {
-            value++;
-            if (value == 2)
+            _value++;
+            if (_value == 2)
                 return 1;
 
             return simpleValueFunction() + simpleValueFunction() + simpleValueFunction();
@@ -41,21 +39,21 @@ namespace HelperKit.Test.Functions
 
             Assert.AreEqual(3, cachedResult);
             Assert.AreEqual(3, result);
-            Assert.Less(numberOfCallsMemoizer, numberOfCalls);
+            Assert.Less(_numberOfCallsMemoizer, _numberOfCalls);
         }
 
         private int Fibonacci(int value)
         {
-            numberOfCalls++;
+            _numberOfCalls++;
             if (value <= 2)
                 return 1;
 
             return Fibonacci(value - 1) + Fibonacci(value - 2);
         }
 
-        private int Fibonacci(int value, Func<int, int> fibonacci)
+        private static int Fibonacci(int value, Func<int, int> fibonacci)
         {
-            numberOfCallsMemoizer++;
+            _numberOfCallsMemoizer++;
             if (value <= 2)
                 return 1;
 
@@ -70,7 +68,7 @@ namespace HelperKit.Test.Functions
             var result = fibonacci(3);
 
             Assert.AreEqual(2, result);
-            numberOfCallsMemoizer = numberOfCalls = 0;
+            _numberOfCallsMemoizer = _numberOfCalls = 0;
         }
     }
 }

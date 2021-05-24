@@ -6,7 +6,7 @@ namespace HelperKit.Test.Extensions
 {
     public class GenericExtensionUnitTest
     {
-        private readonly int[] _intArray = { 1, 2, 3, 4 };
+        private readonly int[] _intArray = {1, 2, 3, 4};
 
         [Test]
         public void EnumConvert_ReturnCorrectValue()

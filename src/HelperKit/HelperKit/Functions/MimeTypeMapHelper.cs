@@ -9,7 +9,7 @@ namespace HelperKit
     /// </summary>
     public static class MimeTypeMapHelper
     {
-        private static readonly Lazy<IDictionary<string, string>> _mappings = new Lazy<IDictionary<string, string>>(BuildMappings);
+        private static readonly Lazy<IDictionary<string, string>> Mappings = new(BuildMappings);
 
         private static IDictionary<string, string> BuildMappings()
         {
@@ -702,7 +702,7 @@ namespace HelperKit
             if (!extension.StartsWith("."))
                 extension = $".{extension}";
 
-            return _mappings.Value.TryGetValue(extension, out var mime) ? mime : "application/octet-stream";
+            return Mappings.Value.TryGetValue(extension, out var mime) ? mime : "application/octet-stream";
         }
 
         /// <summary>
@@ -718,7 +718,7 @@ namespace HelperKit
             if (mimeType.StartsWith("."))
                 throw new ArgumentException("Requested mime type is not valid: " + mimeType);
 
-            return _mappings.Value.TryGetValue(mimeType, out var extension)
+            return Mappings.Value.TryGetValue(mimeType, out var extension)
                 ? extension
                 : throw new ArgumentException("Requested mime type is not registered: " + mimeType);
         }

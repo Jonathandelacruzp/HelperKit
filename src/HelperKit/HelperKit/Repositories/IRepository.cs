@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HelperKit.Models
+namespace HelperKit.Repositories
 {
     public interface IRepository<T> : IDisposable where T : class
     {

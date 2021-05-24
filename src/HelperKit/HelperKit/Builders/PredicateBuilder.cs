@@ -9,6 +9,17 @@ namespace HelperKit.Builders
     public static class PredicateBuilder
     {
         /// <summary>
+        /// PredicateBuilder with parameter
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Expression<Func<T, bool>> New<T>(bool value = true)
+        {
+            return _ => value;
+        }
+
+        /// <summary>
         /// PredicateBuilder for True result
         /// </summary>
         /// <typeparam name="T"></typeparam>
@@ -19,7 +30,7 @@ namespace HelperKit.Builders
         }
 
         /// <summary>
-        /// PredicateBuilder for False result 
+        /// PredicateBuilder for False result
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>

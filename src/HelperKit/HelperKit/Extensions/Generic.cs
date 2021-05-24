@@ -171,11 +171,9 @@ namespace HelperKit
             var strBuilder = new StringBuilder();
             strBuilder.Append('<').Append(typeName).Append('>');
             foreach (var propertyInfo in propertyInfos.Where(x => x.CanRead))
-            {
                 strBuilder.Append('<').Append(propertyInfo.Name).Append('>')
                     .Append(propertyInfo.GetValue(val, null)?.ToString() ?? string.Empty)
                     .Append("</").Append(propertyInfo.Name).Append('>');
-            }
 
             strBuilder.Append("</").Append(typeName).Append('>');
             return strBuilder.ToString();

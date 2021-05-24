@@ -45,18 +45,6 @@ namespace HelperKit
         }
 
         /// <summary>
-        /// Get the short calendar format string
-        /// </summary>
-        /// <param name="val"></param>
-        /// <param name="cultureInfo"></param>
-        /// <returns></returns>
-        public static string ToDateTimeFormatByCulture(this DateTime val, CultureInfo cultureInfo = null)
-        {
-            cultureInfo ??= CultureInfo.CurrentCulture;
-            return val.ToString(cultureInfo.DateTimeFormat.ShortDatePattern);
-        }
-
-        /// <summary>
         /// Gets the week number
         /// </summary>
         /// <param name="date"></param>
@@ -82,7 +70,7 @@ namespace HelperKit
             var daysOffset = (int) cultureInfo.DateTimeFormat.FirstDayOfWeek - (int) jan1.DayOfWeek;
             var firstWeekDay = jan1.AddDays(daysOffset);
             var firstWeek = cultureInfo.Calendar.GetWeekOfYear(jan1, cultureInfo.DateTimeFormat.CalendarWeekRule, cultureInfo.DateTimeFormat.FirstDayOfWeek);
-            if (firstWeek <= 1 || firstWeek > 50)
+            if (firstWeek is <= 1 or > 50)
                 weekOfYear--;
 
             return firstWeekDay.AddDays(weekOfYear * 7);

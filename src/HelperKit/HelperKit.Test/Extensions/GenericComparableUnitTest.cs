@@ -7,14 +7,14 @@ namespace HelperKit.Test.Extensions
 {
     public class GenericComparableUnitTest
     {
-        private readonly List<Color> _colorList = new List<Color>
+        private readonly List<Color> _colorList = new()
         {
             Color.Blue,
             Color.Yellow,
             Color.Yellow
         };
 
-        private readonly List<Color> _colorListToFind = new List<Color>
+        private readonly List<Color> _colorListToFind = new()
         {
             Color.Blue,
             Color.Red

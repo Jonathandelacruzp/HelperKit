@@ -9,6 +9,14 @@
             PredicateBuilder
             </summary>
         </member>
+        <member name="M:HelperKit.Builders.PredicateBuilder.New``1(System.Boolean)">
+            <summary>
+            PredicateBuilder with parameter
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
         <member name="M:HelperKit.Builders.PredicateBuilder.True``1">
             <summary>
             PredicateBuilder for True result
@@ -18,7 +26,7 @@
         </member>
         <member name="M:HelperKit.Builders.PredicateBuilder.False``1">
             <summary>
-            PredicateBuilder for False result 
+            PredicateBuilder for False result
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
@@ -43,6 +51,11 @@
         </member>
         <member name="T:HelperKit.Exceptions.CustomException`1">
             <inheritdoc />
+        </member>
+        <member name="P:HelperKit.Exceptions.CustomException`1.Exception">
+            <summary>
+            Exception
+            </summary>
         </member>
         <member name="M:HelperKit.Exceptions.CustomException`1.#ctor">
             <summary>
@@ -104,14 +117,6 @@
             Get the full calendar format string
             </summary>
             <param name="val"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HelperKit.Extensions.ToDateTimeFormatByCulture(System.DateTime,System.Globalization.CultureInfo)">
-            <summary>
-            Get the short calendar format string
-            </summary>
-            <param name="val"></param>
-            <param name="cultureInfo"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.GetWeekNumber(System.DateTime,System.Globalization.CultureInfo)">
@@ -334,6 +339,23 @@
             <param name="def"></param>
             <returns>string</returns>
         </member>
+        <member name="M:HelperKit.Extensions.ConvertTime(HelperKit.Interfaces.ITimeProvider,HelperKit.Interfaces.ITimeProvider)">
+            <summary>
+            Convert time between TimeProviders
+            </summary>
+            <param name="fromProvider"></param>
+            <param name="toProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.ConvertTime(HelperKit.Interfaces.ITimeProvider,System.DateTime,HelperKit.Interfaces.ITimeProvider)">
+            <summary>
+            Convert time between TimeProviders
+            </summary>
+            <param name="fromProvider"></param>
+            <param name="date"></param>
+            <param name="toProvider"></param>
+            <returns></returns>
+        </member>
         <member name="T:HelperKit.Functions.Memoizer">
             <summary>
             Memoization is a technique for improving performance by caching the return values of expensive function calls
@@ -390,10 +412,67 @@
             Implements a 64-bit CRC hash algorithm for a given polynomial.
             </summary>
         </member>
+        <member name="F:HelperKit.Security.Cryptography.Crc64.DefaultSeed">
+            <summary>
+            Seed Value
+            </summary>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64.#ctor(System.UInt64,System.UInt64)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="polynomial"></param>
+            <param name="seed"></param>
+            <exception cref="T:System.PlatformNotSupportedException"></exception>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64.Initialize">
+            <summary>
+            Initialize seed
+            </summary>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64.HashCore(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Executes the case hash action
+            </summary>
+            <param name="array"></param>
+            <param name="ibStart"></param>
+            <param name="cbSize"></param>
+        </member>
+        <member name="P:HelperKit.Security.Cryptography.Crc64.HashSize">
+            <summary>
+            Default hash size
+            </summary>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64.Create(System.UInt64,System.UInt64)">
+            <summary>
+            Create Crc64
+            </summary>
+            <param name="polynomial"></param>
+            <param name="seed"></param>
+            <returns></returns>
+        </member>
         <member name="T:HelperKit.Security.Cryptography.Crc64Iso">
             <summary>
             Implements a 64-bit CRC ISO 3309 hash algorithm for a given polynomial.
             </summary>
+        </member>
+        <member name="F:HelperKit.Security.Cryptography.Crc64Iso.Iso3309Polynomial">
+            <summary>
+            Iso3309 value
+            </summary>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64Iso.Create">
+            <summary>
+            Create Crc64Iso
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64Iso.Create(System.UInt64)">
+            <summary>
+            Create Crc64Iso
+            </summary>
+            <param name="seed"></param>
+            <returns></returns>
         </member>
         <member name="T:HelperKit.Security.HashHelper">
             <summary>

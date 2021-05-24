@@ -46,7 +46,7 @@ namespace HelperKit
         /// <returns></returns>
         public static string DeleteSlashAndBackslash(this string val)
         {
-            return val.Replace("/", string.Empty).Replace(@"\", string.Empty);
+            return val?.Replace("/", string.Empty).Replace(@"\", string.Empty);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace HelperKit
         /// <returns></returns>
         public static string DeleteDotAndComma(this string val)
         {
-            return val.Replace(".", string.Empty).Replace(",", string.Empty);
+            return val?.Replace(".", string.Empty).Replace(",", string.Empty);
         }
 
         /// <summary>

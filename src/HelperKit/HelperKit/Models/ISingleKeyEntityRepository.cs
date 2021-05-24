@@ -1,6 +1,6 @@
-﻿namespace HelperKit.Models
+﻿namespace HelperKit.Repositories
 {
-    public interface ISingleKeyEntityRepository<T, K> : IRepository<T> where T : class
+    public interface ISingleKeyEntityRepository<T, in K> : IRepository<T> where T : class
     {
         T GetSingle(K entityKey);
     }

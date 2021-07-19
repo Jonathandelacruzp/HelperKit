@@ -42,7 +42,7 @@ namespace HelperKit.Test.Functions
             Assert.Less(_numberOfCallsMemoizer, _numberOfCalls);
         }
 
-        private int Fibonacci(int value)
+        private static int Fibonacci(int value)
         {
             _numberOfCalls++;
             if (value <= 2)

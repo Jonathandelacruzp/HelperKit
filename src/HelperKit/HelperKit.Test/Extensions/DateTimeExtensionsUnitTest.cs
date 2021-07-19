@@ -14,7 +14,7 @@ namespace HelperKit.Test.Extensions
         private readonly ITimeProvider _customTimeProvider = new CustomTimeProvider();
 
         [Test]
-        public void VerifyToDateTimeExternsion_ReturnsCorrectValue()
+        public void VerifyToDateTimeExtension_ReturnsCorrectValue()
         {
             var dateNow = DateTime.Now;
 
@@ -47,12 +47,12 @@ namespace HelperKit.Test.Extensions
         }
 
         [Test]
-        public void VerifyITimeProviderConvet_ReturnsCorrectValue()
+        public void VerifyITimeProviderConvert_ReturnsCorrectValue()
         {
             var hours = Math.Abs(_localTimeProvider.TimeZoneInfo.BaseUtcOffset.TotalHours);
             var result = _localTimeProvider.ConvertTime(_utcTimeProvider);
             var ticksResult = result.Ticks - _localTimeProvider.Now.Ticks;
-            int resultHour = new DateTime(Math.Abs(ticksResult)).Hour + (ticksResult > 0 ? 1 : 0);
+            var resultHour = new DateTime(Math.Abs(ticksResult)).Hour + (ticksResult > 0 ? 1 : 0);
             // + 1 because the ticks on the provider keeps advancing and is close to the time difference
 
             Assert.AreEqual((int)hours, resultHour);

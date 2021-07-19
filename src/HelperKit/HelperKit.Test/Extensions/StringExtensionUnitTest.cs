@@ -41,10 +41,10 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void ReplaceNoBreakingSpace_Replace()
         {
-            var stringWithDiacritics = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
-            stringWithDiacritics = Regex.Replace(stringWithDiacritics, @"\u00A0", " ");
+            var withDiacritics = "Lorem Ipsum is simply dummy text of the printing and typesetting industry";
+            withDiacritics = Regex.Replace(withDiacritics, @"\u00A0", " ");
 
-            Assert.AreEqual("Lorem Ipsum is simply dummy text of the printing and typesetting industry", stringWithDiacritics.ReplaceNonBreakingSpace());
+            Assert.AreEqual("Lorem Ipsum is simply dummy text of the printing and typesetting industry", withDiacritics.ReplaceNonBreakingSpace());
         }
 
         [Test]

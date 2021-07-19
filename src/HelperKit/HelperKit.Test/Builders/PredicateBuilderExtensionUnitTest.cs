@@ -6,11 +6,6 @@ using System.Linq;
 
 namespace HelperKit.Test.Builders
 {
-    public interface IDateProvider
-    {
-        DateTime Now { get; }
-    }
-
     internal class PredicateBuilderExtensionUnitTest
     {
         [Test]

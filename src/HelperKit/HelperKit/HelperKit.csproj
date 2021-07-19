@@ -32,6 +32,11 @@
 		<PackageProjectUrl>https://github.com/Jonathandelacruzp/HelperKit</PackageProjectUrl>
 	</PropertyGroup>
 
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<DebugType>None</DebugType>
+		<DebugSymbols>false</DebugSymbols>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
 		<DocumentationFile>D:\dev\git\HelperKit\src\HelperKit\HelperKit\HelperKit.xml</DocumentationFile>
 	</PropertyGroup>

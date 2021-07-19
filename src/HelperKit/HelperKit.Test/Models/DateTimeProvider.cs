@@ -18,11 +18,11 @@ namespace HelperKit.Test.Models
 
     public class CustomTimeProvider : ITimeProvider
     {
-        private readonly string _name = "Custom Provider";
-        private readonly int _timeDifference = DateTimeExtensionsUnitTest.Hours;
+        private const string Name = "Custom Provider";
+        private const int TimeDifference = DateTimeExtensionsUnitTest.Hours;
         private TimeZoneInfo _timeZoneInfo;
 
         public DateTime Now => DateTime.UtcNow.Add(_timeZoneInfo.BaseUtcOffset);
-        public TimeZoneInfo TimeZoneInfo => _timeZoneInfo ??= TimeZoneInfo.CreateCustomTimeZone(_name, TimeSpan.FromHours(_timeDifference), _name, _name);
+        public TimeZoneInfo TimeZoneInfo => _timeZoneInfo ??= TimeZoneInfo.CreateCustomTimeZone(Name, TimeSpan.FromHours(TimeDifference), Name, Name);
     }
 }

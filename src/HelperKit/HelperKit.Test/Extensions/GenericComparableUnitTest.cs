@@ -48,15 +48,15 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void IsContainedOnExtension_ShouldTrowAnArgumentException()
         {
-            void action() => _colorListToFind.IsContainedOn(_colorList);
-            Assert.Throws<ArgumentException>(action);
+            void Action() => _colorListToFind.IsContainedOn(_colorList);
+            Assert.Throws<ArgumentException>(Action);
         }
 
         [Test]
         public void IsContainedOnExtension_ShouldTrowAnArgumentNUllException()
         {
-            static void nullAction() => ((string) null).IsContainedOn("rojo", "verde");
-            Assert.Throws<ArgumentNullException>(nullAction);
+            static void NullAction() => ((string) null).IsContainedOn("rojo", "verde");
+            Assert.Throws<ArgumentNullException>(NullAction);
         }
     }
 }

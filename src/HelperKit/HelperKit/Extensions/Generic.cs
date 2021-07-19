@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -120,6 +121,34 @@ namespace HelperKit
                 .ToDictionary(x => x.Name, x => x.GetValue(val, null));
         }
 
+        /// <summary>
+        /// Converts an IEnumerable object to Datatable
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public static DataTable ToDataTable<T>(this IEnumerable<T> items) where T : class
+        {
+            var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            if (props.Length == 0)
+                throw new Exception("The implemeted type doesn't have valid properties");
+
+            var dataTable = new DataTable(typeof(T).Name);
+            foreach (var prop in props)
+                dataTable.Columns.Add(prop.Name, prop.PropertyType);
+
+            foreach (var item in items)
+            {
+                var values = new object[props.Length];
+                for (var i = 0; i < props.Length; i++)
+                    values[i] = props[i].GetValue(item, null);
+
+                dataTable.Rows.Add(values);
+            }
+
+            return dataTable;
+        }
+
         #endregion
 
         #region XML
@@ -153,8 +182,8 @@ namespace HelperKit
         public static T DeserializeXmlToObject<T>(this string xml) where T : class
         {
             var xmlSerializer = new XmlSerializer(typeof(T));
-            using var stringReader = new StringReader(xml);
-            return (T) xmlSerializer.Deserialize(stringReader);
+            using var reader = new StringReader(xml);
+            return (T)xmlSerializer.Deserialize(reader);
         }
 
         /// <summary>

@@ -223,6 +223,14 @@
             <param name="val"></param>
             <returns></returns>
         </member>
+        <member name="M:HelperKit.Extensions.ToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Converts an IEnumerable object to Datatable
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items"></param>
+            <returns></returns>
+        </member>
         <member name="M:HelperKit.Extensions.SerializeObjectToXml``1(``0)">
             <summary>
             Serialize an object to xml
@@ -373,6 +381,11 @@
             <param name="mimeType"></param>
             <returns></returns>
             <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:HelperKit.Interfaces.ITimeProvider">
+            <summary>
+            Defines the structure of a time provider, Makes easier the unit testing and value mock
+            </summary>
         </member>
         <member name="T:HelperKit.Security.Cryptography.Crc64">
             <summary>

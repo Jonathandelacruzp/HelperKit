@@ -4,38 +4,59 @@
         <name>HelperKit</name>
     </assembly>
     <members>
-        <member name="M:HelperKit.Exceptions.CustomException`1.#ctor">
+        <member name="T:HelperKit.Builders.PredicateBuilder">
             <summary>
-            constructor
+            PredicateBuilder
             </summary>
         </member>
-        <member name="M:HelperKit.Exceptions.CustomException`1.#ctor(System.String)">
+        <member name="M:HelperKit.Builders.PredicateBuilder.New``1(System.Boolean)">
             <summary>
-            constructor
+            PredicateBuilder with parameter
             </summary>
-            <param name="message"></param>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+            <returns></returns>
         </member>
-        <member name="M:HelperKit.Exceptions.CustomException`1.#ctor(System.String,System.Exception)">
+        <member name="M:HelperKit.Builders.PredicateBuilder.True``1">
             <summary>
-            constructor
+            PredicateBuilder for True result
             </summary>
-            <param name="message"></param>
-            <param name="innerException"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
-        <member name="M:HelperKit.Exceptions.CustomException`1.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+        <member name="M:HelperKit.Builders.PredicateBuilder.False``1">
             <summary>
-            constructor
+            PredicateBuilder for False result
             </summary>
-            <param name="info"></param>
-            <param name="context"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Builders.PredicateBuilder.Or``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            PredicateBuilder for Or operator
+            </summary>
+            <param name="expr1"></param>
+            <param name="expr2"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Builders.PredicateBuilder.And``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            PredicateBuilder for And operator
+            </summary>
+            <param name="expr1"></param>
+            <param name="expr2"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
         <member name="T:HelperKit.Extensions">
             <summary>
-            Funciones de Extension
+            Extension functions
             </summary>
         </member>
-        <member name="M:HelperKit.Extensions.ToBoolean(System.Object,System.Boolean)">
+        <member name="M:HelperKit.Extensions.ToBoolean(System.String,System.Boolean)">
             <summary>
+            Converts to Boolean
             </summary>
             <param name="val"></param>
             <param name="def"></param>
@@ -43,95 +64,121 @@
         </member>
         <member name="M:HelperKit.Extensions.IsBetween(System.DateTime,System.DateTime,System.DateTime)">
             <summary>
+            Validates if the given date is between 2 dates
             </summary>
             <param name="val"></param>
-            <param name="Start"></param>
-            <param name="End"></param>
+            <param name="start"></param>
+            <param name="end"></param>
             <returns></returns>
         </member>
-        <member name="M:HelperKit.Extensions.GetPeruMoneyRound(System.Decimal)">
+        <member name="M:HelperKit.Extensions.ToDateTime(System.Object,System.DateTime)">
             <summary>
-            Calcula la cifra de recondeo para la moneda peruana con la regla .05 centimos
+            Converts a value to DateTime
             </summary>
+            <param name="val"></param>
+            <param name="def"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.ToFullCalendarDate(System.DateTime)">
+            <summary>
+            Get the full calendar format string
+            </summary>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.GetWeekNumber(System.DateTime,System.Globalization.CultureInfo)">
+            <summary>
+            Gets the week number
+            </summary>
+            <param name="date"></param>
+            <param name="cultureInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.FirstDateOfWeek(System.Int32,System.Int32,System.Globalization.CultureInfo)">
+            <summary>
+            Gets the default fist day of week
+            </summary>
+            <param name="year"></param>
+            <param name="weekOfYear"></param>
+            <param name="cultureInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.FirstDateOfWeek(System.DateTime,System.Int32,System.Globalization.CultureInfo)">
+            <summary>
+            Gets the default fist day of week
+            </summary>
+            <param name="date">Only gets the year of this parameter</param>
+            <param name="weekOfYear"></param>
+            <param name="cultureInfo"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.Round(System.Decimal,System.Int32)">
             <summary>
-            Redondea decimal a n campos
+            Round a decimal value by a number of decimals
             </summary>
             <param name="val"></param>
-            <param name="decimals"></param>
+            <param name="decimals">Number of decimals (default 2)</param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToDecimal(System.Object,System.Decimal)">
             <summary>
-            Covierte un objeto a un entero tipo Decimal
+            Converts a value to decimal
             </summary>
             <param name="val"></param>
             <param name="def"></param>
-            <returns>Decimal</returns>
-        </member>
-        <member name="M:HelperKit.Extensions.ToDecimal(System.Object)">
-            <summary>
-            Covierte un objeto a un entero tipo Decimal
-            </summary>
-            <param name="val"></param>
             <returns>Decimal</returns>
         </member>
         <member name="M:HelperKit.Extensions.ToLong(System.Decimal,System.Int64)">
             <summary>
-            Covierte un decimal a un entero tipo long
+            Converts a value to long
             </summary>
             <param name="val">Decimal</param>
             <param name="def"></param>
             <returns>long</returns>
         </member>
-        <member name="M:HelperKit.Extensions.ToLong(System.Decimal)">
-            <summary>
-            Covierte un decimal a un entero tipo long
-            </summary>
-            <param name="val">Decimal</param>
-            <returns>long</returns>
-        </member>
         <member name="M:HelperKit.Extensions.HasAny``1(System.Collections.Generic.IEnumerable{``0},``0[])">
             <summary>
+            Validates if an item exist
             </summary>
             <typeparam name="T"></typeparam>
             <param name="array"></param>
             <param name="values"></param>
             <returns></returns>
         </member>
-        <member name="M:HelperKit.Extensions.HasAnySingle``1(``0,``0[])">
+        <member name="M:HelperKit.Extensions.IsContainedOn``1(``0,System.Collections.Generic.IEnumerable{``0})">
             <summary>
+            Validates if at least one item exist on other collection
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="value"></param>
+            <param name="val"></param>
             <param name="values"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.IsContainedOn``1(``0,``0[])">
             <summary>
+            Validates if at least one item exist on other collection
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="value"></param>
-            <param name="values"></param>
+            <param name="val"></param>
+            <param name="param"></param>
             <returns></returns>
         </member>
-        <member name="M:HelperKit.Extensions.SaveAsXML(System.Object,System.String)">
+        <member name="M:HelperKit.Extensions.SaveAsXml(System.Object,System.String)">
             <summary>
-            Guarda archivo xml dependiendo del objeto y el tipo definido.
+            Saves an object as xml file
             </summary>
             <param name="obj"></param>
             <param name="fileName"></param>
         </member>
         <member name="M:HelperKit.Extensions.CreateDirectory(System.IO.DirectoryInfo)">
             <summary>
-            Crea nuevo directorio
+            Creates a new Directory
             </summary>
             <param name="directory"></param>
         </member>
         <member name="M:HelperKit.Extensions.ToEnum``1(System.String)">
             <summary>
+            Converts to Enum
             </summary>
             <typeparam name="T"></typeparam>
             <param name="value"></param>
@@ -139,54 +186,81 @@
         </member>
         <member name="M:HelperKit.Extensions.EnumNamedValues``1">
             <summary>
+            Gets the enums values and names as Dictionary
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToValue``1(System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
             <summary>
-            Retorna un objeto según su tipo de dato (T) guardado en un diccionario,
-            en caso el objeto no exista se crea una nueva instancia del mismo
+            Returns the object of type T from a dictionary
             </summary>
-            <param name="dictionary">Diccionario tipo string-object</param>
-            <param name="key">Nombre del Key a buscar en el TempData</param>
-            <returns>Object</returns>
+            <param name="dictionary"></param>
+            <param name="key"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToNameValueCollection``1(``0)">
             <summary>
+            Converts an object to named value collection
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="t"></param>
+            <param name="val"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToKeyValuePair``1(``0)">
             <summary>
+            Converts to List of key value Pair
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="t"></param>
+            <param name="val"></param>
             <returns></returns>
         </member>
-        <member name="M:HelperKit.Extensions.ToDictionary(System.Object)">
+        <member name="M:HelperKit.Extensions.ToDictionary``1(``0)">
             <summary>
-            Convert any object to dictionary
+            Converts a class object to dictionary
             </summary>
-            <param name="obj"></param>
+            <param name="val"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.ToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Converts an IEnumerable object to Datatable
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="items"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.SerializeObjectToXml``1(``0)">
+            <summary>
+            Serialize an object to xml
+            </summary>
+            <param name="val"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.DeserializeXmlToObject``1(System.String)">
+            <summary>
+            Deserialize an string to and object
+            </summary>
+            <param name="xml"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.ConvertObjectToXmlString``1(``0)">
+            <summary>
+            Converts an object to xml text
+            </summary>
+            <param name="val"></param>
+            <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToInteger(System.Object,System.Int32)">
             <summary>
-            Covierte un objeto a un entero tipo Int32
+            Converts an object to int
             </summary>
             <param name="val"></param>
             <param name="def"></param>
             <returns>Int32</returns>
-        </member>
-        <member name="M:HelperKit.Extensions.ToInteger(System.Object)">
-            <summary>
-            Covierte un objeto a un entero tipo int
-            </summary>
-            <param name="val"></param>
-            <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToBytes(System.IO.Stream)">
             <summary>
@@ -202,20 +276,13 @@
             <param name="val"></param>
             <returns></returns>
         </member>
-        <member name="M:HelperKit.Extensions.TrimRemoveDiacritics(System.String)">
-            <summary>
-            Removes diacritics and trim a value
-            </summary>
-            <param name="val"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HelperKit.Extensions.ReplaceNoBbreakingSpace(System.String,System.String)">
+        <member name="M:HelperKit.Extensions.ReplaceNonBreakingSpace(System.String,System.String)">
             <summary>
             Replace all NonBreaking Space (char 160) to a simple space
             </summary>
             <param name="val"></param>
             <param name="def"></param>
-            <returns>Cadena con espacio simple</returns>
+            <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.DeleteSlashAndBackslash(System.String)">
             <summary>
@@ -231,6 +298,14 @@
             <param name="val"></param>
             <returns></returns>
         </member>
+        <member name="M:HelperKit.Extensions.CustomReplaceOn(System.String,System.String[])">
+            <summary>
+            Replace all the values set it on param with a empty string
+            </summary>
+            <param name="val"></param>
+            <param name="param"></param>
+            <returns></returns>
+        </member>
         <member name="M:HelperKit.Extensions.ToSafeString(System.Object,System.String)">
             <summary>
             Returns a string with safe mode
@@ -239,11 +314,150 @@
             <param name="def"></param>
             <returns>string</returns>
         </member>
-        <member name="M:HelperKit.Extensions.TostringUTF(System.String)">
+        <member name="M:HelperKit.Extensions.ConvertTime(HelperKit.Interfaces.ITimeProvider,HelperKit.Interfaces.ITimeProvider)">
             <summary>
+            Convert time between TimeProviders
             </summary>
-            <param name="val"></param>
+            <param name="fromProvider"></param>
+            <param name="toProvider"></param>
             <returns></returns>
+        </member>
+        <member name="M:HelperKit.Extensions.ConvertTime(HelperKit.Interfaces.ITimeProvider,System.DateTime,HelperKit.Interfaces.ITimeProvider)">
+            <summary>
+            Convert time between TimeProviders
+            </summary>
+            <param name="fromProvider"></param>
+            <param name="date"></param>
+            <param name="toProvider"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HelperKit.Functions.Memoizer">
+            <summary>
+            Memoization is a technique for improving performance by caching the return values of expensive function calls
+            </summary>
+        </member>
+        <member name="M:HelperKit.Functions.Memoizer.Memoize``1(System.Func{``0})">
+            <summary>
+            Cache a function and its value
+            </summary>
+            <param name="func"></param>
+            <typeparam name="TResult"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Functions.Memoizer.Memoize``2(System.Func{``0,``1})">
+            <summary>
+            Cache a function by function parameter returning the value
+            </summary>
+            <param name="func"></param>
+            <typeparam name="TInput"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Functions.Memoizer.ConcurrentMemoize``2(System.Func{``0,``1})">
+            <summary>
+            Cache concurrently a function by function parameter returning the value
+            </summary>
+            <param name="func"></param>
+            <typeparam name="TInput"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:HelperKit.MimeTypeMapHelper">
+            <summary>
+            MimeType map helper
+            </summary>
+        </member>
+        <member name="M:HelperKit.MimeTypeMapHelper.GetMimeType(System.String)">
+            <summary>
+            Gets the MimeType
+            </summary>
+            <param name="extension"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.MimeTypeMapHelper.GetExtension(System.String)">
+            <summary>
+            Get the extension
+            </summary>
+            <param name="mimeType"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:HelperKit.Interfaces.ITimeProvider">
+            <summary>
+            Defines the structure of a time provider, Makes easier the unit testing and value mock
+            </summary>
+        </member>
+        <member name="T:HelperKit.Security.Cryptography.Crc64">
+            <summary>
+            Implements a 64-bit CRC hash algorithm for a given polynomial.
+            </summary>
+        </member>
+        <member name="F:HelperKit.Security.Cryptography.Crc64.DefaultSeed">
+            <summary>
+            Seed Value
+            </summary>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64.#ctor(System.UInt64,System.UInt64)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="polynomial"></param>
+            <param name="seed"></param>
+            <exception cref="T:System.PlatformNotSupportedException"></exception>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64.Initialize">
+            <summary>
+            Initialize seed
+            </summary>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64.HashCore(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Executes the case hash action
+            </summary>
+            <param name="array"></param>
+            <param name="ibStart"></param>
+            <param name="cbSize"></param>
+        </member>
+        <member name="P:HelperKit.Security.Cryptography.Crc64.HashSize">
+            <summary>
+            Default hash size
+            </summary>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64.Create(System.UInt64,System.UInt64)">
+            <summary>
+            Create Crc64
+            </summary>
+            <param name="polynomial"></param>
+            <param name="seed"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HelperKit.Security.Cryptography.Crc64Iso">
+            <summary>
+            Implements a 64-bit CRC ISO 3309 hash algorithm for a given polynomial.
+            </summary>
+        </member>
+        <member name="F:HelperKit.Security.Cryptography.Crc64Iso.Iso3309Polynomial">
+            <summary>
+            Iso3309 value
+            </summary>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64Iso.Create">
+            <summary>
+            Create Crc64Iso
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Security.Cryptography.Crc64Iso.Create(System.UInt64)">
+            <summary>
+            Create Crc64Iso
+            </summary>
+            <param name="seed"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HelperKit.Security.HashHelper">
+            <summary>
+            Helper that extends useful methods for common hash implementation
+            </summary>
         </member>
         <member name="M:HelperKit.Security.HashHelper.GenerateHashString(System.Security.Cryptography.HashAlgorithm,System.String)">
             <summary>
@@ -252,32 +466,54 @@
             <param name="hashAlgorithm"></param>
             <param name="text"></param>
             <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:HelperKit.Security.HashHelper.ComputeMD5Hash(System.String)">
+        <member name="M:HelperKit.Security.HashHelper.ComputeMd5Hash(System.String)">
             <summary>
+            Computes MD5 Hash
             </summary>
             <param name="rawData"></param>
             <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:HelperKit.Security.HashHelper.AreEqualMD5(System.String,System.String)">
+        <member name="M:HelperKit.Security.HashHelper.AreEqualMd5(System.String,System.String)">
             <summary>
+            Compare the actual value vs the Md5 hash
             </summary>
             <param name="text"></param>
-            <param name="valorEncriptado"></param>
+            <param name="encryptedValue"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Security.HashHelper.ComputeSha256Hash(System.String)">
             <summary>
-            dice que hashea pe
+            Computes Sha256 Hash
             </summary>
             <param name="rawData"></param>
             <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:HelperKit.Security.HashHelper.AreEqualSha256Hash(System.String,System.String)">
             <summary>
+            Compare the actual value vs the Sha256 hash
             </summary>
             <param name="text"></param>
-            <param name="valorEncriptado"></param>
+            <param name="encryptedValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HelperKit.Security.HashHelper.ComputeCrc64IsoHash(System.String)">
+            <summary>
+            Computes Crc64 Hash
+            </summary>
+            <param name="rawData"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:HelperKit.Security.HashHelper.AreEqualCrc64IsoHash(System.String,System.String)">
+            <summary>
+            Compare the actual value vs the Crc64 hash
+            </summary>
+            <param name="text"></param>
+            <param name="encryptedValue"></param>
             <returns></returns>
         </member>
     </members>

@@ -2,16 +2,16 @@ using NUnit.Framework;
 
 namespace HelperKit.Test.Extensions
 {
-    public class DeimalExtensionUnitTest
+    public class DecimalExtensionUnitTest
     {
         [Test]
         public void DecimalExtension_ReturnTrue()
         {
             var decimalValue = new decimal(5);
-            var stringValue = "5";
-            var intValue = 5;
-            double doubleValue = 5F;
-            float floatValue = 5;
+            const string stringValue = "5";
+            const int intValue = 5;
+            const double doubleValue = 5F;
+            const float floatValue = 5;
 
             Assert.IsInstanceOf<decimal>(intValue.ToDecimal());
 
@@ -31,17 +31,17 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void DecimalExtension_ReturnZeroFromNonNumericStringValue()
         {
-            var stringFalse = "5F";
+            const string stringFalse = "5F";
             Assert.AreEqual(0, stringFalse.ToDecimal());
         }
 
         [Test]
         public void LongExtension_GivesTheCorrectValue()
         {
-            long floatvalue = 5;
+            const long floatValue = 5;
             var decimalValue = new decimal(5);
             Assert.IsInstanceOf<long>(decimalValue.ToLong());
-            Assert.AreEqual(floatvalue, decimalValue.ToLong());
+            Assert.AreEqual(floatValue, decimalValue.ToLong());
         }
     }
 }

@@ -11,15 +11,19 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;net45;net46;net47</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
+		<DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
 		<PackageId>HelperKit</PackageId>
-		<Version>1.3.0</Version>
+		<Version>1.3.2</Version>
 		<Authors>jonathan.delacruzp</Authors>
 		<Company>jonathan.delacruzp</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>1.3.0</AssemblyVersion>
-		<FileVersion>1.3.0</FileVersion>
-		<PackageReleaseNotes></PackageReleaseNotes>
-		<Copyright>jonathan.delacruzp, 2019</Copyright>
+		<AssemblyVersion>1.3.2</AssemblyVersion>
+		<FileVersion>1.3.2</FileVersion>
+		<PackageReleaseNotes>
+			Added Memoizer Function Helper
+			Added Cr64 Hash Helper
+		</PackageReleaseNotes>
+		<Copyright>jonathan.delacruzp, 2021</Copyright>
 		<RepositoryType>git</RepositoryType>
 		<Description>Small library of general purpose utilities for .NET development that almost every application can use.</Description>
 		<SignAssembly>true</SignAssembly>
@@ -28,8 +32,17 @@
 		<PackageProjectUrl>https://github.com/Jonathandelacruzp/HelperKit</PackageProjectUrl>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<DocumentationFile>D:\Workspaces\jonathan\HelperKit\HelperKit\HelperKit\HelperKit.xml</DocumentationFile>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<DebugType>None</DebugType>
+		<DebugSymbols>false</DebugSymbols>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+		<DocumentationFile>D:\dev\git\HelperKit\src\HelperKit\HelperKit\HelperKit.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+		<DocumentationFile>D:\dev\git\HelperKit\src\HelperKit\HelperKit\HelperKit.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

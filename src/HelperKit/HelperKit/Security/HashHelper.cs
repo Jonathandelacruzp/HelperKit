@@ -1,9 +1,13 @@
-﻿using System;
+﻿using HelperKit.Security.Cryptography;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace HelperKit.Security
 {
+    /// <summary>
+    /// Helper that extends useful methods for common hash implementation
+    /// </summary>
     public static class HashHelper
     {
         /// <summary>
@@ -41,7 +45,7 @@ namespace HelperKit.Security
         }
 
         /// <summary>
-        /// Compare the actual value vs the encrypted
+        /// Compare the actual value vs the Md5 hash
         /// </summary>
         /// <param name="text"></param>
         /// <param name="encryptedValue"></param>
@@ -52,7 +56,7 @@ namespace HelperKit.Security
         }
 
         /// <summary>
-        /// Computes Sha256
+        /// Computes Sha256 Hash
         /// </summary>
         /// <param name="rawData"></param>
         /// <returns></returns>
@@ -66,7 +70,7 @@ namespace HelperKit.Security
         }
 
         /// <summary>
-        /// Compare the actual value vs the encrypted
+        /// Compare the actual value vs the Sha256 hash
         /// </summary>
         /// <param name="text"></param>
         /// <param name="encryptedValue"></param>
@@ -74,6 +78,31 @@ namespace HelperKit.Security
         public static bool AreEqualSha256Hash(string text, string encryptedValue)
         {
             return ComputeSha256Hash(text) == encryptedValue;
+        }
+
+        /// <summary>
+        /// Computes Crc64 Hash
+        /// </summary>
+        /// <param name="rawData"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public static string ComputeCrc64IsoHash(string rawData)
+        {
+            _ = rawData ?? throw new ArgumentNullException(nameof(rawData));
+
+            using var cr64 = Crc64Iso.Create();
+            return cr64.GenerateHashString(rawData);
+        }
+
+        /// <summary>
+        /// Compare the actual value vs the Crc64 hash
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="encryptedValue"></param>
+        /// <returns></returns>
+        public static bool AreEqualCrc64IsoHash(string text, string encryptedValue)
+        {
+            return ComputeCrc64IsoHash(text) == encryptedValue;
         }
     }
 }

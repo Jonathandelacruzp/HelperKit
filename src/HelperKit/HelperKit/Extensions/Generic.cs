@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +22,7 @@ namespace HelperKit
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static T ToEnum<T>(this string value) where T : struct, IConvertible
+        public static T ToEnum<T>(this string value) where T : Enum
         {
             return (T) Enum.Parse(typeof(T), value, true);
         }
@@ -31,7 +32,7 @@ namespace HelperKit
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static IDictionary<int, string> EnumNamedValues<T>() where T : struct, IConvertible
+        public static IDictionary<int, string> EnumNamedValues<T>() where T : Enum
         {
             var values = Enum.GetValues(typeof(T));
             return values.Cast<int>().ToDictionary(item => item, item => Enum.GetName(typeof(T), item));
@@ -42,7 +43,7 @@ namespace HelperKit
         #region Dictionary Convert Helper
 
         /// <summary>
-        /// Returns the object of type T
+        /// Returns the object of type T from a dictionary
         /// </summary>
         /// <param name="dictionary"></param>
         /// <param name="key"></param>
@@ -52,12 +53,13 @@ namespace HelperKit
         {
             _ = key ?? throw new ArgumentNullException(nameof(key));
 
-            var temp = dictionary[key];
-            return temp != null ? (T) temp : (T) Activator.CreateInstance(typeof(T));
+            return dictionary.TryGetValue(key, out var temp)
+                ? (T) temp
+                : (T) Activator.CreateInstance(typeof(T));
         }
 
         // /// <summary>
-        // /// 
+        // ///
         // /// </summary>
         // /// <param name="nameValueCollection"></param>
         // /// <param name="name"></param>
@@ -72,14 +74,14 @@ namespace HelperKit
         /// Converts an object to named value collection
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="t"></param>
+        /// <param name="val"></param>
         /// <returns></returns>
-        public static NameValueCollection ToNameValueCollection<T>(this T t)
+        public static NameValueCollection ToNameValueCollection<T>(this T val) where T : class
         {
             var nameValueCollection = new NameValueCollection();
-            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(t))
+            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(val))
             {
-                var value = propertyDescriptor.GetValue(t)?.ToString();
+                var value = propertyDescriptor.GetValue(val)?.ToString();
                 if (value != null)
                     nameValueCollection.Add(propertyDescriptor.Name, value);
             }
@@ -91,32 +93,60 @@ namespace HelperKit
         /// Converts to List of key value Pair
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="t"></param>
+        /// <param name="val"></param>
         /// <returns></returns>
-        public static ICollection<KeyValuePair<string, string>> ToKeyValuePair<T>(this T t)
+        public static ICollection<KeyValuePair<string, string>> ToKeyValuePair<T>(this T val) where T : class
         {
             var keyPair = new List<KeyValuePair<string, string>>();
-            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(t))
+            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(val))
             {
-                var value = propertyDescriptor.GetValue(t)?.ToString();
-                if (value != null)
-                    keyPair.Add(new KeyValuePair<string, string>(propertyDescriptor.Name, value));
+                var objValue = propertyDescriptor.GetValue(val)?.ToString();
+                if (objValue != null)
+                    keyPair.Add(new KeyValuePair<string, string>(propertyDescriptor.Name, objValue));
             }
 
             return keyPair;
         }
 
         /// <summary>
-        /// Convert any object to dictionary
+        /// Converts a class object to dictionary
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="val"></param>
         /// <returns></returns>
-        public static IDictionary<string, object> ToDictionary(this object obj)
+        public static IDictionary<string, object> ToDictionary<T>(this T val) where T : class
         {
-            return obj?.GetType()
+            return val?.GetType()
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                 .Where(x => x.CanRead || x.CanWrite)
-                .ToDictionary(x => x.Name, x => x.GetValue(obj, null));
+                .ToDictionary(x => x.Name, x => x.GetValue(val, null));
+        }
+
+        /// <summary>
+        /// Converts an IEnumerable object to Datatable
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        public static DataTable ToDataTable<T>(this IEnumerable<T> items) where T : class
+        {
+            var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+            if (props.Length == 0)
+                throw new Exception("The implemeted type doesn't have valid properties");
+
+            var dataTable = new DataTable(typeof(T).Name);
+            foreach (var prop in props)
+                dataTable.Columns.Add(prop.Name, prop.PropertyType);
+
+            foreach (var item in items)
+            {
+                var values = new object[props.Length];
+                for (var i = 0; i < props.Length; i++)
+                    values[i] = props[i].GetValue(item, null);
+
+                dataTable.Rows.Add(values);
+            }
+
+            return dataTable;
         }
 
         #endregion
@@ -126,19 +156,19 @@ namespace HelperKit
         /// <summary>
         /// Serialize an object to xml
         /// </summary>
-        /// <param name="t"></param>
+        /// <param name="val"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static string SerializeObjectToXml<T>(this T t)
+        public static string SerializeObjectToXml<T>(this T val) where T : class
         {
             var xmlDoc = new XmlDocument();
-            var xmlSerializer = new XmlSerializer(t.GetType());
+            var xmlSerializer = new XmlSerializer(val.GetType());
 
             using var xmlStream = new MemoryStream();
             var xmlns = new XmlSerializerNamespaces();
             xmlns.Add(string.Empty, string.Empty);
 
-            xmlSerializer.Serialize(xmlStream, t, xmlns);
+            xmlSerializer.Serialize(xmlStream, val, xmlns);
             xmlStream.Position = 0;
             xmlDoc.Load(xmlStream);
             return xmlDoc.InnerXml.Replace("<?xml version=\"1.0\"?>", string.Empty);
@@ -149,35 +179,32 @@ namespace HelperKit
         /// </summary>
         /// <param name="xml"></param>
         /// <returns></returns>
-        public static T DeserializeXmlToObject<T>(this string xml)
+        public static T DeserializeXmlToObject<T>(this string xml) where T : class
         {
             var xmlSerializer = new XmlSerializer(typeof(T));
-            using var stringReader = new StringReader(xml);
-            var instance = (T) xmlSerializer.Deserialize(stringReader);
-
-            return instance;
+            using var reader = new StringReader(xml);
+            return (T)xmlSerializer.Deserialize(reader);
         }
 
         /// <summary>
         /// Converts an object to xml text
         /// </summary>
-        /// <param name="t"></param>
+        /// <param name="val"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static string ConvertObjectToXmlString<T>(this T t)
+        public static string ConvertObjectToXmlString<T>(this T val) where T : class
         {
-            var typeName = t.GetType().Name;
-            var propertyInfos = t.GetType().GetProperties();
+            var typeName = val.GetType().Name;
+            var propertyInfos = val.GetType().GetProperties();
 
             var strBuilder = new StringBuilder();
-            strBuilder.Append('<').Append(typeName);
-            foreach (var propertyInfo in propertyInfos)
-            {
-                string startTag = $"<{propertyInfo.Name}>", endTag = $"</{propertyInfo.Name}>";
-                strBuilder.Append(startTag).Append(propertyInfo.GetValue(t, null)).Append(endTag);
-            }
+            strBuilder.Append('<').Append(typeName).Append('>');
+            foreach (var propertyInfo in propertyInfos.Where(x => x.CanRead))
+                strBuilder.Append('<').Append(propertyInfo.Name).Append('>')
+                    .Append(propertyInfo.GetValue(val, null)?.ToString() ?? string.Empty)
+                    .Append("</").Append(propertyInfo.Name).Append('>');
 
-            strBuilder.Append("</").Append(typeName);
+            strBuilder.Append("</").Append(typeName).Append('>');
             return strBuilder.ToString();
         }
 

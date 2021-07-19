@@ -5,15 +5,15 @@ namespace HelperKit.Test.Extensions
     public class BooleanExtensionUnitTest
     {
         [Test]
-        public void BooleanExtension_AcceptLiteralStringBoleanValue()
+        public void BooleanExtension_AcceptLiteralStringBooleanValue()
         {
-            var stringTrue = "true";
-            var stringTrueUpper = "TRUE";
-            var stringTrueCapital = "True";
+            const string stringTrue = "true";
+            const string stringTrueUpper = "TRUE";
+            const string stringTrueCapital = "True";
 
-            var stringFalse = "false";
-            var stringFalseUpper = "FALSE";
-            var stringFalseCapital = "False";
+            const string stringFalse = "false";
+            const string stringFalseUpper = "FALSE";
+            const string stringFalseCapital = "False";
 
             Assert.IsInstanceOf<bool>(stringTrue.ToBoolean());
 
@@ -29,9 +29,9 @@ namespace HelperKit.Test.Extensions
         [Test]
         public void BooleanExtension_ReturnFalseWithWrongValues()
         {
-            var anyString = "asads";
-            var anyStringUpper = "ASADSADSDAS";
-            var anyStringCapital = "Aasdadsasd";
+            const string anyString = "asads";
+            const string anyStringUpper = "ASADSADSDAS";
+            const string anyStringCapital = "Aasdadsasd";
 
             Assert.AreEqual(false, anyString.ToBoolean());
             Assert.AreEqual(false, anyStringUpper.ToBoolean());

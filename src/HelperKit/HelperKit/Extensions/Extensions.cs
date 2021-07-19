@@ -30,28 +30,28 @@ namespace HelperKit
         /// Validates if at least one item exist on other collection
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
+        /// <param name="val"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        public static bool IsContainedOn<T>(this T value, IEnumerable<T> values)
+        public static bool IsContainedOn<T>(this T val, IEnumerable<T> values)
         {
-            _ = value ?? throw new ArgumentNullException(nameof(value));
+            _ = val ?? throw new ArgumentNullException(nameof(val));
 
             return typeof(T).GetInterface("IEnumerable") != null
                 ? throw new ArgumentException("Requested value could not be an Enumerable.")
-                : values.Any(x => x.Equals(value));
+                : values.Any(x => x.Equals(val));
         }
 
         /// <summary>
         /// Validates if at least one item exist on other collection
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="value"></param>
-        /// <param name="values"></param>
+        /// <param name="val"></param>
+        /// <param name="param"></param>
         /// <returns></returns>
-        public static bool IsContainedOn<T>(this T value, params T[] values)
+        public static bool IsContainedOn<T>(this T val, params T[] param)
         {
-            return IsContainedOn(value, values as IEnumerable<T>);
+            return IsContainedOn(val, param as IEnumerable<T>);
         }
 
         #endregion
@@ -64,7 +64,7 @@ namespace HelperKit
         public static void SaveAsXml(this object obj, string fileName)
         {
             _ = fileName ?? throw new ArgumentNullException(nameof(fileName));
-            var xmlRequest = new StreamWriter(fileName);
+            using var xmlRequest = new StreamWriter(fileName);
             var xmlFileRequest = new XmlSerializer(obj.GetType());
             xmlFileRequest.Serialize(xmlRequest, obj);
             xmlRequest.Close();

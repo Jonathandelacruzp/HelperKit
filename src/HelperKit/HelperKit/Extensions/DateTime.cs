@@ -24,46 +24,24 @@ namespace HelperKit
         #region DateTime Convert
 
         /// <summary>
-        /// Converts a value to DateTime 
+        /// Converts a value to DateTime
         /// </summary>
         /// <param name="val"></param>
         /// <param name="def"></param>
         /// <returns></returns>
-        public static DateTime ToDateTime(this object val, DateTime def)
+        public static DateTime ToDateTime(this object val, DateTime def = default)
         {
             return DateTime.TryParse(val.ToString(), out var result) ? result : def;
         }
 
         /// <summary>
-        /// Converts a value to DateTime 
-        /// </summary>
-        /// <param name="val"></param>
-        /// <returns></returns>
-        public static DateTime ToDateTime(this object val)
-        {
-            return ToDateTime(val, DateTime.MinValue);
-        }
-
-        /// <summary>
-        /// Get the full calendar format string 
+        /// Get the full calendar format string
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
         public static string ToFullCalendarDate(this DateTime val)
         {
             return val.ToString("yyyy-MM-dd hh:mm:ss");
-        }
-
-        /// <summary>
-        /// Get the short calendar format string 
-        /// </summary>
-        /// <param name="val"></param>
-        /// <param name="cultureInfo"></param>
-        /// <returns></returns>
-        public static string ToDateTimeFormatByCulture(this DateTime val, CultureInfo cultureInfo = null)
-        {
-            cultureInfo ??= CultureInfo.CurrentCulture;
-            return val.ToString(cultureInfo.DateTimeFormat.ShortDatePattern);
         }
 
         /// <summary>
@@ -92,10 +70,22 @@ namespace HelperKit
             var daysOffset = (int) cultureInfo.DateTimeFormat.FirstDayOfWeek - (int) jan1.DayOfWeek;
             var firstWeekDay = jan1.AddDays(daysOffset);
             var firstWeek = cultureInfo.Calendar.GetWeekOfYear(jan1, cultureInfo.DateTimeFormat.CalendarWeekRule, cultureInfo.DateTimeFormat.FirstDayOfWeek);
-            if (firstWeek <= 1 || firstWeek > 50)
+            if (firstWeek is <= 1 or > 50)
                 weekOfYear--;
 
             return firstWeekDay.AddDays(weekOfYear * 7);
+        }
+
+        /// <summary>
+        /// Gets the default fist day of week
+        /// </summary>
+        /// <param name="date">Only gets the year of this parameter</param>
+        /// <param name="weekOfYear"></param>
+        /// <param name="cultureInfo"></param>
+        /// <returns></returns>
+        public static DateTime FirstDateOfWeek(this DateTime date, int weekOfYear, CultureInfo cultureInfo = null)
+        {
+            return FirstDateOfWeek(date.Year, weekOfYear, cultureInfo);
         }
 
         #endregion

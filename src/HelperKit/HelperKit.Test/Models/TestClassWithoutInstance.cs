@@ -25,7 +25,7 @@ namespace HelperKit.Test.Models
             var random = new Random();
             var arraySize = random.Next() % 20;
             var guid = Guid.NewGuid().ToString().Split('-')[0];
-            var testClass = new TestClassWithoutInstance()
+            var testClass = new TestClassWithoutInstance
             {
                 IntValue = random.Next(),
                 BooleanValue = random.Next(200) % 4 == 0,

@@ -7,12 +7,12 @@
         /// <summary>
         /// Converts to Boolean
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <param name="def"></param>
         /// <returns></returns>
-        public static bool ToBoolean(this string val, bool def = false)
+        public static bool ToBoolean(this string value, bool def = false)
         {
-            return bool.TryParse(val, out var result) ? result : def;
+            return bool.TryParse(value, out var result) ? result : def;
         }
 
         #endregion

@@ -17,41 +17,41 @@ namespace HelperKit
         /// Validates if an item exist
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="array"></param>
-        /// <param name="values"></param>
+        /// <param name="items"></param>
+        /// <param name="param"></param>
         /// <returns></returns>
-        public static bool HasAny<T>(this IEnumerable<T> array, params T[] values)
+        public static bool HasAny<T>(this IEnumerable<T> items, params T[] param)
         {
-            _ = array ?? throw new ArgumentNullException(nameof(array));
-            return values.Any(array.Contains);
+            _ = items ?? throw new ArgumentNullException(nameof(items));
+            return param.Any(items.Contains);
         }
 
         /// <summary>
         /// Validates if at least one item exist on other collection
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="val"></param>
-        /// <param name="values"></param>
+        /// <param name="value"></param>
+        /// <param name="items"></param>
         /// <returns></returns>
-        public static bool IsContainedOn<T>(this T val, IEnumerable<T> values)
+        public static bool IsContainedOn<T>(this T value, IEnumerable<T> items)
         {
-            _ = val ?? throw new ArgumentNullException(nameof(val));
+            _ = value ?? throw new ArgumentNullException(nameof(value));
 
             return typeof(T).GetInterface("IEnumerable") != null
                 ? throw new ArgumentException("Requested value could not be an Enumerable.")
-                : values.Any(x => x.Equals(val));
+                : items.Any(x => x.Equals(value));
         }
 
         /// <summary>
         /// Validates if at least one item exist on other collection
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static bool IsContainedOn<T>(this T val, params T[] param)
+        public static bool IsContainedOn<T>(this T value, params T[] param)
         {
-            return IsContainedOn(val, param as IEnumerable<T>);
+            return IsContainedOn(value, param as IEnumerable<T>);
         }
 
         #endregion

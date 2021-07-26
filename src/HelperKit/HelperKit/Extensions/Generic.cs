@@ -74,16 +74,16 @@ namespace HelperKit
         /// Converts an object to named value collection
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static NameValueCollection ToNameValueCollection<T>(this T val) where T : class
+        public static NameValueCollection ToNameValueCollection<T>(this T value) where T : class
         {
             var nameValueCollection = new NameValueCollection();
-            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(val))
+            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(value))
             {
-                var value = propertyDescriptor.GetValue(val)?.ToString();
-                if (value != null)
-                    nameValueCollection.Add(propertyDescriptor.Name, value);
+                var propertyValue = propertyDescriptor.GetValue(value)?.ToString();
+                if (propertyValue != null)
+                    nameValueCollection.Add(propertyDescriptor.Name, (string)propertyValue);
             }
 
             return nameValueCollection;
@@ -93,14 +93,14 @@ namespace HelperKit
         /// Converts to List of key value Pair
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static ICollection<KeyValuePair<string, string>> ToKeyValuePair<T>(this T val) where T : class
+        public static ICollection<KeyValuePair<string, string>> ToKeyValuePair<T>(this T value) where T : class
         {
             var keyPair = new List<KeyValuePair<string, string>>();
-            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(val))
+            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(value))
             {
-                var objValue = propertyDescriptor.GetValue(val)?.ToString();
+                var objValue = propertyDescriptor.GetValue(value)?.ToString();
                 if (objValue != null)
                     keyPair.Add(new KeyValuePair<string, string>(propertyDescriptor.Name, objValue));
             }
@@ -111,14 +111,14 @@ namespace HelperKit
         /// <summary>
         /// Converts a class object to dictionary
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static IDictionary<string, object> ToDictionary<T>(this T val) where T : class
+        public static IDictionary<string, object> ToDictionary<T>(this T value) where T : class
         {
-            return val?.GetType()
+            return value?.GetType()
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
                 .Where(x => x.CanRead || x.CanWrite)
-                .ToDictionary(x => x.Name, x => x.GetValue(val, null));
+                .ToDictionary(x => x.Name, x => x.GetValue(value, null));
         }
 
         /// <summary>
@@ -156,19 +156,19 @@ namespace HelperKit
         /// <summary>
         /// Serialize an object to xml
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static string SerializeObjectToXml<T>(this T val) where T : class
+        public static string SerializeObjectToXml<T>(this T value) where T : class
         {
             var xmlDoc = new XmlDocument();
-            var xmlSerializer = new XmlSerializer(val.GetType());
+            var xmlSerializer = new XmlSerializer(value.GetType());
 
             using var xmlStream = new MemoryStream();
             var xmlns = new XmlSerializerNamespaces();
             xmlns.Add(string.Empty, string.Empty);
 
-            xmlSerializer.Serialize(xmlStream, val, xmlns);
+            xmlSerializer.Serialize(xmlStream, value, xmlns);
             xmlStream.Position = 0;
             xmlDoc.Load(xmlStream);
             return xmlDoc.InnerXml.Replace("<?xml version=\"1.0\"?>", string.Empty);
@@ -189,19 +189,19 @@ namespace HelperKit
         /// <summary>
         /// Converts an object to xml text
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static string ConvertObjectToXmlString<T>(this T val) where T : class
+        public static string ConvertObjectToXmlString<T>(this T value) where T : class
         {
-            var typeName = val.GetType().Name;
-            var propertyInfos = val.GetType().GetProperties();
+            var typeName = value.GetType().Name;
+            var propertyInfos = value.GetType().GetProperties();
 
             var strBuilder = new StringBuilder();
             strBuilder.Append('<').Append(typeName).Append('>');
             foreach (var propertyInfo in propertyInfos.Where(x => x.CanRead))
                 strBuilder.Append('<').Append(propertyInfo.Name).Append('>')
-                    .Append(propertyInfo.GetValue(val, null)?.ToString() ?? string.Empty)
+                    .Append(propertyInfo.GetValue(value, null)?.ToString() ?? string.Empty)
                     .Append("</").Append(propertyInfo.Name).Append('>');
 
             strBuilder.Append("</").Append(typeName).Append('>');

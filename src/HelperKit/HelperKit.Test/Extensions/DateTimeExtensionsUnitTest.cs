@@ -57,5 +57,19 @@ namespace HelperKit.Test.Extensions
 
             Assert.AreEqual((int)hours, resultHour);
         }
+
+        [Test]
+        public void VerifyITimeProviderConvertTime_ReturnsCorrectValue()
+        {
+            var inputDateTime = new DateTime(2021, 07, 15);
+            var convertedDateTime = inputDateTime.ConvertTime(_localTimeProvider, _utcTimeProvider);
+
+            var timeOffsetBetweeProviders = _utcTimeProvider.TimeZoneInfo.BaseUtcOffset - _localTimeProvider.TimeZoneInfo.BaseUtcOffset;
+
+            var hourDifferende = Math.Abs(timeOffsetBetweeProviders.TotalHours);
+            var hoursDifferenceResult = Math.Abs(inputDateTime.Hour - convertedDateTime.Hour);
+
+            Assert.AreEqual(hourDifferende, hoursDifferenceResult);
+        }
     }
 }

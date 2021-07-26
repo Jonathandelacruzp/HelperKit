@@ -11,11 +11,11 @@ namespace HelperKit
         /// <summary>
         /// Removes diacritics
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static string RemoveDiacritics(this string val)
+        public static string RemoveDiacritics(this string value)
         {
-            var normalizedString = val.Normalize(NormalizationForm.FormD);
+            var normalizedString = value.Normalize(NormalizationForm.FormD);
             var strBuilder = new StringBuilder();
             foreach (var character in normalizedString)
             {
@@ -30,44 +30,44 @@ namespace HelperKit
         /// <summary>
         /// Replace all NonBreaking Space (char 160) to a simple space
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <param name="def"></param>
         /// <returns></returns>
-        public static string ReplaceNonBreakingSpace(this string val, string def = " ")
+        public static string ReplaceNonBreakingSpace(this string value, string def = " ")
         {
             var nbsp = System.Convert.ToChar(160).ToString();
-            return val.Replace(nbsp, def);
+            return value.Replace(nbsp, def);
         }
 
         /// <summary>
         /// Deletes all slash / y backslash \ from string
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static string DeleteSlashAndBackslash(this string val)
+        public static string DeleteSlashAndBackslash(this string value)
         {
-            return val?.Replace("/", string.Empty).Replace(@"\", string.Empty);
+            return value?.Replace("/", string.Empty).Replace(@"\", string.Empty);
         }
 
         /// <summary>
         /// Deletes all dot and commas of a string
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static string DeleteDotAndComma(this string val)
+        public static string DeleteDotAndComma(this string value)
         {
-            return val?.Replace(".", string.Empty).Replace(",", string.Empty);
+            return value?.Replace(".", string.Empty).Replace(",", string.Empty);
         }
 
         /// <summary>
         /// Replace all the values set it on param with a empty string
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <param name="param"></param>
         /// <returns></returns>
-        public static string CustomReplaceOn(this string val, params string[] param)
+        public static string CustomReplaceOn(this string value, params string[] param)
         {
-            return param.Aggregate(val, (current, item) => current.Replace(item, string.Empty));
+            return param.Aggregate(value, (current, item) => current.Replace(item, string.Empty));
         }
 
         #endregion
@@ -77,12 +77,12 @@ namespace HelperKit
         /// <summary>
         /// Returns a string with safe mode
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <param name="def"></param>
         /// <returns>string</returns>
-        public static string ToSafeString(this object val, string def = "")
+        public static string ToSafeString(this object value, string def = "")
         {
-            return (val ?? def).ToString();
+            return (value ?? def).ToString();
         }
 
         ///// <summary>
@@ -99,6 +99,6 @@ namespace HelperKit
 
         #endregion
 
-        //public static string ToJson(this object val) => JsonConvert.SerializeObject(val, Formatting.Indented, new JsonSerializerSettings() { PreserveReferencesHandling = PreserveReferencesHandling.None, ReferenceLoopHandling = ReferenceLoopHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Reuse });
+        //public static string ToJson(this object value) => JsonConvert.SerializeObject(value, Formatting.Indented, new JsonSerializerSettings() { PreserveReferencesHandling = PreserveReferencesHandling.None, ReferenceLoopHandling = ReferenceLoopHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Reuse });
     }
 }

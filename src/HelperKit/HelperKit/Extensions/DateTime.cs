@@ -26,22 +26,22 @@ namespace HelperKit
         /// <summary>
         /// Converts a value to DateTime
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value"></param>
         /// <param name="def"></param>
         /// <returns></returns>
-        public static DateTime ToDateTime(this object val, DateTime def = default)
+        public static DateTime ToDateTime(this object value, DateTime def = default)
         {
-            return DateTime.TryParse(val.ToString(), out var result) ? result : def;
+            return DateTime.TryParse(value.ToString(), out var result) ? result : def;
         }
 
         /// <summary>
         /// Get the full calendar format string
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="date"></param>
         /// <returns></returns>
-        public static string ToFullCalendarDate(this DateTime val)
+        public static string ToFullCalendarDate(this DateTime date)
         {
-            return val.ToString("yyyy-MM-dd hh:mm:ss");
+            return date.ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         /// <summary>

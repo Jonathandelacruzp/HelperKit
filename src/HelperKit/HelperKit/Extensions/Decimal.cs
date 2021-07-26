@@ -8,29 +8,29 @@ namespace HelperKit
         #region Decimal
 
         /// <summary>
-        /// Round a decimal value by a number of decimals
+        /// Converts a value to decimal
         /// </summary>
-        /// <param name="val"></param>
-        /// <param name="decimals">Number of decimals (default 2)</param>
-        /// <returns></returns>
-        public static decimal Round(this decimal val, int decimals = 2)
+        /// <param name="value"></param>
+        /// <param name="def"></param>
+        /// <returns>Decimal</returns>
+        public static decimal ToDecimal(this object value, decimal def = 0)
         {
-            return decimal.Round(val, decimals, MidpointRounding.AwayFromZero);
+            return decimal.TryParse(value?.ToString(), out var result) ? result : def;
         }
 
         #endregion
 
-        #region Decimal Convert Helper
+        #region Double Convert Helper
 
         /// <summary>
-        /// Converts a value to decimal
+        /// Converts a value to double
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="value">Decimal</param>
         /// <param name="def"></param>
-        /// <returns>Decimal</returns>
-        public static decimal ToDecimal(this object val, decimal def = 0)
+        /// <returns>long</returns>
+        public static double ToDouble(this object value, long def = 0)
         {
-            return decimal.TryParse(val?.ToString(), out var result) ? result : def;
+            return double.TryParse(value?.ToString(), out var result) ? result : def;
         }
 
         #endregion
@@ -40,12 +40,12 @@ namespace HelperKit
         /// <summary>
         /// Converts a value to long
         /// </summary>
-        /// <param name="val">Decimal</param>
+        /// <param name="value">Decimal</param>
         /// <param name="def"></param>
         /// <returns>long</returns>
-        public static long ToLong(this decimal val, long def = 0)
+        public static long ToLong(this object value, long def = 0)
         {
-            return long.TryParse(val.ToString(CultureInfo.CurrentCulture), out var result) ? result : def;
+            return long.TryParse(value?.ToString(), out var result) ? result : def;
         }
 
         #endregion

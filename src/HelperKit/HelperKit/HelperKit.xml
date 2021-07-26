@@ -58,7 +58,7 @@
             <summary>
             Converts to Boolean
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <param name="def"></param>
             <returns></returns>
         </member>
@@ -75,7 +75,7 @@
             <summary>
             Converts a value to DateTime
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <param name="def"></param>
             <returns></returns>
         </member>
@@ -83,7 +83,7 @@
             <summary>
             Get the full calendar format string
             </summary>
-            <param name="val"></param>
+            <param name="date"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.GetWeekNumber(System.DateTime,System.Globalization.CultureInfo)">
@@ -112,27 +112,27 @@
             <param name="cultureInfo"></param>
             <returns></returns>
         </member>
-        <member name="M:HelperKit.Extensions.Round(System.Decimal,System.Int32)">
-            <summary>
-            Round a decimal value by a number of decimals
-            </summary>
-            <param name="val"></param>
-            <param name="decimals">Number of decimals (default 2)</param>
-            <returns></returns>
-        </member>
         <member name="M:HelperKit.Extensions.ToDecimal(System.Object,System.Decimal)">
             <summary>
             Converts a value to decimal
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <param name="def"></param>
             <returns>Decimal</returns>
         </member>
-        <member name="M:HelperKit.Extensions.ToLong(System.Decimal,System.Int64)">
+        <member name="M:HelperKit.Extensions.ToDouble(System.Object,System.Int64)">
+            <summary>
+            Converts a value to double
+            </summary>
+            <param name="value">Decimal</param>
+            <param name="def"></param>
+            <returns>long</returns>
+        </member>
+        <member name="M:HelperKit.Extensions.ToLong(System.Object,System.Int64)">
             <summary>
             Converts a value to long
             </summary>
-            <param name="val">Decimal</param>
+            <param name="value">Decimal</param>
             <param name="def"></param>
             <returns>long</returns>
         </member>
@@ -141,8 +141,8 @@
             Validates if an item exist
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="array"></param>
-            <param name="values"></param>
+            <param name="items"></param>
+            <param name="param"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.IsContainedOn``1(``0,System.Collections.Generic.IEnumerable{``0})">
@@ -150,8 +150,8 @@
             Validates if at least one item exist on other collection
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="val"></param>
-            <param name="values"></param>
+            <param name="value"></param>
+            <param name="items"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.IsContainedOn``1(``0,``0[])">
@@ -159,7 +159,7 @@
             Validates if at least one item exist on other collection
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="val"></param>
+            <param name="value"></param>
             <param name="param"></param>
             <returns></returns>
         </member>
@@ -205,7 +205,7 @@
             Converts an object to named value collection
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="val"></param>
+            <param name="value"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToKeyValuePair``1(``0)">
@@ -213,14 +213,14 @@
             Converts to List of key value Pair
             </summary>
             <typeparam name="T"></typeparam>
-            <param name="val"></param>
+            <param name="value"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToDictionary``1(``0)">
             <summary>
             Converts a class object to dictionary
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ToDataTable``1(System.Collections.Generic.IEnumerable{``0})">
@@ -235,7 +235,7 @@
             <summary>
             Serialize an object to xml
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
@@ -250,7 +250,7 @@
             <summary>
             Converts an object to xml text
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
@@ -258,7 +258,7 @@
             <summary>
             Converts an object to int
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <param name="def"></param>
             <returns>Int32</returns>
         </member>
@@ -273,14 +273,14 @@
             <summary>
             Removes diacritics
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.ReplaceNonBreakingSpace(System.String,System.String)">
             <summary>
             Replace all NonBreaking Space (char 160) to a simple space
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <param name="def"></param>
             <returns></returns>
         </member>
@@ -288,21 +288,21 @@
             <summary>
             Deletes all slash / y backslash \ from string
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.DeleteDotAndComma(System.String)">
             <summary>
             Deletes all dot and commas of a string
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <returns></returns>
         </member>
         <member name="M:HelperKit.Extensions.CustomReplaceOn(System.String,System.String[])">
             <summary>
             Replace all the values set it on param with a empty string
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <param name="param"></param>
             <returns></returns>
         </member>
@@ -310,7 +310,7 @@
             <summary>
             Returns a string with safe mode
             </summary>
-            <param name="val"></param>
+            <param name="value"></param>
             <param name="def"></param>
             <returns>string</returns>
         </member>
@@ -322,12 +322,12 @@
             <param name="toProvider"></param>
             <returns></returns>
         </member>
-        <member name="M:HelperKit.Extensions.ConvertTime(HelperKit.Interfaces.ITimeProvider,System.DateTime,HelperKit.Interfaces.ITimeProvider)">
+        <member name="M:HelperKit.Extensions.ConvertTime(System.DateTime,HelperKit.Interfaces.ITimeProvider,HelperKit.Interfaces.ITimeProvider)">
             <summary>
             Convert time between TimeProviders
             </summary>
-            <param name="fromProvider"></param>
             <param name="date"></param>
+            <param name="fromProvider"></param>
             <param name="toProvider"></param>
             <returns></returns>
         </member>

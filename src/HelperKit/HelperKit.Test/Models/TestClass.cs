@@ -25,7 +25,7 @@ namespace HelperKit.Test.Models
             var random = new Random();
             var arraySize = random.Next() % 20;
             var guid = Guid.NewGuid().ToString().Split('-')[0];
-            var testClass = new TestClass
+            return new TestClass
             {
                 IntValue = random.Next(),
                 BooleanValue = random.Next(200) % 4 == 0,
@@ -33,7 +33,22 @@ namespace HelperKit.Test.Models
                 IntList = Enumerable.Repeat(0, arraySize).Select(_ => random.Next(0, 100)).ToList(),
                 StringValue = guid
             };
-            return testClass;
+        }
+    }
+
+    public class EmptyTestClass
+    {
+        public static IEnumerable<EmptyTestClass> CreateElements(int number)
+        {
+            var testClassList = new List<EmptyTestClass>();
+            for (var i = 0; i < number; i++) testClassList.Add(Create());
+
+            return testClassList;
+        }
+
+        public static EmptyTestClass Create()
+        {
+            return new EmptyTestClass();
         }
     }
 }

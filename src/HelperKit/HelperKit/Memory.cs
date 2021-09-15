@@ -10,6 +10,7 @@ namespace HelperKit
         /// </summary>
         /// <param name="stream"></param>
         /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static byte[] ToBytes(this Stream stream)
         {
             _ = stream ?? throw new ArgumentNullException(nameof(stream));

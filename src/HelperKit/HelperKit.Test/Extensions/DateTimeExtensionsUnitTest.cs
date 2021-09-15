@@ -64,12 +64,45 @@ namespace HelperKit.Test.Extensions
             var inputDateTime = new DateTime(2021, 07, 15);
             var convertedDateTime = inputDateTime.ConvertTime(_localTimeProvider, _utcTimeProvider);
 
-            var timeOffsetBetweeProviders = _utcTimeProvider.TimeZoneInfo.BaseUtcOffset - _localTimeProvider.TimeZoneInfo.BaseUtcOffset;
+            var timeOffsetBetweenProviders = _utcTimeProvider.TimeZoneInfo.BaseUtcOffset - _localTimeProvider.TimeZoneInfo.BaseUtcOffset;
 
-            var hourDifferende = Math.Abs(timeOffsetBetweeProviders.TotalHours);
+            var hourDifference = Math.Abs(timeOffsetBetweenProviders.TotalHours);
             var hoursDifferenceResult = Math.Abs(inputDateTime.Hour - convertedDateTime.Hour);
 
-            Assert.AreEqual(hourDifferende, hoursDifferenceResult);
+            Assert.AreEqual(hourDifference, hoursDifferenceResult);
+        }
+
+        [Test]
+        public void VerifyToDateTime_ReturnsCorrectValue()
+        {
+            var inputDateTime = new DateTime(2021, 07, 15);
+
+            var dateStr = inputDateTime.ToString();
+
+            var resultDate = dateStr.ToDateTime();
+
+            Assert.AreEqual(inputDateTime, resultDate);
+        }
+
+        [Test]
+        public void VerifyFirstDateOfWeek_ReturnsCorrectValue()
+        {
+            var expected = DateTime.Parse("2021-01-03"); //Fisrt sunday and second week of the year
+            var inputDateTime = new DateTime(2021, 1, 1);
+
+            var date = inputDateTime.FirstDateOfWeek(2);
+            Assert.AreEqual(expected, date);
+        }
+
+        [Test]
+        public void IsBetween_ReturnsSuccess()
+        {
+            var minDateTime = new DateTime(2021, 1, 1);
+            var inputDateTime = new DateTime(2021, 2, 1);
+            var maxDateTime = new DateTime(2022, 1, 1);
+
+            var result = inputDateTime.IsBetween(minDateTime, maxDateTime);
+            Assert.IsTrue(result);
         }
     }
 }

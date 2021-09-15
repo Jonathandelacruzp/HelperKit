@@ -9,20 +9,21 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net45;net46;net47</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net462;net47</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
+	</PropertyGroup>
+
+	<PropertyGroup>
 		<PackageId>HelperKit</PackageId>
 		<Version>1.3.2</Version>
 		<Authors>jonathan.delacruzp</Authors>
 		<Company>jonathan.delacruzp</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>1.3.2</AssemblyVersion>
-		<FileVersion>1.3.2</FileVersion>
-		<PackageReleaseNotes>
-			Added Memoizer Function Helper
-			Added Cr64 Hash Helper
-		</PackageReleaseNotes>
+		<AssemblyVersion>1.3.4</AssemblyVersion>
+		<FileVersion>1.3.4</FileVersion>
 		<Copyright>jonathan.delacruzp, 2021</Copyright>
 		<RepositoryType>git</RepositoryType>
 		<Description>Small library of general purpose utilities for .NET development that almost every application can use.</Description>
@@ -37,16 +38,32 @@
 		<DebugSymbols>false</DebugSymbols>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
-		<DocumentationFile>D:\dev\git\HelperKit\src\HelperKit\HelperKit\HelperKit.xml</DocumentationFile>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-		<DocumentationFile>D:\dev\git\HelperKit\src\HelperKit\HelperKit\HelperKit.xml</DocumentationFile>
-	</PropertyGroup>
-
 	<ItemGroup>
-		<None Remove="HelperKit.csproj.vspscc" />
+	  <Compile Update="Memory.cs">
+	    <DependentUpon>Extensions.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="DateTime.cs">
+	    <DependentUpon>Extensions.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="String.cs">
+	    <DependentUpon>Extensions.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Int.cs">
+	    <DependentUpon>Extensions.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="TimeProvider.cs">
+	    <DependentUpon>Extensions.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Boolean.cs">
+	    <DependentUpon>Extensions.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Generic.cs">
+	    <DependentUpon>Extensions.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Decimal.cs">
+	    <DependentUpon>Extensions.cs</DependentUpon>
+	  </Compile>
+		<None Remove="HelperKit.xml" />
 	</ItemGroup>
 
 </Project>

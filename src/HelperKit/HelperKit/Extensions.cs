@@ -20,6 +20,7 @@ namespace HelperKit
         /// <param name="items"></param>
         /// <param name="param"></param>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static bool HasAny<T>(this IEnumerable<T> items, params T[] param)
         {
             _ = items ?? throw new ArgumentNullException(nameof(items));
@@ -33,13 +34,15 @@ namespace HelperKit
         /// <param name="value"></param>
         /// <param name="items"></param>
         /// <returns></returns>
-        public static bool IsContainedOn<T>(this T value, IEnumerable<T> items)
+        /// <exception cref="ArgumentNullException">Thrown when value is null</exception>
+        /// <exception cref="ArgumentException">Thrown when obj is null</exception>
+        public static bool IsContainedIn<T>(this T value, IEnumerable<T> items)
         {
             _ = value ?? throw new ArgumentNullException(nameof(value));
 
-            return typeof(T).GetInterface("IEnumerable") != null
-                ? throw new ArgumentException("Requested value could not be an Enumerable.")
-                : items.Any(x => x.Equals(value));
+            return typeof(T).GetInterface("IEnumerable") == null
+                ? items?.Any(x => x.Equals(value)) == true
+                : throw new ArgumentException("Requested value could not be an Enumerable.");
         }
 
         /// <summary>
@@ -49,9 +52,22 @@ namespace HelperKit
         /// <param name="value"></param>
         /// <param name="param"></param>
         /// <returns></returns>
+        public static bool IsContainedIn<T>(this T value, params T[] param)
+        {
+            return IsContainedIn(value, param as IEnumerable<T>);
+        }
+
+        /// <summary>
+        /// Validates if at least one item exist on other collection
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [Obsolete("Use IsContainedIn intead")]
         public static bool IsContainedOn<T>(this T value, params T[] param)
         {
-            return IsContainedOn(value, param as IEnumerable<T>);
+            return IsContainedIn(value, param as IEnumerable<T>);
         }
 
         #endregion
@@ -61,8 +77,10 @@ namespace HelperKit
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="fileName"></param>
+        /// <exception cref="ArgumentNullException">Thrown when obj is null</exception>
         public static void SaveAsXml(this object obj, string fileName)
         {
+            _ = obj ?? throw new ArgumentNullException(nameof(obj));
             _ = fileName ?? throw new ArgumentNullException(nameof(fileName));
             using var xmlRequest = new StreamWriter(fileName);
             var xmlFileRequest = new XmlSerializer(obj.GetType());

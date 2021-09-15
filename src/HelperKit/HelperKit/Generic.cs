@@ -49,6 +49,7 @@ namespace HelperKit
         /// <param name="key"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static T ToValue<T>(this IDictionary<string, object> dictionary, string key)
         {
             _ = key ?? throw new ArgumentNullException(nameof(key));
@@ -127,11 +128,12 @@ namespace HelperKit
         /// <typeparam name="T"></typeparam>
         /// <param name="items"></param>
         /// <returns></returns>
+        /// <exception cref="MissingFieldException"></exception>
         public static DataTable ToDataTable<T>(this IEnumerable<T> items) where T : class
         {
             var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
             if (props.Length == 0)
-                throw new Exception("The implemeted type doesn't have valid properties");
+                throw new MissingFieldException("The implemented type doesn't have valid fields");
 
             var dataTable = new DataTable(typeof(T).Name);
             foreach (var prop in props)
@@ -157,32 +159,35 @@ namespace HelperKit
         /// Serialize an object to xml
         /// </summary>
         /// <param name="value"></param>
+        /// <param name="includeHeader"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static string SerializeObjectToXml<T>(this T value) where T : class
+        public static string SerializeObjectToXml<T>(this T value, bool includeHeader = false) where T : class
         {
             var xmlDoc = new XmlDocument();
             var xmlSerializer = new XmlSerializer(value.GetType());
 
             using var xmlStream = new MemoryStream();
             var xmlns = new XmlSerializerNamespaces();
-            xmlns.Add(string.Empty, string.Empty);
+            //xmlns.Add(string.Empty, string.Empty);
 
             xmlSerializer.Serialize(xmlStream, value, xmlns);
             xmlStream.Position = 0;
             xmlDoc.Load(xmlStream);
-            return xmlDoc.InnerXml.Replace("<?xml version=\"1.0\"?>", string.Empty);
+            return includeHeader
+                ? xmlDoc.InnerXml
+                : xmlDoc.InnerXml.Replace("<?xml version=\"1.0\"?>", string.Empty);
         }
 
         /// <summary>
         /// Deserialize an string to and object
         /// </summary>
-        /// <param name="xml"></param>
+        /// <param name="xmlString"></param>
         /// <returns></returns>
-        public static T DeserializeXmlToObject<T>(this string xml) where T : class
+        public static T DeserializeXmlToObject<T>(this string xmlString) where T : class
         {
             var xmlSerializer = new XmlSerializer(typeof(T));
-            using var reader = new StringReader(xml);
+            using var reader = new StringReader(xmlString);
             return (T)xmlSerializer.Deserialize(reader);
         }
 
@@ -192,6 +197,7 @@ namespace HelperKit
         /// <param name="value"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
+        [Obsolete("Use SerializeObjectToXml<T> instead")]
         public static string ConvertObjectToXmlString<T>(this T value) where T : class
         {
             var typeName = value.GetType().Name;
@@ -200,9 +206,11 @@ namespace HelperKit
             var strBuilder = new StringBuilder();
             strBuilder.Append('<').Append(typeName).Append('>');
             foreach (var propertyInfo in propertyInfos.Where(x => x.CanRead))
+            {
                 strBuilder.Append('<').Append(propertyInfo.Name).Append('>')
-                    .Append(propertyInfo.GetValue(value, null)?.ToString() ?? string.Empty)
-                    .Append("</").Append(propertyInfo.Name).Append('>');
+                   .Append(propertyInfo.GetValue(value, null)?.ToString() ?? string.Empty)
+                   .Append("</").Append(propertyInfo.Name).Append('>');
+            }
 
             strBuilder.Append("</").Append(typeName).Append('>');
             return strBuilder.ToString();

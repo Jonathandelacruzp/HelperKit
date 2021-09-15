@@ -1,4 +1,4 @@
-﻿namespace HelperKit.Models
+﻿namespace HelperKit.Interfaces
 {
     public interface IDataResponse<T> : IDataResponse
     {

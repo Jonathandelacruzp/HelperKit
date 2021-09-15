@@ -43,5 +43,23 @@ namespace HelperKit.Test.Extensions
             Assert.IsInstanceOf<long>(decimalValue.ToLong());
             Assert.AreEqual(floatValue, decimalValue.ToLong());
         }
+
+        [Test]
+        public void DoubleExtension_ReturnTrue()
+        {
+            const double decimalValue = 5;
+            const string stringValue = "5";
+            const int intValue = 5;
+            const double doubleValue = 5F;
+            const float floatValue = 5;
+
+            Assert.IsInstanceOf<decimal>(intValue.ToDecimal());
+
+            Assert.AreEqual(decimalValue, decimalValue.ToDouble());
+            Assert.AreEqual(decimalValue, stringValue.ToDouble());
+            Assert.AreEqual(decimalValue, intValue.ToDouble());
+            Assert.AreEqual(decimalValue, doubleValue.ToDouble());
+            Assert.AreEqual(decimalValue, floatValue.ToDouble());
+        }
     }
 }

@@ -2,6 +2,7 @@ using HelperKit.Test.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace HelperKit.Test.Extensions
 {
@@ -38,25 +39,36 @@ namespace HelperKit.Test.Extensions
         {
             const Color colorBlue = Color.Blue;
 
-            var paramTest = colorBlue.IsContainedOn(Color.Blue, Color.Yellow, Color.Red);
+            var paramTest = colorBlue.IsContainedIn(Color.Blue, Color.Yellow, Color.Red);
             Assert.IsTrue(paramTest);
 
-            var enumerableTest = colorBlue.IsContainedOn(_colorListToFind);
+            var enumerableTest = colorBlue.IsContainedIn(_colorListToFind);
             Assert.IsTrue(enumerableTest);
         }
 
         [Test]
         public void IsContainedOnExtension_ShouldTrowAnArgumentException()
         {
-            void Action() => _colorListToFind.IsContainedOn(_colorList);
+            void Action() => _colorListToFind.IsContainedIn(_colorList);
             Assert.Throws<ArgumentException>(Action);
         }
 
         [Test]
         public void IsContainedOnExtension_ShouldTrowAnArgumentNUllException()
         {
-            static void NullAction() => ((string) null).IsContainedOn("rojo", "verde");
+            static void NullAction() => ((string) null).IsContainedIn("rojo", "verde");
             Assert.Throws<ArgumentNullException>(NullAction);
+        }
+
+        [Test]
+        public void CreateDirectory_CreatesDirectory()
+        {
+            var directoryInfo = new DirectoryInfo("./Test");
+
+            directoryInfo.CreateDirectory();
+
+            var directoryInfoValid = new DirectoryInfo("./Test");
+            Assert.IsTrue(directoryInfoValid.Exists);
         }
     }
 }

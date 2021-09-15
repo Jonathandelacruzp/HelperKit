@@ -2,6 +2,7 @@ using HelperKit.Test.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace HelperKit.Test.Extensions
 {
@@ -112,10 +113,81 @@ namespace HelperKit.Test.Extensions
         }
 
         [Test]
+        public void ToDataTable_WithEmptyClass_ThrowsException()
+        {
+            var elements = EmptyTestClass.CreateElements(2);
+
+            void action() => elements.ToDataTable();
+            Assert.Throws<MissingFieldException>(action);
+        }
+
+        [Test]
         public void ToDataTable_TrowsNullRefferenceException()
         {
             static void NullAction() => ((IEnumerable<TestClass>)null).ToDataTable();
             Assert.Throws<NullReferenceException>(NullAction);
+        }
+
+        [Test]
+        public void ToDataValue_WithEmptyClass_ThrowsException()
+        {
+            var elements = TestClass.Create();
+
+            var dictionary = elements.ToDictionary();
+
+            void nullAction() => dictionary.ToValue<TestClass>(null);
+
+            Assert.Throws<ArgumentNullException>(nullAction);
+        }
+
+        [Test]
+        public void ToDataValue_WithEmptyClass_ReturnsValues()
+        {
+            var elements = TestClass.Create();
+            var dictionary = elements.ToDictionary();
+
+            var result = dictionary.ToValue<int[]>("IntArray");
+
+            CollectionAssert.AreEquivalent(elements.IntArray, result);
+        }
+
+        [Test]
+        public void SerializeObjectToXml_WithClass_ReturnsSuccess()
+        {
+            const string regexStr = @"<StringValue>[\s\S]*?<\/StringValue>";
+
+            var rerex = new Regex(regexStr);
+
+            var elements = TestClass.Create();
+            var xmlstring = elements.SerializeObjectToXml();
+
+            Assert.IsTrue(rerex.IsMatch(xmlstring));
+        }
+
+        [Test]
+        [Obsolete("ConvertObjectToXmlString obsolete")]
+        public void ConvertObjectToXmlString_WithClass_ReturnsSuccess()
+        {
+            const string regexStr = @"<StringValue>[\s\S]*?<\/StringValue>";
+
+            var rerex = new Regex(regexStr);
+
+            var elements = TestClass.Create();
+            var xmlstring = elements.ConvertObjectToXmlString();
+
+            Assert.IsTrue(rerex.IsMatch(xmlstring));
+        }
+
+        [Test]
+        public void DeserializeXmlToObject_WithClass_ReturnsSuccess()
+        {
+            var elements = TestClass.Create();
+            var xmlstring = elements.SerializeObjectToXml();
+
+            var restClass = xmlstring.DeserializeXmlToObject<TestClass>();
+
+            Assert.AreEqual(elements.IntValue, restClass.IntValue);
+            CollectionAssert.AreEqual(elements.IntArray, restClass.IntArray);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using HelperKit.Security.Cryptography;
-using System;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,7 +15,7 @@ namespace HelperKit.Security
         /// <param name="hashAlgorithm"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">Throws an exception if text is null</exception>
         public static string GenerateHashString(this HashAlgorithm hashAlgorithm, string text)
         {
             _ = text ?? throw new ArgumentNullException(nameof(text));
@@ -35,7 +34,7 @@ namespace HelperKit.Security
         /// </summary>
         /// <param name="rawData"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">Throws an exception if rawData is null</exception>
         public static string ComputeMd5Hash(string rawData)
         {
             _ = rawData ?? throw new ArgumentNullException(nameof(rawData));
@@ -60,7 +59,7 @@ namespace HelperKit.Security
         /// </summary>
         /// <param name="rawData"></param>
         /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentNullException">Throws an exception if rawData is null</exception>
         public static string ComputeSha256Hash(string rawData)
         {
             _ = rawData ?? throw new ArgumentNullException(nameof(rawData));
@@ -78,31 +77,6 @@ namespace HelperKit.Security
         public static bool AreEqualSha256Hash(string text, string encryptedValue)
         {
             return ComputeSha256Hash(text) == encryptedValue;
-        }
-
-        /// <summary>
-        /// Computes Crc64 Hash
-        /// </summary>
-        /// <param name="rawData"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException"></exception>
-        public static string ComputeCrc64IsoHash(string rawData)
-        {
-            _ = rawData ?? throw new ArgumentNullException(nameof(rawData));
-
-            using var cr64 = Crc64Iso.Create();
-            return cr64.GenerateHashString(rawData);
-        }
-
-        /// <summary>
-        /// Compare the actual value vs the Crc64 hash
-        /// </summary>
-        /// <param name="text"></param>
-        /// <param name="encryptedValue"></param>
-        /// <returns></returns>
-        public static bool AreEqualCrc64IsoHash(string text, string encryptedValue)
-        {
-            return ComputeCrc64IsoHash(text) == encryptedValue;
         }
     }
 }

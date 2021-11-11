@@ -1,29 +1,24 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
-namespace HelperKit.Interfaces
+namespace HelperKit.Interfaces;
+
+public interface IRepository<T> : IDisposable where T : class
 {
-    public interface IRepository<T> : IDisposable where T : class
-    {
-        IQueryable<T> GetAll();
+    IQueryable<T> GetAll();
 
-        IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
+    IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
 
-        void Create(T entity);
+    void Create(T entity);
 
-        Task CreateAsync(T entity, CancellationToken cancellationToken = default);
+    Task CreateAsync(T entity, CancellationToken cancellationToken = default);
 
-        void Update(T entity);
+    void Update(T entity);
 
-        void Delete(T entity);
+    void Delete(T entity);
 
-        void Edit(T entity);
+    void Edit(T entity);
 
-        int SaveChanges();
+    int SaveChanges();
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-    }
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

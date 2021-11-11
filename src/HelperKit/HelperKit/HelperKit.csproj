@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net462;net47</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -30,40 +30,35 @@
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
 		<DelaySign>false</DelaySign>
-		<PackageProjectUrl>https://github.com/Jonathandelacruzp/HelperKit</PackageProjectUrl>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<DebugType>None</DebugType>
-		<DebugSymbols>false</DebugSymbols>
+		<PackageProjectUrl>https://github.com/jonathandelacruzp/HelperKit</PackageProjectUrl>
+		<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Update="Memory.cs">
-	    <DependentUpon>Extensions.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="DateTime.cs">
-	    <DependentUpon>Extensions.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="String.cs">
-	    <DependentUpon>Extensions.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="Int.cs">
-	    <DependentUpon>Extensions.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="TimeProvider.cs">
-	    <DependentUpon>Extensions.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="Boolean.cs">
-	    <DependentUpon>Extensions.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="Generic.cs">
-	    <DependentUpon>Extensions.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="Decimal.cs">
-	    <DependentUpon>Extensions.cs</DependentUpon>
-	  </Compile>
-		<None Remove="HelperKit.xml" />
+		<Compile Update="Memory.cs">
+			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
+		<Compile Update="DateTime.cs">
+			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
+		<Compile Update="String.cs">
+			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Int.cs">
+			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
+		<Compile Update="TimeProvider.cs">
+			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Boolean.cs">
+			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Generic.cs">
+			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Decimal.cs">
+			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 </Project>

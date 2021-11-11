@@ -1,6 +1,4 @@
 ﻿using HelperKit.Functions;
-using NUnit.Framework;
-using System;
 
 namespace HelperKit.Test.Functions
 {
@@ -10,14 +8,14 @@ namespace HelperKit.Test.Functions
         private static int _numberOfCallsMemoizer;
         private static int _numberOfCalls;
 
-        [Test]
+        [Fact]
         public void SimpleMemoizerFunction_ReturnCachedFunction()
         {
             Func<int> simpleValueFunction = null;
             simpleValueFunction = Memoizer.Memoize(() => SimpleValueFunction(simpleValueFunction));
             var result = simpleValueFunction();
 
-            Assert.AreEqual(3, result);
+            Assert.Equal(3, result);
         }
 
         private static int SimpleValueFunction(Func<int> simpleValueFunction)
@@ -29,7 +27,7 @@ namespace HelperKit.Test.Functions
             return simpleValueFunction() + simpleValueFunction() + simpleValueFunction();
         }
 
-        [Test]
+        [Fact]
         public void MemoizerFunctionWithValueInput_ReturnCachedFunctions()
         {
             Func<int, int> fibonacci = null;
@@ -37,9 +35,9 @@ namespace HelperKit.Test.Functions
             var cachedResult = fibonacci(4);
             var result = Fibonacci(4);
 
-            Assert.AreEqual(3, cachedResult);
-            Assert.AreEqual(3, result);
-            Assert.Less(_numberOfCallsMemoizer, _numberOfCalls);
+            Assert.Equal(3, cachedResult);
+            Assert.Equal(3, result);
+            Assert.True(_numberOfCallsMemoizer < _numberOfCalls);
         }
 
         private static int Fibonacci(int value)
@@ -60,14 +58,14 @@ namespace HelperKit.Test.Functions
             return fibonacci(value - 1) + fibonacci(value - 2);
         }
 
-        [Test]
+        [Fact]
         public void MemoizerConcurrentFunctionWithValueInput_ReturnCachedFunctions()
         {
             Func<int, int> fibonacci = null;
             fibonacci = Memoizer.ConcurrentMemoize((int n1) => Fibonacci(n1, fibonacci));
             var result = fibonacci(3);
 
-            Assert.AreEqual(2, result);
+            Assert.Equal(2, result);
             _numberOfCallsMemoizer = _numberOfCalls = 0;
         }
     }

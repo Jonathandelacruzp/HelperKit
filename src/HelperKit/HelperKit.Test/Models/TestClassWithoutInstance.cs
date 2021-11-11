@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace HelperKit.Test.Models
+﻿namespace HelperKit.Test.Models
 {
     public class TestClassWithoutInstance
     {

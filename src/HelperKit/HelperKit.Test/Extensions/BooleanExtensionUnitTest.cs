@@ -1,47 +1,54 @@
-using NUnit.Framework;
+namespace HelperKit.Test.Extensions;
 
-namespace HelperKit.Test.Extensions
+public class BooleanExtensionUnitTest
 {
-    public class BooleanExtensionUnitTest
+    [Fact]
+    public void BooleanExtension_AcceptLiteralStringBooleanValue()
     {
-        [Test]
-        public void BooleanExtension_AcceptLiteralStringBooleanValue()
-        {
-            const string stringTrue = "true";
-            const string stringTrueUpper = "TRUE";
-            const string stringTrueCapital = "True";
+        const string stringTrue = "true";
+        const string stringTrueUpper = "TRUE";
+        const string stringTrueCapital = "True";
 
-            const string stringFalse = "false";
-            const string stringFalseUpper = "FALSE";
-            const string stringFalseCapital = "False";
+        const string stringFalse = "false";
+        const string stringFalseUpper = "FALSE";
+        const string stringFalseCapital = "False";
 
-            Assert.IsInstanceOf<bool>(stringTrue.ToBoolean());
+        stringTrue.ToBoolean().Should<bool>();
+        stringTrue.ToBoolean().Should().BeTrue();
 
-            Assert.AreEqual(true, stringTrue.ToBoolean());
-            Assert.AreEqual(true, stringTrueUpper.ToBoolean());
-            Assert.AreEqual(true, stringTrueCapital.ToBoolean());
+        stringTrueUpper.ToBoolean().Should<bool>();
+        stringTrueUpper.ToBoolean().Should().BeTrue();
 
-            Assert.AreEqual(false, stringFalse.ToBoolean());
-            Assert.AreEqual(false, stringFalseUpper.ToBoolean());
-            Assert.AreEqual(false, stringFalseCapital.ToBoolean());
-        }
+        stringTrueCapital.ToBoolean().Should<bool>();
+        stringTrueCapital.ToBoolean().Should().BeTrue();
 
-        [Test]
-        public void BooleanExtension_ReturnFalseWithWrongValues()
-        {
-            const string anyString = "asads";
-            const string anyStringUpper = "ASADSADSDAS";
-            const string anyStringCapital = "Aasdadsasd";
+        stringFalse.ToBoolean().Should<bool>();
+        stringFalse.ToBoolean().Should().BeFalse();
 
-            Assert.AreEqual(false, anyString.ToBoolean());
-            Assert.AreEqual(false, anyStringUpper.ToBoolean());
-            Assert.AreEqual(false, anyStringCapital.ToBoolean());
-        }
+        stringFalseUpper.ToBoolean().Should<bool>();
+        stringFalseUpper.ToBoolean().Should().BeFalse();
 
-        [Test]
-        public void BooleanExtension_ReturnFalseNullValue()
-        {
-            Assert.AreEqual(false, ((string) null).ToBoolean());
-        }
+        stringFalseCapital.ToBoolean().Should<bool>();
+        stringFalseCapital.ToBoolean().Should().BeFalse();
+    }
+
+    [Fact]
+    public void BooleanExtension_ReturnFalseWithWrongValues()
+    {
+        const string anyString = "asads";
+        const string anyStringUpper = "ASADSADSDAS";
+        const string anyStringCapital = "Aasdadsasd";
+
+        anyString.ToBoolean().Should().BeFalse();
+        anyStringUpper.ToBoolean().Should().BeFalse();
+        anyStringCapital.ToBoolean().Should().BeFalse();
+    }
+
+    [Fact]
+    public void BooleanExtension_ReturnFalseNullValue()
+    {
+        var boolFromNull = ((string)null).ToBoolean();
+
+        boolFromNull.Should().BeFalse();
     }
 }

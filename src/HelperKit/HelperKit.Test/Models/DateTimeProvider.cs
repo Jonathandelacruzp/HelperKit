@@ -1,6 +1,4 @@
-﻿using HelperKit.Interfaces;
-using HelperKit.Test.Extensions;
-using System;
+﻿using HelperKit.Test.Extensions;
 
 namespace HelperKit.Test.Models
 {
@@ -8,12 +6,14 @@ namespace HelperKit.Test.Models
     {
         public DateTime Now => DateTime.UtcNow;
         public TimeZoneInfo TimeZoneInfo => TimeZoneInfo.Utc;
+        public string Id => TimeZoneInfo.Utc.Id;
     }
 
     public class LocalTimeProvider : ITimeProvider
     {
         public DateTime Now => DateTime.Now;
         public TimeZoneInfo TimeZoneInfo => TimeZoneInfo.Local;
+        public string Id => TimeZoneInfo.Local.Id;
     }
 
     public class CustomTimeProvider : ITimeProvider
@@ -22,7 +22,9 @@ namespace HelperKit.Test.Models
         private const int TimeDifference = DateTimeExtensionsUnitTest.Hours;
         private TimeZoneInfo _timeZoneInfo;
 
+        public string Id => TimeZoneInfo.Id;
         public DateTime Now => DateTime.UtcNow.Add(_timeZoneInfo.BaseUtcOffset);
         public TimeZoneInfo TimeZoneInfo => _timeZoneInfo ??= TimeZoneInfo.CreateCustomTimeZone(Name, TimeSpan.FromHours(TimeDifference), Name, Name);
     }
+
 }

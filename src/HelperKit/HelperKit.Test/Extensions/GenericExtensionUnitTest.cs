@@ -1,193 +1,195 @@
 using HelperKit.Test.Models;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
-namespace HelperKit.Test.Extensions
+namespace HelperKit.Test.Extensions;
+
+public class GenericExtensionUnitTest
 {
-    public class GenericExtensionUnitTest
+    private readonly int[] _intArray = { 1, 2, 3, 4 };
+
+    [Fact]
+    public void EnumConvert_ReturnCorrectValue()
     {
-        private readonly int[] _intArray = { 1, 2, 3, 4 };
+        const string enumRed = "Red";
 
-        [Test]
-        public void EnumConvert_ReturnCorrectValue()
+        enumRed.ToEnum<Color>().Should();
+        enumRed.ToEnum<Color>().Should().Be(Color.Red);
+    }
+
+    [Fact]
+    public void EnumConvert_ReturnError_FromNotExistingValue()
+    {
+        const string pinkColor = "Pink";
+
+        var pinkAction = () => pinkColor.ToEnum<Color>();
+
+        pinkAction.Should().Throw<ArgumentException>()
+            .WithMessage($"Requested value '{pinkColor}' was not found.");
+    }
+
+    [Fact]
+    public void EnumToDictionary_GetCorrectItems()
+    {
+        var enumResult = HelperKit.Extensions.EnumNamedValues<Color>();
+
+        enumResult.Should().HaveCount(4);
+    }
+
+    [Fact]
+    public void ClassToDictionary_WithPublicInstance()
+    {
+        var testClass = TestClass.Create();
+
+        var result = testClass.ToDictionary();
+
+        result.Should().HaveCount(5);
+    }
+
+    [Fact]
+    public void ClassToDictionary_GetOnlyGetInstances()
+    {
+        var testClass = TestClassWithoutInstance.Create();
+
+        var result = testClass.ToDictionary();
+
+        result.Should().HaveCount(1);
+    }
+
+    [Fact]
+    public void ClassToNameValueCollection_WithPublicInstance()
+    {
+        var testClass = TestClass.Create();
+
+        var result = testClass.ToNameValueCollection();
+
+        Assert.Equal(5, result.Count);
+    }
+
+    [Fact]
+    public void ClassToNameValueCollection_GetOnlyGetInstances()
+    {
+        var testClass = new TestClassWithoutInstance
         {
-            const string enumRed = "Red";
+            IntValue = 3,
+            StringValue = "string value",
+            BooleanValue = true,
+            IntArray = _intArray,
+            IntList = _intArray
+        };
 
-            Assert.IsInstanceOf<Color>(enumRed.ToEnum<Color>());
-            Assert.AreEqual(Color.Red, enumRed.ToEnum<Color>());
-        }
+        var result = testClass.ToNameValueCollection();
 
-        [Test]
-        public void EnumConvert_ReturnError_FromNotExistingValue()
+        Assert.Single(result);
+    }
+
+    [Fact]
+    public void ClassToKeyValuePair_WithPublicInstance()
+    {
+        var testClass = TestClass.Create();
+
+        var result = testClass.ToKeyValuePair();
+
+        result.Should().HaveCount(5);
+    }
+
+    [Fact]
+    public void ClassToKeyValuePair_GetOnlyGetInstances()
+    {
+        var testClass = new TestClassWithoutInstance
         {
-            const string pinkColor = "Pink";
+            IntValue = 3,
+            StringValue = "string value",
+            BooleanValue = true,
+            IntArray = _intArray,
+            IntList = _intArray
+        };
 
-            var ex = Assert.Throws<ArgumentException>(() => pinkColor.ToEnum<Color>());
-            Assert.AreEqual(ex!.Message, $"Requested value '{pinkColor}' was not found.");
-        }
+        var result = testClass.ToKeyValuePair();
 
-        [Test]
-        public void EnumToDictionary_GetCorrectItems()
-        {
-            var enumResult = HelperKit.Extensions.EnumNamedValues<Color>();
-            Assert.AreEqual(4, enumResult.Count);
-        }
+        result.Should().HaveCount(1);
+    }
 
-        [Test]
-        public void ClassToDictionary_WithPublicInstance()
-        {
-            var testClass = TestClass.Create();
+    [Fact]
+    public void ToDataTable_ReturnsAValidDataTable()
+    {
+        var elements = TestClass.CreateElements(5);
+        var dataTable = elements.ToDataTable();
 
-            var result = testClass.ToDictionary();
-            Assert.AreEqual(5, result.Count);
-        }
+        dataTable.Should().NotBeNull();
+    }
 
-        [Test]
-        public void ClassToDictionary_GetOnlyGetInstances()
-        {
-            var testClass = TestClassWithoutInstance.Create();
+    [Fact]
+    public void ToDataTable_WithEmptyClass_ThrowsException()
+    {
+        var elements = EmptyTestClass.CreateElements(2);
 
-            var result = testClass.ToDictionary();
-            Assert.AreEqual(1, result.Count);
-        }
+        var action = () => elements.ToDataTable();
 
-        [Test]
-        public void ClassToNameValueCollection_WithPublicInstance()
-        {
-            var testClass = TestClass.Create();
+        action.Should().Throw<MissingFieldException>();
+    }
 
-            var result = testClass.ToNameValueCollection();
-            Assert.AreEqual(5, result.Count);
-        }
+    [Fact]
+    public void ToDataTable_TrowsNullReferenceException()
+    {
+        var nullAction = () => ((IEnumerable<TestClass>)null).ToDataTable();
 
-        [Test]
-        public void ClassToNameValueCollection_GetOnlyGetInstances()
-        {
-            var testClass = new TestClassWithoutInstance
-            {
-                IntValue = 3,
-                StringValue = "string value",
-                BooleanValue = true,
-                IntArray = _intArray,
-                IntList = _intArray
-            };
+        nullAction.Should().Throw<NullReferenceException>();
+    }
 
-            var result = testClass.ToNameValueCollection();
-            Assert.AreEqual(1, result.Count);
-        }
+    [Fact]
+    public void ToDataValue_WithEmptyClass_ThrowsException()
+    {
+        var elements = TestClass.Create();
 
-        [Test]
-        public void ClassToKeyValuePair_WithPublicInstance()
-        {
-            var testClass = TestClass.Create();
+        var dictionary = elements.ToDictionary();
 
-            var result = testClass.ToKeyValuePair();
-            Assert.AreEqual(5, result.Count);
-        }
+        var nullAction = () => dictionary.ToValue<TestClass>(null);
 
-        [Test]
-        public void ClassToKeyValuePair_GetOnlyGetInstances()
-        {
-            var testClass = new TestClassWithoutInstance
-            {
-                IntValue = 3,
-                StringValue = "string value",
-                BooleanValue = true,
-                IntArray = _intArray,
-                IntList = _intArray
-            };
+        nullAction.Should().Throw<ArgumentNullException>();
+    }
 
-            var result = testClass.ToKeyValuePair();
-            Assert.AreEqual(1, result.Count);
-        }
+    [Fact]
+    public void ToDataValue_WithEmptyClass_ReturnsValues()
+    {
+        var elements = TestClass.Create();
+        var dictionary = elements.ToDictionary();
 
-        [Test]
-        public void ToDataTable_ReturnsAValidDataTable()
-        {
-            var elements = TestClass.CreateElements(5);
-            var dataTable = elements.ToDataTable();
+        var result = dictionary.ToValue<int[]>("IntArray");
 
-            Assert.IsNotNull(dataTable);
-        }
+        result.Should().BeEquivalentTo(elements.IntArray);
+    }
 
-        [Test]
-        public void ToDataTable_WithEmptyClass_ThrowsException()
-        {
-            var elements = EmptyTestClass.CreateElements(2);
+    [Fact]
+    public void SerializeObjectToXml_WithClass_ReturnsSuccess()
+    {
+        const string regexStr = @"<StringValue>[\s\S]*?<\/StringValue>";
 
-            void action() => elements.ToDataTable();
-            Assert.Throws<MissingFieldException>(action);
-        }
+        var elements = TestClass.Create();
+        var xmlstring = elements.SerializeObjectToXml();
 
-        [Test]
-        public void ToDataTable_TrowsNullRefferenceException()
-        {
-            static void NullAction() => ((IEnumerable<TestClass>)null).ToDataTable();
-            Assert.Throws<NullReferenceException>(NullAction);
-        }
+        xmlstring.Should().MatchRegex(regexStr);
+    }
 
-        [Test]
-        public void ToDataValue_WithEmptyClass_ThrowsException()
-        {
-            var elements = TestClass.Create();
+    [Fact]
+    [Obsolete("ConvertObjectToXmlString obsolete")]
+    public void ConvertObjectToXmlString_WithClass_ReturnsSuccess()
+    {
+        const string regexStr = @"<StringValue>[\s\S]*?<\/StringValue>";
 
-            var dictionary = elements.ToDictionary();
+        var elements = TestClass.Create();
+        var xmlstring = elements.ConvertObjectToXmlString();
 
-            void nullAction() => dictionary.ToValue<TestClass>(null);
+        xmlstring.Should().MatchRegex(regexStr);
+    }
 
-            Assert.Throws<ArgumentNullException>(nullAction);
-        }
+    [Fact]
+    public void DeserializeXmlToObject_WithClass_ReturnsSuccess()
+    {
+        var elements = TestClass.Create();
+        var xmlstring = elements.SerializeObjectToXml();
 
-        [Test]
-        public void ToDataValue_WithEmptyClass_ReturnsValues()
-        {
-            var elements = TestClass.Create();
-            var dictionary = elements.ToDictionary();
+        var restClass = xmlstring.DeserializeXmlToObject<TestClass>();
 
-            var result = dictionary.ToValue<int[]>("IntArray");
-
-            CollectionAssert.AreEquivalent(elements.IntArray, result);
-        }
-
-        [Test]
-        public void SerializeObjectToXml_WithClass_ReturnsSuccess()
-        {
-            const string regexStr = @"<StringValue>[\s\S]*?<\/StringValue>";
-
-            var rerex = new Regex(regexStr);
-
-            var elements = TestClass.Create();
-            var xmlstring = elements.SerializeObjectToXml();
-
-            Assert.IsTrue(rerex.IsMatch(xmlstring));
-        }
-
-        [Test]
-        [Obsolete("ConvertObjectToXmlString obsolete")]
-        public void ConvertObjectToXmlString_WithClass_ReturnsSuccess()
-        {
-            const string regexStr = @"<StringValue>[\s\S]*?<\/StringValue>";
-
-            var rerex = new Regex(regexStr);
-
-            var elements = TestClass.Create();
-            var xmlstring = elements.ConvertObjectToXmlString();
-
-            Assert.IsTrue(rerex.IsMatch(xmlstring));
-        }
-
-        [Test]
-        public void DeserializeXmlToObject_WithClass_ReturnsSuccess()
-        {
-            var elements = TestClass.Create();
-            var xmlstring = elements.SerializeObjectToXml();
-
-            var restClass = xmlstring.DeserializeXmlToObject<TestClass>();
-
-            Assert.AreEqual(elements.IntValue, restClass.IntValue);
-            CollectionAssert.AreEqual(elements.IntArray, restClass.IntArray);
-        }
+        restClass.IntValue.Should().Be(elements.IntValue);
+        restClass.IntArray.Should().BeEquivalentTo(elements.IntArray);
     }
 }

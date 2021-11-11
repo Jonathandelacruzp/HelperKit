@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HelperKit.Test.Interfaces
+﻿namespace HelperKit.Test.Interfaces
 {
     public interface IDateProvider
     {

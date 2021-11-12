@@ -1,33 +1,31 @@
 using HelperKit.Test.Models;
-using NUnit.Framework;
-using System.IO;
 using System.Xml.Serialization;
 
-namespace HelperKit.Test.Extensions
+namespace HelperKit.Test.Extensions;
+
+public class XmlExtensionUnitTest
 {
-    public class XmlExtensionUnitTest
+    [Fact]
+    public void SaveAsXmlExtension_SaveAValidFile()
     {
-        [Test]
-        public void SaveAsXmlExtension_SaveAValidFile()
-        {
-            const string filename = "testClassFile.xml";
-            var testClass = TestClass.Create();
+        const string filename = "testClassFile.xml";
+        var testClass = TestClass.Create();
 
-            File.Delete(filename);
+        File.Delete(filename);
 
-            testClass.SaveAsXml(filename);
-            var stream = new StreamReader(filename);
+        testClass.SaveAsXml(filename);
+        var stream = new StreamReader(filename);
 
-            Assert.IsNotNull(stream, "File exist");
+        stream.Should().NotBeNull();
 
-            var xmlSerializer = new XmlSerializer(typeof(TestClass));
-            var testClassFromXml = xmlSerializer.Deserialize(stream) as TestClass;
+        var xmlSerializer = new XmlSerializer(typeof(TestClass));
+        var testClassFromXml = xmlSerializer.Deserialize(stream) as TestClass;
 
-            CollectionAssert.AreEqual(testClassFromXml?.IntArray, testClass.IntArray);
-            CollectionAssert.AreEqual(testClassFromXml?.IntList, testClass.IntList);
-            Assert.AreEqual(testClassFromXml?.BooleanValue, testClass.BooleanValue);
-            Assert.AreEqual(testClassFromXml?.IntValue, testClass.IntValue);
-            Assert.AreEqual(testClassFromXml?.StringValue, testClass.StringValue);
-        }
+        testClassFromXml.Should().NotBeNull();
+        testClassFromXml.IntArray.Should().BeEquivalentTo(testClass.IntArray);
+        testClassFromXml.IntList.Should().BeEquivalentTo(testClass.IntList);
+        testClassFromXml.BooleanValue.Should().Be(testClass.BooleanValue);
+        testClassFromXml.IntValue.Should().Be(testClass.IntValue);
+        testClassFromXml.StringValue.Should().BeEquivalentTo(testClass.StringValue);
     }
 }

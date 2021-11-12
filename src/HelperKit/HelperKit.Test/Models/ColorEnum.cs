@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HelperKit.Test.Models
+﻿namespace HelperKit.Test.Models
 {
     [Flags]
     internal enum Color

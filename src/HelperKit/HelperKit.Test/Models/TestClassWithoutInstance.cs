@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace HelperKit.Test.Models
+﻿namespace HelperKit.Test.Models
 {
     public class TestClassWithoutInstance
     {
@@ -11,14 +7,6 @@ namespace HelperKit.Test.Models
         public bool BooleanValue;
         public int[] IntArray;
         public IEnumerable<int> IntList;
-
-        public static IEnumerable<TestClassWithoutInstance> CreateElements(int number)
-        {
-            var testClassList = new List<TestClassWithoutInstance>();
-            for (var i = 0; i < number; i++) testClassList.Add(Create());
-
-            return testClassList;
-        }
 
         public static TestClassWithoutInstance Create()
         {

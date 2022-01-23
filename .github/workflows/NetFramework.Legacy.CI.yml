@@ -17,18 +17,26 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        dotnet-version: '6.0.x'
-        include-prerelease: true
+        fetch-depth: 0
     
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+      
     - name: Setup Nuget.exe
       uses: nuget/setup-nuget@v1
       with:
         nuget-version: '5.x'
+        
     - name: Restore packages
       run: nuget restore src/HelperKit/HelperKit.sln
+      
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
+      
     - name: Build with MSBuild
       run: msbuild src/HelperKit/HelperKit.sln -p:Configuration=Release
+      
     - name: dotnet test
       run: dotnet test src/HelperKit/HelperKit.sln --no-restore --verbosity normal

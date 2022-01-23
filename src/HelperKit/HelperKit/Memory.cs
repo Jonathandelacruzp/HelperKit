@@ -7,8 +7,8 @@ public static partial class Extensions
     /// </summary>
     /// <param name="stream"></param>
     /// <returns></returns>
-    /// <exception cref="ArgumentException"></exception>
-    public static byte[] ToBytes(this Stream stream)
+    /// <exception cref="ArgumentNullException"></exception>
+    public static ReadOnlyMemory<byte> ToBytes(this Stream stream)
     {
         _ = stream ?? throw new ArgumentNullException(nameof(stream));
 

@@ -35,6 +35,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="System.Memory" Version="4.5.4" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Compile Update="Memory.cs">
 			<DependentUpon>Extensions.cs</DependentUpon>
 		</Compile>

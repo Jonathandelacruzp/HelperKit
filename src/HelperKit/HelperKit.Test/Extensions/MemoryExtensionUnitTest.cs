@@ -9,7 +9,7 @@ public class MemoryExtensionUnitTest
         var stream = new StreamReader(solutionDir + "\\Files\\text2.txt");
 
         var result = stream.BaseStream.ToBytes();
-        result.Should().AllBeOfType<byte>();
+        result.Should().BeOfType<byte>();
         result.Should().NotBeNull();
     }
 

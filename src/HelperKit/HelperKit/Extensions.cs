@@ -96,7 +96,7 @@ public static partial class Extensions
 
     public static bool TryGetResult<T>(this IDataResponse<T> value, out T result)
     {
-        if (value.Result == null)
+        if (value.Result is null)
         {
             result = default;
             return false;

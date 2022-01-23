@@ -29,9 +29,11 @@ public static partial class Extensions
     /// <param name="value"></param>
     /// <param name="def"></param>
     /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public static string ReplaceNonBreakingSpace(this string value, string def = " ")
     {
-        var nbsp = System.Convert.ToChar(160).ToString();
+        _ = value ?? throw new ArgumentNullException(nameof(value));
+        var nbsp = Convert.ToChar(160).ToString();
         return value.Replace(nbsp, def);
     }
 

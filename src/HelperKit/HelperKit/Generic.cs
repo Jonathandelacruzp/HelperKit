@@ -29,7 +29,7 @@ public static partial class Extensions
     public static IDictionary<int, string> EnumNamedValues<T>() where T : Enum
     {
         var values = Enum.GetValues(typeof(T));
-        return values.Cast<int>().ToDictionary(item => item, item => Enum.GetName(typeof(T), item));
+        return values.Cast<int>().ToDictionary(x => x, x => Enum.GetName(typeof(T), x));
     }
 
     #endregion
@@ -78,7 +78,7 @@ public static partial class Extensions
         {
             var propertyValue = propertyDescriptor.GetValue(value)?.ToString();
             if (propertyValue != null)
-                nameValueCollection.Add(propertyDescriptor.Name, (string)propertyValue);
+                nameValueCollection.Add(propertyDescriptor.Name, propertyValue);
         }
 
         return nameValueCollection;

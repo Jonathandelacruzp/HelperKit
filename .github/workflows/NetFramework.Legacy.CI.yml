@@ -24,6 +24,9 @@ jobs:
       with:
         dotnet-version: 6.0.x
       
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.1.1
+      
     - name: Setup Nuget.exe
       uses: nuget/setup-nuget@v1
       with:
@@ -32,11 +35,11 @@ jobs:
     - name: Restore packages
       run: nuget restore src/HelperKit/HelperKit.sln
       
-    - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
-      
     - name: Build with MSBuild
       run: msbuild src/HelperKit/HelperKit.sln -p:Configuration=Release
+      
+    - name: Build
+      run: dotnet build src/HelperKit/HelperKit.sln --no-restore -c Release
       
     - name: dotnet test
       run: dotnet test src/HelperKit/HelperKit.sln --no-restore --verbosity normal

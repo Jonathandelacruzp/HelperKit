@@ -3,9 +3,8 @@
 /// <summary>
 /// Defines the structure of a time provider, Makes easier the unit testing and value mock
 /// </summary>
-public interface ITimeProvider
+public interface IDateTimeProvider
 {
-    public string Id { get; }
     public DateTime Now { get; }
     public TimeZoneInfo TimeZoneInfo { get; }
 }

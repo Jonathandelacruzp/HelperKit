@@ -1,7 +1,6 @@
-﻿namespace HelperKit.Test.Interfaces
+﻿namespace HelperKit.Test.Interfaces;
+
+public interface IDateProvider
 {
-    public interface IDateProvider
-    {
-        DateTime Now { get; }
-    }
+    DateTime Now { get; }
 }

@@ -1,11 +1,10 @@
-﻿namespace HelperKit.Test.Models
+﻿namespace HelperKit.Test.Models;
+
+[Flags]
+internal enum Color
 {
-    [Flags]
-    internal enum Color
-    {
-        Red,
-        Blue,
-        Green,
-        Yellow
-    }
+    Red,
+    Blue,
+    Green,
+    Yellow
 }

@@ -51,7 +51,7 @@
 		<Compile Update="Int.cs">
 			<DependentUpon>Extensions.cs</DependentUpon>
 		</Compile>
-		<Compile Update="TimeProvider.cs">
+		<Compile Update="DateTimeProvider.cs">
 			<DependentUpon>Extensions.cs</DependentUpon>
 		</Compile>
 		<Compile Update="Boolean.cs">

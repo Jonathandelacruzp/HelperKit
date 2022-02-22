@@ -5,9 +5,9 @@ namespace HelperKit.Test.Extensions;
 public class DateTimeExtensionsUnitTest
 {
     internal const int Hours = 14;
-    private readonly ITimeProvider _utcTimeProvider = new UtcTimeProvider();
-    private readonly ITimeProvider _localTimeProvider = new LocalTimeProvider();
-    private readonly ITimeProvider _customTimeProvider = new CustomTimeProvider();
+    private readonly IDateTimeProvider _utcTimeProvider = new UtcDateTimeProvider();
+    private readonly IDateTimeProvider _localTimeProvider = new LocalDateTimeProvider();
+    private readonly IDateTimeProvider _customTimeProvider = DateTimeProvider.Factory.Create("Custom Provider", TimeSpan.FromHours(Hours));
 
     [Fact]
     public void VerifyToDateTimeExtension_ReturnsCorrectValue()
@@ -107,8 +107,39 @@ public class DateTimeExtensionsUnitTest
     [Fact]
     public void GetSystemTimeProviders()
     {
-        var items = TimeProvider.GetSystemTimeProviders();
+        var items = DateTimeProvider.GetSystemDateTimeProviders();
 
         items.Should().NotBeEmpty();
+    }
+
+    [Fact]
+    public void Create_FromGetSystemTimeProviders()
+    {
+        var items = DateTimeProvider.GetSystemDateTimeProviders();
+
+        _ = items.TryGetValue("Central Standard Time", out var dateTimeProvider);
+
+        var dateNow = dateTimeProvider.Now;
+
+        dateNow.Should().NotBe(DateTime.MinValue);
+    }
+
+    [Fact]
+    public void CurrentDateOffset_ChangesTimes()
+    {
+        var dateTimeProviderCentral = DateTimeProvider.Factory.Create("Central Standard Time");
+        var dateTimeProviderPeru = DateTimeProvider.Factory.Create("SA Pacific Standard Time");
+
+        var customTimeProvider = new CustomDateTimeProvider(new DateTime(2022, 02, 20), dateTimeProviderPeru.TimeZoneInfo);
+
+        var dateCentral = customTimeProvider.ConvertTime(dateTimeProviderCentral);
+        var datePeru = customTimeProvider.ConvertTime(dateTimeProviderPeru);
+
+        var difference = dateTimeProviderPeru.TimeZoneInfo.BaseUtcOffset - dateTimeProviderCentral.TimeZoneInfo.BaseUtcOffset;
+
+        var dateNow = dateTimeProviderCentral.Now;
+
+        dateNow.Should().NotBe(DateTime.MinValue);
+        difference.Should().Be(datePeru - dateCentral);
     }
 }

@@ -22,6 +22,15 @@ public class StringExtensionUnitTest
 
         result.Should().Be("Je veux  aller à Saint-Étienne");
     }
+    
+    [Fact]
+    public void DeleteDotAndComaOpt_DeleteThen()
+    {
+        const string stringWithDotsAndComma = "Je veux ,,, aller à Saint-Étienne...";
+        var result = stringWithDotsAndComma.AsSpan().DeleteDotAndCommaOpt();
+
+        result.Should().Be("Je veux  aller à Saint-Étienne");
+    }
 
     [Fact]
     public void DeleteSlashes_DeleteThen()

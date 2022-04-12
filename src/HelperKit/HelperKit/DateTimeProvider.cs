@@ -37,8 +37,8 @@ public sealed class DateTimeProvider : IDateTimeProvider
 
     public static class Factory
     {
-        public static IDateTimeProvider Create(TimeZoneInfo timeZoneInfo)
-        => new DateTimeProvider(timeZoneInfo);
+        public static IDateTimeProvider Create(TimeZoneInfo timeZoneInfo) 
+            => new DateTimeProvider(timeZoneInfo);
 
         public static IDateTimeProvider Create(string id, TimeSpan baseUtcOffset, string standardName = null, string displayStandardName = null)
             => new DateTimeProvider(TimeZoneInfo.CreateCustomTimeZone(id, baseUtcOffset, standardName ?? id, displayStandardName ?? standardName ?? id));
@@ -46,10 +46,10 @@ public sealed class DateTimeProvider : IDateTimeProvider
         public static IDateTimeProvider Create(string timeZoneId)
             => SystemDateTimeProviders.TryGetValue(timeZoneId, out var value)
                 ? value
-                : throw new Exception($"The value is provided in not valid timeZoneId: {timeZoneId}");
+                : throw new Exception($"The value provided is not a valid timeZoneId: {timeZoneId}");
     }
 
-    private static readonly ReadOnlyDictionary<string, IDateTimeProvider> SystemDateTimeProviders = new(TimeZoneInfo.GetSystemTimeZones().ToDictionary<TimeZoneInfo, string, IDateTimeProvider>(x => x.Id, x => new DateTimeProvider(x)));
+    private static readonly ReadOnlyDictionary<string, IDateTimeProvider> SystemDateTimeProviders = new(TimeZoneInfo.GetSystemTimeZones().ToDictionary<TimeZoneInfo, string, IDateTimeProvider>(t => t.Id, t => new DateTimeProvider(t)));
 
     public static IDictionary<string, IDateTimeProvider> GetSystemDateTimeProviders() => SystemDateTimeProviders;
 }

@@ -6,7 +6,7 @@ public class MemoryExtensionUnitTest
     public void MemoryExtension_ReturnTrue()
     {
         var solutionDir = Directory.GetCurrentDirectory();
-        var stream = new StreamReader(solutionDir + "\\Files\\text2.txt");
+        var stream = new StreamReader(solutionDir + "/Files/text2.txt");
 
         var result = stream.BaseStream.ToBytes();
         result.Should().BeOfType<ReadOnlyMemory<byte>>();

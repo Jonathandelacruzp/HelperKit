@@ -56,6 +56,33 @@ public static partial class Extensions
     {
         return value?.Replace(".", string.Empty).Replace(",", string.Empty);
     }
+    
+    public static string DeleteDotAndCommaOpt(this ReadOnlySpan<char> value)
+    {
+        try
+        {
+            const char dot = '.';
+            const char comma = ',';
+            Span<char> result = stackalloc char[value.Length];
+            var j = 0;
+
+            for (var i = 0; i < value.Length; i++)
+            { 
+                if (value[i] is dot or comma)
+                    continue;
+                
+                result[j] = value[i];
+                j++;
+            }
+
+            return result.Slice(0,j).ToString();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
 
     /// <summary>
     /// Replace all the values set it on param with a empty string
@@ -83,19 +110,6 @@ public static partial class Extensions
         return (value ?? def).ToString();
     }
 
-    ///// <summary>
-    /////Converts o string UTF
-    ///// </summary>
-    ///// <param name="val"></param>
-    ///// <returns></returns>
-    //public static string ToStringUtf8(this string val)
-    //{
-    //    return Encoding.UTF8.GetString(Encoding.GetEncoding(1252).GetBytes(val ?? string.Empty));
-    //}
-
-    //public static string ToStringJavaScript(this string val) => HttpUtility.JavaScriptStringEncode(val ?? string.Empty);
-
     #endregion
 
-    //public static string ToJson(this object value) => JsonConvert.SerializeObject(value, Formatting.Indented, new JsonSerializerSettings() { PreserveReferencesHandling = PreserveReferencesHandling.None, ReferenceLoopHandling = ReferenceLoopHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Reuse });
 }

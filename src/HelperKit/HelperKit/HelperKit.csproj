@@ -63,6 +63,9 @@
 		<Compile Update="Decimal.cs">
 			<DependentUpon>Extensions.cs</DependentUpon>
 		</Compile>
+		<Compile Update="Extensions.Obsolete.cs">
+		  <DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 </Project>

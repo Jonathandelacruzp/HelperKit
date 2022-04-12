@@ -1,10 +1,11 @@
 ﻿using HelperKit.Test.Models;
+using TimeZoneConverter;
 
 namespace HelperKit.Test.Extensions;
 
 public class DateTimeExtensionsUnitTest
 {
-    internal const int Hours = 14;
+    private const int Hours = 14;
     private readonly IDateTimeProvider _utcTimeProvider = new UtcDateTimeProvider();
     private readonly IDateTimeProvider _localTimeProvider = new LocalDateTimeProvider();
     private readonly IDateTimeProvider _customTimeProvider = DateTimeProvider.Factory.Create("Custom Provider", TimeSpan.FromHours(Hours));
@@ -52,7 +53,7 @@ public class DateTimeExtensionsUnitTest
         var resultHour = new DateTime(Math.Abs(ticksResult)).Hour + (ticksResult > 0 ? 1 : 0);
         // + 1 because the ticks on the provider keeps advancing and is close to the time difference
 
-        resultHour.Should().Be((int)hours);
+        resultHour.Should().Be((int) hours);
     }
 
     [Fact]
@@ -66,7 +67,7 @@ public class DateTimeExtensionsUnitTest
         var hourDifference = Math.Abs(timeOffsetBetweenProviders.TotalHours);
         var hoursDifferenceResult = Math.Abs(inputDateTime.Hour - convertedDateTime.Hour);
 
-        hoursDifferenceResult.Should().Be((int)hourDifference);
+        hoursDifferenceResult.Should().Be((int) hourDifference);
     }
 
     [Fact]
@@ -84,7 +85,7 @@ public class DateTimeExtensionsUnitTest
     [Fact]
     public void VerifyFirstDateOfWeek_ReturnsCorrectValue()
     {
-        var expected = DateTime.Parse("2021-01-03"); //Fisrt sunday and second week of the year
+        var expected = DateTime.Parse("2021-01-03"); //First sunday and second week of the year
         var inputDateTime = new DateTime(2021, 1, 1);
 
         var date = inputDateTime.FirstDateOfWeek(2);
@@ -116,10 +117,11 @@ public class DateTimeExtensionsUnitTest
     public void Create_FromGetSystemTimeProviders()
     {
         var items = DateTimeProvider.GetSystemDateTimeProviders();
-
-        _ = items.TryGetValue("Central Standard Time", out var dateTimeProvider);
-
-        var dateNow = dateTimeProvider.Now;
+        var timeZone = TZConvert.GetTimeZoneInfo("Central Standard Time");
+        
+        var dateNow = items.TryGetValue(timeZone.Id, out var dateTimeProvider) 
+            ? dateTimeProvider.Now 
+            : DateTime.MinValue;
 
         dateNow.Should().NotBe(DateTime.MinValue);
     }
@@ -127,8 +129,11 @@ public class DateTimeExtensionsUnitTest
     [Fact]
     public void CurrentDateOffset_ChangesTimes()
     {
-        var dateTimeProviderCentral = DateTimeProvider.Factory.Create("Central Standard Time");
-        var dateTimeProviderPeru = DateTimeProvider.Factory.Create("SA Pacific Standard Time");
+        var timeZoneCst = TZConvert.GetTimeZoneInfo("Central Standard Time");
+        var timeZoneSaPst = TZConvert.GetTimeZoneInfo("SA Pacific Standard Time");
+
+        var dateTimeProviderCentral = DateTimeProvider.Factory.Create(timeZoneCst);
+        var dateTimeProviderPeru = DateTimeProvider.Factory.Create(timeZoneSaPst);
 
         var customTimeProvider = new CustomDateTimeProvider(new DateTime(2022, 02, 20), dateTimeProviderPeru.TimeZoneInfo);
 

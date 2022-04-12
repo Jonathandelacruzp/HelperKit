@@ -53,19 +53,6 @@ public static partial class Extensions
         return IsContainedIn(value, param as IEnumerable<T>);
     }
 
-    /// <summary>
-    /// Validates if at least one item exist on other collection
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="value"></param>
-    /// <param name="param"></param>
-    /// <returns></returns>
-    [Obsolete("Use IsContainedIn intead")]
-    public static bool IsContainedOn<T>(this T value, params T[] param)
-    {
-        return IsContainedIn(value, param as IEnumerable<T>);
-    }
-
     #endregion
 
     /// <summary>

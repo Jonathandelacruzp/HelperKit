@@ -2,6 +2,11 @@
 
 public static partial class Extensions
 {
+    private const char Slash = '/';
+    private const char BackSlash = '\\';
+    private const char Dot = '.';
+    private const char Comma = ',';
+    
     #region String
 
     /// <summary>
@@ -54,14 +59,12 @@ public static partial class Extensions
     /// <returns></returns>
     public static string DeleteSlashAndBackslash(this ReadOnlySpan<char> value)
     {
-        const char slash = '/';
-        const char backSlash = '\\';
         Span<char> result = stackalloc char[value.Length];
         var j = 0;
 
         for (var i = 0; i < value.Length; i++)
         {
-            if (value[i] is slash or backSlash)
+            if (value[i] is Slash or BackSlash)
                 continue;
 
             result[j] = value[i];
@@ -88,14 +91,12 @@ public static partial class Extensions
     /// <returns></returns>
     public static string DeleteDotAndComma(this ReadOnlySpan<char> value)
     {
-        const char dot = '.';
-        const char comma = ',';
         Span<char> result = stackalloc char[value.Length];
         var j = 0;
 
         for (var i = 0; i < value.Length; i++)
         {
-            if (value[i] is dot or comma)
+            if (value[i] is Dot or Comma)
                 continue;
 
             result[j] = value[i];

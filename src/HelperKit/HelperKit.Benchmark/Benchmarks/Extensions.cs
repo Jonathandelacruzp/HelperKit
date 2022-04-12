@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using BenchmarkDotNet.Attributes;
 
 namespace HelperKit.Benchmark.Benchmarks;
@@ -5,18 +6,38 @@ namespace HelperKit.Benchmark.Benchmarks;
 [MemoryDiagnoser]
 public class Extensions
 {
-    private const string Text =
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+    private readonly string _textSlash;
+    private readonly string _text;
 
-    [Benchmark]
-    public void Helperkit()
+    public Extensions()
     {
-        var text = Text.DeleteDotAndComma();
+        _text =
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
+        
+         _textSlash = @"Je veux /// aller \ Saint-Etienne...";
     }
 
     [Benchmark]
-    public void Span()
+    public void DeleteDotAndComma()
     {
-        var text = Text.AsSpan().DeleteDotAndCommaOpt();
+        var text = _text.DeleteDotAndComma();
+    }
+
+    [Benchmark]
+    public void SpanDeleteDotAndComma()
+    {
+        var text = _text.AsSpan().DeleteDotAndComma();
+    }
+
+    [Benchmark]
+    public void DeleteSlashAndBackslash()
+    {
+        var text = _textSlash.DeleteSlashAndBackslash();
+    }
+
+    [Benchmark]
+    public void SpanDeleteSlashAndBackslash()
+    {
+        var text = _textSlash.AsSpan().DeleteSlashAndBackslash();
     }
 }

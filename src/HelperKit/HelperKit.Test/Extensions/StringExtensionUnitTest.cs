@@ -27,7 +27,7 @@ public class StringExtensionUnitTest
     public void DeleteDotAndComaOpt_DeleteThen()
     {
         const string stringWithDotsAndComma = "Je veux ,,, aller à Saint-Étienne...";
-        var result = stringWithDotsAndComma.AsSpan().DeleteDotAndCommaOpt();
+        var result = stringWithDotsAndComma.AsSpan().DeleteDotAndComma();
 
         result.Should().Be("Je veux  aller à Saint-Étienne");
     }
@@ -37,6 +37,15 @@ public class StringExtensionUnitTest
     {
         const string stringWithDotsAndComma = @"Je veux /// aller \ Saint-Etienne...";
         var result = stringWithDotsAndComma.DeleteSlashAndBackslash();
+
+        result.Should().Be("Je veux  aller  Saint-Etienne...");
+    }
+    
+    [Fact]
+    public void DeleteSlashesOpt_DeleteThen()
+    {
+        const string stringWithDotsAndComma = @"Je veux /// aller \ Saint-Etienne...";
+        var result = stringWithDotsAndComma.AsSpan().DeleteSlashAndBackslash();
 
         result.Should().Be("Je veux  aller  Saint-Etienne...");
     }

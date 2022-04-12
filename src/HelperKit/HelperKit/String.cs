@@ -46,6 +46,30 @@ public static partial class Extensions
     {
         return value?.Replace("/", string.Empty).Replace(@"\", string.Empty);
     }
+    
+    /// <summary>
+    /// Deletes all slash / y backslash \ from string
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static string DeleteSlashAndBackslash(this ReadOnlySpan<char> value)
+    {
+        const char slash = '/';
+        const char backSlash = '\\';
+        Span<char> result = stackalloc char[value.Length];
+        var j = 0;
+
+        for (var i = 0; i < value.Length; i++)
+        {
+            if (value[i] is slash or backSlash)
+                continue;
+
+            result[j] = value[i];
+            j++;
+        }
+
+        return result.Slice(0, j).ToString();
+    }
 
     /// <summary>
     /// Deletes all dot and commas of a string
@@ -56,32 +80,29 @@ public static partial class Extensions
     {
         return value?.Replace(".", string.Empty).Replace(",", string.Empty);
     }
-    
-    public static string DeleteDotAndCommaOpt(this ReadOnlySpan<char> value)
+
+    /// <summary>
+    /// Deletes all dot and commas of a string
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static string DeleteDotAndComma(this ReadOnlySpan<char> value)
     {
-        try
-        {
-            const char dot = '.';
-            const char comma = ',';
-            Span<char> result = stackalloc char[value.Length];
-            var j = 0;
+        const char dot = '.';
+        const char comma = ',';
+        Span<char> result = stackalloc char[value.Length];
+        var j = 0;
 
-            for (var i = 0; i < value.Length; i++)
-            { 
-                if (value[i] is dot or comma)
-                    continue;
-                
-                result[j] = value[i];
-                j++;
-            }
-
-            return result.Slice(0,j).ToString();
-        }
-        catch (Exception e)
+        for (var i = 0; i < value.Length; i++)
         {
-            Console.WriteLine(e);
-            throw;
+            if (value[i] is dot or comma)
+                continue;
+
+            result[j] = value[i];
+            j++;
         }
+
+        return result.Slice(0, j).ToString();
     }
 
     /// <summary>
@@ -111,5 +132,4 @@ public static partial class Extensions
     }
 
     #endregion
-
 }

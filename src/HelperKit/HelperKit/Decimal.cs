@@ -7,12 +7,12 @@ public static partial class Extensions
     /// <summary>
     /// Converts a value to decimal
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="s"></param>
     /// <param name="def"></param>
     /// <returns>Decimal</returns>
-    public static decimal ToDecimal(this object value, decimal def = 0)
+    public static decimal ToDecimal(this object s, decimal def = 0)
     {
-        return decimal.TryParse(value?.ToString(), out var result) ? result : def;
+        return decimal.TryParse(s?.ToString(), out var result) ? result : def;
     }
 
     #endregion
@@ -22,12 +22,12 @@ public static partial class Extensions
     /// <summary>
     /// Converts a value to double
     /// </summary>
-    /// <param name="value">Decimal</param>
+    /// <param name="s">Decimal</param>
     /// <param name="def"></param>
     /// <returns>long</returns>
-    public static double ToDouble(this object value, long def = 0)
+    public static double ToDouble(this object s, long def = 0)
     {
-        return double.TryParse(value?.ToString(), out var result) ? result : def;
+        return double.TryParse(s?.ToString(), out var result) ? result : def;
     }
 
     #endregion
@@ -37,12 +37,12 @@ public static partial class Extensions
     /// <summary>
     /// Converts a value to long
     /// </summary>
-    /// <param name="value">Decimal</param>
+    /// <param name="s">Decimal</param>
     /// <param name="def"></param>
     /// <returns>long</returns>
-    public static long ToLong(this object value, long def = 0)
+    public static long ToLong(this object s, long def = 0)
     {
-        return long.TryParse(value?.ToString(), out var result) ? result : def;
+        return long.TryParse(s?.ToString(), out var result) ? result : def;
     }
 
     #endregion

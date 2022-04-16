@@ -22,7 +22,7 @@ public class StringExtensionUnitTest
 
         result.Should().Be("Je veux  aller à Saint-Étienne");
     }
-    
+
     [Fact]
     public void DeleteDotAndComaOpt_DeleteThen()
     {
@@ -40,7 +40,7 @@ public class StringExtensionUnitTest
 
         result.Should().Be("Je veux  aller  Saint-Etienne...");
     }
-    
+
     [Fact]
     public void DeleteSlashesOpt_DeleteThen()
     {

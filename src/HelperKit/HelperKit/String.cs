@@ -6,7 +6,9 @@ public static partial class Extensions
     private const char BackSlash = '\\';
     private const char Dot = '.';
     private const char Comma = ',';
-    
+    private const string Nbsp = @"\u00A0";
+    private const int MaxStackLimit = 1024;
+
     #region String
 
     /// <summary>
@@ -18,8 +20,9 @@ public static partial class Extensions
     {
         var normalizedString = value.Normalize(NormalizationForm.FormD);
         var strBuilder = new StringBuilder();
-        foreach (var character in normalizedString)
+        for (var i = 0; i < normalizedString.Length; i++)
         {
+            var character = normalizedString[i];
             var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
             if (unicodeCategory != UnicodeCategory.NonSpacingMark)
                 strBuilder.Append(character);
@@ -38,8 +41,7 @@ public static partial class Extensions
     public static string ReplaceNonBreakingSpace(this string value, string def = " ")
     {
         _ = value ?? throw new ArgumentNullException(nameof(value));
-        var nbsp = Convert.ToChar(160).ToString();
-        return value.Replace(nbsp, def);
+        return value.Replace(Nbsp, def);
     }
 
     /// <summary>
@@ -51,7 +53,7 @@ public static partial class Extensions
     {
         return value?.Replace("/", string.Empty).Replace(@"\", string.Empty);
     }
-    
+
     /// <summary>
     /// Deletes all slash / y backslash \ from string
     /// </summary>
@@ -59,10 +61,13 @@ public static partial class Extensions
     /// <returns></returns>
     public static string DeleteSlashAndBackslash(this ReadOnlySpan<char> value)
     {
-        Span<char> result = stackalloc char[value.Length];
+        var length = value.Length;
+        var result = length <= MaxStackLimit
+            ? stackalloc char[length]
+            : new char[length];
         var j = 0;
 
-        for (var i = 0; i < value.Length; i++)
+        for (var i = 0; i < length; i++)
         {
             if (value[i] is Slash or BackSlash)
                 continue;
@@ -91,10 +96,13 @@ public static partial class Extensions
     /// <returns></returns>
     public static string DeleteDotAndComma(this ReadOnlySpan<char> value)
     {
-        Span<char> result = stackalloc char[value.Length];
+        var length = value.Length;
+        var result = length <= MaxStackLimit
+            ? stackalloc char[length]
+            : new char[length];
         var j = 0;
 
-        for (var i = 0; i < value.Length; i++)
+        for (var i = 0; i < length; i++)
         {
             if (value[i] is Dot or Comma)
                 continue;

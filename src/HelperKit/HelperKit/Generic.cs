@@ -74,11 +74,11 @@ public static partial class Extensions
     public static NameValueCollection ToNameValueCollection<T>(this T value) where T : class
     {
         var nameValueCollection = new NameValueCollection();
-        foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(value))
+        foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(value))
         {
-            var propertyValue = propertyDescriptor.GetValue(value)?.ToString();
+            var propertyValue = prop.GetValue(value)?.ToString();
             if (propertyValue != null)
-                nameValueCollection.Add(propertyDescriptor.Name, propertyValue);
+                nameValueCollection.Add(prop.Name, propertyValue);
         }
 
         return nameValueCollection;
@@ -90,17 +90,17 @@ public static partial class Extensions
     /// <typeparam name="T"></typeparam>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static ICollection<KeyValuePair<string, string>> ToKeyValuePair<T>(this T value) where T : class
+    public static IList<KeyValuePair<string, string>> ToKeyValuePair<T>(this T value) where T : class
     {
-        var keyPair = new List<KeyValuePair<string, string>>();
-        foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(value))
+        var keyPairs = new List<KeyValuePair<string, string>>();
+        foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(value))
         {
-            var objValue = propertyDescriptor.GetValue(value)?.ToString();
+            var objValue = prop.GetValue(value)?.ToString();
             if (objValue != null)
-                keyPair.Add(new KeyValuePair<string, string>(propertyDescriptor.Name, objValue));
+                keyPairs.Add(new KeyValuePair<string, string>(prop.Name, objValue));
         }
 
-        return keyPair;
+        return keyPairs;
     }
 
     /// <summary>
@@ -114,19 +114,6 @@ public static partial class Extensions
             .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
             .Where(x => x.CanRead || x.CanWrite)
             .ToDictionary(x => x.Name, x => x.GetValue(value, null));
-    }
-
-    /// <summary>
-    /// Converts an Object to Datatable
-    /// </summary>
-    /// <param name="result"></param>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    public static DataTable ToDataTable<T>(this object result)
-    {
-        return result is IEnumerable results
-            ? results.ToDataTable<T>()
-            : new[] { result }.ToDataTable<T>();
     }
 
     /// <summary>
@@ -215,8 +202,8 @@ public static partial class Extensions
         foreach (var propertyInfo in propertyInfos.Where(x => x.CanRead))
         {
             strBuilder.Append('<').Append(propertyInfo.Name).Append('>')
-               .Append(propertyInfo.GetValue(value, null)?.ToString() ?? string.Empty)
-               .Append("</").Append(propertyInfo.Name).Append('>');
+                .Append(propertyInfo.GetValue(value, null)?.ToString() ?? string.Empty)
+                .Append("</").Append(propertyInfo.Name).Append('>');
         }
 
         strBuilder.Append("</").Append(typeName).Append('>');

@@ -14,7 +14,7 @@ public static partial class Extensions
     {
         return IsContainedIn(value, param as IEnumerable<T>);
     }
-    
+
     #region String
 
     ///  <summary>
@@ -29,10 +29,10 @@ public static partial class Extensions
         _ = val ?? throw new ArgumentNullException(nameof(val));
         return Encoding.UTF8.GetString(Encoding.GetEncoding(1252).GetBytes(val));
     }
-     
+
     //[Obsolete]
     //public static string ToStringJavaScript(this string val) => HttpUtility.JavaScriptStringEncode(val ?? string.Empty);
-    
+
     //public static string ToJson(this object value)
     //  => JsonConvert.SerializeObject(value, Formatting.Indented, new JsonSerializerSettings() { PreserveReferencesHandling = PreserveReferencesHandling.None, ReferenceLoopHandling = ReferenceLoopHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Reuse });
 

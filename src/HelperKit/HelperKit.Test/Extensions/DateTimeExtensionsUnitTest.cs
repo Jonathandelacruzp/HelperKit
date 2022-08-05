@@ -1,5 +1,4 @@
-﻿using HelperKit.Test.Models;
-using TimeZoneConverter;
+﻿using TimeZoneConverter;
 
 namespace HelperKit.Test.Extensions;
 
@@ -53,7 +52,7 @@ public class DateTimeExtensionsUnitTest
         var resultHour = new DateTime(Math.Abs(ticksResult)).Hour + (ticksResult > 0 ? 1 : 0);
         // + 1 because the ticks on the provider keeps advancing and is close to the time difference
 
-        resultHour.Should().Be((int) hours);
+        resultHour.Should().Be((int)hours);
     }
 
     [Fact]
@@ -67,7 +66,7 @@ public class DateTimeExtensionsUnitTest
         var hourDifference = Math.Abs(timeOffsetBetweenProviders.TotalHours);
         var hoursDifferenceResult = Math.Abs(inputDateTime.Hour - convertedDateTime.Hour);
 
-        hoursDifferenceResult.Should().Be((int) hourDifference);
+        hoursDifferenceResult.Should().Be((int)hourDifference);
     }
 
     [Fact]
@@ -106,7 +105,15 @@ public class DateTimeExtensionsUnitTest
     }
 
     [Fact]
-    public void GetSystemTimeProviders()
+    public void GetSystemTimeProviders_1()
+    {
+        var items = DateTimeProvider.GetSystemDateTimeProviders();
+
+        items.Should().NotBeEmpty();
+    }
+
+    [Fact]
+    public void GetSystemTimeProviders_2()
     {
         var items = DateTimeProvider.GetSystemDateTimeProviders();
 
@@ -118,9 +125,9 @@ public class DateTimeExtensionsUnitTest
     {
         var items = DateTimeProvider.GetSystemDateTimeProviders();
         var timeZone = TZConvert.GetTimeZoneInfo("Central Standard Time");
-        
-        var dateNow = items.TryGetValue(timeZone.Id, out var dateTimeProvider) 
-            ? dateTimeProvider.Now 
+
+        var dateNow = items.TryGetValue(timeZone.Id, out var dateTimeProvider)
+            ? dateTimeProvider.Now
             : DateTime.MinValue;
 
         dateNow.Should().NotBe(DateTime.MinValue);

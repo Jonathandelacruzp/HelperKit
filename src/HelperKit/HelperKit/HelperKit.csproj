@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
+		<TargetFrameworks>netstandard2.1;net462</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -35,7 +35,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="System.Memory" Version="4.5.4" />
+		<PackageReference Include="System.Memory" Version="4.5.5" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -64,7 +64,10 @@
 			<DependentUpon>Extensions.cs</DependentUpon>
 		</Compile>
 		<Compile Update="Extensions.Obsolete.cs">
-		  <DependentUpon>Extensions.cs</DependentUpon>
+			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Task.cs">
+			<DependentUpon>Extensions.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
 

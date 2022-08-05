@@ -47,3 +47,26 @@ public class EmptyTestClass
         return new EmptyTestClass();
     }
 }
+
+public class TestClassClone
+{
+    public string Text { get; set; }
+    public string PublicText { get { return Text ?? string.Empty; } }
+    public EmptyTestClassSerializableClone EmptyTestClassSerializableClone { get; set; }
+
+    public static TestClassClone Create(string text = null)
+    {
+        return new TestClassClone { Text = text, EmptyTestClassSerializableClone = EmptyTestClassSerializableClone.Create("D:") };
+    }
+}
+
+[Serializable]
+public class EmptyTestClassSerializableClone
+{
+    public string Text { get; set; }
+
+    public static EmptyTestClassSerializableClone Create(string text = null)
+    {
+        return new EmptyTestClassSerializableClone { Text = text };
+    }
+}

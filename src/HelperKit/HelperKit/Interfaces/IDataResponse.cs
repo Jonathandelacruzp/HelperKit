@@ -1,13 +1,13 @@
 ﻿namespace HelperKit.Interfaces;
 
-public interface IDataResponse
+public interface IResult
 {
     string StatusCode { get; set; }
     string Message { get; set; }
     string Detail { get; set; }
 }
 
-public interface IDataResponse<T> : IDataResponse
+public interface IResult<T> : IResult
 {
-    T Result { get; set; }
+    T Value { get; set; }
 }

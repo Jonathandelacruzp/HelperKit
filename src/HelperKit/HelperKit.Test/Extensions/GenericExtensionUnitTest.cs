@@ -1,5 +1,3 @@
-using HelperKit.Test.Models;
-
 namespace HelperKit.Test.Extensions;
 
 public class GenericExtensionUnitTest
@@ -128,11 +126,11 @@ public class GenericExtensionUnitTest
     }
 
     [Fact]
-    public void ToDataTable_TrowsNullReferenceException()
+    public void ToDataTable_WithNullInput_ReturnsEmptyTable()
     {
-        var nullAction = () => ((IEnumerable<TestClass>)null).ToDataTable();
+        var dataTable = ((IEnumerable<TestClass>)null).ToDataTable();
 
-        nullAction.Should().Throw<NullReferenceException>();
+        dataTable.Should().NotBeNull();
     }
 
     [Fact]
@@ -191,5 +189,33 @@ public class GenericExtensionUnitTest
 
         restClass.IntValue.Should().Be(elements.IntValue);
         restClass.IntArray.Should().BeEquivalentTo(elements.IntArray);
+    }
+
+    [Fact]
+    public void CloneObject_WithClass_ReturnsSuccess()
+    {
+        var original = TestClassClone.Create("test");
+        var shallowCopy = original;
+
+        var clone = original.CloneObject();
+
+        original.Should().Be(shallowCopy);
+        original.Should().NotBe(clone);
+
+        original.Text.Should().BeEquivalentTo(clone.Text);
+    }
+
+    [Fact]
+    public void CloneObject_WithSerializableClass_ReturnsSuccess()
+    {
+        var original = EmptyTestClassSerializableClone.Create("test");
+        var shallowCopy = original;
+
+        var clone = original.CloneObject();
+
+        original.Should().Be(shallowCopy);
+        original.Should().NotBe(clone);
+
+        original.Text.Should().BeEquivalentTo(clone.Text);
     }
 }

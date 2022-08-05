@@ -1,5 +1,3 @@
-using HelperKit.Test.Models;
-
 namespace HelperKit.Test.Extensions;
 
 public class GenericComparableUnitTest

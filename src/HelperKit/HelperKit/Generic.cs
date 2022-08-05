@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using System.Data;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace HelperKit;
 
@@ -33,6 +33,44 @@ public static partial class Extensions
     }
 
     #endregion
+
+    /// <summary>
+    /// Clones an object creating a new instance with the same field values
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
+    public static T CloneObject<T>(this T value) where T : class
+    {
+        _ = value ?? throw new ArgumentNullException();
+
+        var type = typeof(T);
+        if (type.IsSerializable)
+            return CloneSerializableObject(value);
+
+        var result = Activator.CreateInstance<T>();
+        foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+        {
+            if (!property.CanWrite)
+                continue;
+
+            if (property.PropertyType.IsValueType || property.PropertyType.IsEnum || property.PropertyType.Equals(typeof(string)))
+                property.SetValue(result, property.GetValue(value, null), null);
+            else
+                property.SetValue(result, property.GetValue(value, null)?.CloneObject(), null);
+        }
+        return result;
+    }
+
+    private static T CloneSerializableObject<T>(this T value) where T : class
+    {
+        using var stream = new MemoryStream();
+        var formatter = new BinaryFormatter();
+        formatter.Serialize(stream, value);
+        stream.Position = 0;
+        return (T)formatter.Deserialize(stream);
+    }
 
     #region Dictionary Convert Helper
 
@@ -133,8 +171,14 @@ public static partial class Extensions
         foreach (var prop in props)
             dataTable.Columns.Add(prop.Name, prop.PropertyType);
 
+        if (items is null)
+            return dataTable;
+
         foreach (var item in items)
         {
+            if (item is null)
+                continue;
+
             var values = new object[props.Length];
             for (var i = 0; i < props.Length; i++)
                 values[i] = props[i].GetValue(item, null);

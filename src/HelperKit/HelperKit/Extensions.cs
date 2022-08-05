@@ -34,7 +34,7 @@ public static partial class Extensions
     {
         _ = value ?? throw new ArgumentNullException(nameof(value));
 
-        return typeof(T).GetInterface("IEnumerable") == null
+        return typeof(T).GetInterface("IEnumerable") is null
             ? items?.Any(x => x.Equals(value)) == true
             : throw new ArgumentException("Requested value could not be an Enumerable.");
     }
@@ -79,15 +79,15 @@ public static partial class Extensions
             directory.Create();
     }
 
-    public static bool TryGetResult<T>(this IDataResponse<T> value, out T result)
+    public static bool TryGetResult<T>(this IResult<T> value, out T result)
     {
-        if (value.Result is null)
+        if (value.Value is null)
         {
             result = default;
             return false;
         }
 
-        result = value.Result;
+        result = value.Value;
         return true;
     }
 }

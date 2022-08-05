@@ -48,25 +48,27 @@ public class EmptyTestClass
     }
 }
 
-public class TestClassClone
-{
-    public string Text { get; set; }
-    public string PublicText { get { return Text ?? string.Empty; } }
-    public EmptyTestClassSerializableClone EmptyTestClassSerializableClone { get; set; }
-
-    public static TestClassClone Create(string text = null)
-    {
-        return new TestClassClone { Text = text, EmptyTestClassSerializableClone = EmptyTestClassSerializableClone.Create("D:") };
-    }
-}
-
 [Serializable]
-public class EmptyTestClassSerializableClone
+public class TestClassSerializable
 {
-    public string Text { get; set; }
+    public int IntValue { get; set; }
+    public string StringValue { get; set; }
+    public bool BooleanValue { get; set; }
+    public int[] IntArray { get; set; }
+    public List<int> IntList { get; set; }
 
-    public static EmptyTestClassSerializableClone Create(string text = null)
+    public static TestClassSerializable Create()
     {
-        return new EmptyTestClassSerializableClone { Text = text };
+        var random = new Random();
+        var arraySize = random.Next() % 20;
+        var guid = Guid.NewGuid().ToString().Split('-')[0];
+        return new TestClassSerializable
+        {
+            IntValue = random.Next(),
+            BooleanValue = random.Next(200) % 4 == 0,
+            IntArray = Enumerable.Repeat(0, arraySize).Select(_ => random.Next(0, 100)).ToArray(),
+            IntList = Enumerable.Repeat(0, arraySize).Select(_ => random.Next(0, 100)).ToList(),
+            StringValue = guid
+        };
     }
 }

@@ -194,7 +194,7 @@ public class GenericExtensionUnitTest
     [Fact]
     public void CloneObject_WithClass_ReturnsSuccess()
     {
-        var original = TestClassClone.Create("test");
+        var original = TestClass.Create();
         var shallowCopy = original;
 
         var clone = original.CloneObject();
@@ -202,13 +202,17 @@ public class GenericExtensionUnitTest
         original.Should().Be(shallowCopy);
         original.Should().NotBe(clone);
 
-        original.Text.Should().BeEquivalentTo(clone.Text);
+        original.StringValue.Should().BeEquivalentTo(clone.StringValue);
+        original.IntValue.Should().Be(clone.IntValue);
+        original.BooleanValue.Should().Be(clone.BooleanValue);
+        original.IntArray.Should().BeEquivalentTo(clone.IntArray);
+        original.IntList.Should().BeEquivalentTo(clone.IntList);
     }
 
     [Fact]
     public void CloneObject_WithSerializableClass_ReturnsSuccess()
     {
-        var original = EmptyTestClassSerializableClone.Create("test");
+        var original = TestClassSerializable.Create();
         var shallowCopy = original;
 
         var clone = original.CloneObject();
@@ -216,6 +220,10 @@ public class GenericExtensionUnitTest
         original.Should().Be(shallowCopy);
         original.Should().NotBe(clone);
 
-        original.Text.Should().BeEquivalentTo(clone.Text);
+        original.StringValue.Should().BeEquivalentTo(clone.StringValue);
+        original.IntValue.Should().Be(clone.IntValue);
+        original.BooleanValue.Should().Be(clone.BooleanValue);
+        original.IntArray.Should().BeEquivalentTo(clone.IntArray);
+        original.IntList.Should().BeEquivalentTo(clone.IntList);
     }
 }

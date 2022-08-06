@@ -11,31 +11,31 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.1;net462</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
-		<DebugType Condition=" '$(Configuration)' == 'Release' ">None</DebugType>
+		<DebugType Condition="'$(Configuration)' == 'Release'">None</DebugType>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<PackageId>HelperKit</PackageId>
-		<Version>1.3.3</Version>
+		<Version>1.4.0</Version>
 		<Authors>jonathan.delacruzp</Authors>
 		<Company>jonathan.delacruzp</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<AssemblyVersion>1.3.3</AssemblyVersion>
-		<FileVersion>1.3.3</FileVersion>
-		<Copyright>jonathan.delacruzp, 2021</Copyright>
+		<AssemblyVersion>1.4.0</AssemblyVersion>
+		<FileVersion>1.4.0</FileVersion>
+		<Copyright>jonathan.delacruzp, 2022</Copyright>
 		<RepositoryType>git</RepositoryType>
 		<Description>Small library of general purpose utilities for .NET development that almost every application can use.</Description>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
-		<DelaySign>false</DelaySign>
+		<DelaySign>False</DelaySign>
 		<PackageProjectUrl>https://github.com/jonathandelacruzp/HelperKit</PackageProjectUrl>
 		<AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Memory" Version="4.5.5" />
+		<PackageReference Include="System.Memory" Version="4.5.*" Condition="'$(TargetFramework)' == 'net462'" />
 	</ItemGroup>
 
 	<ItemGroup>

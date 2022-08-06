@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace HelperKit;
+﻿namespace HelperKit;
 
 /// <summary>
 /// MimeType map helper

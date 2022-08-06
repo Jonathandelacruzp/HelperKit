@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace HelperKit.Test.Extensions;
+namespace HelperKit.Tests.Extensions;
 
 public class StringExtensionUnitTest
 {

@@ -1,4 +1,4 @@
-﻿namespace HelperKit.Test.Models;
+﻿namespace HelperKit.Tests.Models;
 
 public class TestClassWithoutInstance
 {

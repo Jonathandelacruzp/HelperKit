@@ -5,6 +5,7 @@ namespace HelperKit.Security;
 /// <summary>
 /// Helper that extends useful methods for common hash implementation
 /// </summary>
+[ExcludeFromCodeCoverage]
 public static class HashHelper
 {
     /// <summary>
@@ -19,10 +20,9 @@ public static class HashHelper
         _ = text ?? throw new ArgumentNullException(nameof(text));
 
         hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(text));
-        var hash = hashAlgorithm.Hash;
         var sb = new StringBuilder();
-        foreach (var hashItem in hash)
-            sb.Append(hashItem.ToString("x2"));
+        foreach (var hashItem in hashAlgorithm.Hash)
+            sb.AppendFormat("{0:x2}", hashItem);
 
         return sb.ToString();
     }

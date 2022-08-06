@@ -1,6 +1,6 @@
 ﻿using HelperKit.Functions;
 
-namespace HelperKit.Test.Functions;
+namespace HelperKit.Tests.Functions;
 
 public class MemoizerUnitTest
 {

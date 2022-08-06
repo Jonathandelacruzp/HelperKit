@@ -56,11 +56,12 @@ public static partial class Extensions
     /// <summary>
     /// Gets the default fist day of week
     /// </summary>
+    /// <param name="_"></param>
     /// <param name="year"></param>
     /// <param name="weekOfYear"></param>
     /// <param name="cultureInfo"></param>
     /// <returns></returns>
-    public static DateTime FirstDateOfWeek(int year, int weekOfYear, CultureInfo cultureInfo = null)
+    public static DateTime FirstDateOfWeek(this DateTime _, int year, int weekOfYear, CultureInfo cultureInfo = null)
     {
         cultureInfo ??= CultureInfo.CurrentCulture;
         var jan1 = new DateTime(year, 1, 1);
@@ -82,7 +83,7 @@ public static partial class Extensions
     /// <returns></returns>
     public static DateTime FirstDateOfWeek(this DateTime date, int weekOfYear, CultureInfo cultureInfo = null)
     {
-        return FirstDateOfWeek(date.Year, weekOfYear, cultureInfo);
+        return FirstDateOfWeek(date, date.Year, weekOfYear, cultureInfo);
     }
 
     #endregion

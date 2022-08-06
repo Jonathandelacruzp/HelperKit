@@ -43,13 +43,14 @@ public sealed class DateTimeProvider : IDateTimeProvider
         public static IDateTimeProvider Create(string id, TimeSpan baseUtcOffset, string standardName = null, string displayStandardName = null)
             => new DateTimeProvider(TimeZoneInfo.CreateCustomTimeZone(id, baseUtcOffset, standardName ?? id, displayStandardName ?? standardName ?? id));
 
+        [ExcludeFromCodeCoverage]
         public static IDateTimeProvider Create(string timeZoneId)
-            => _systemDateTimeProviders.TryGetValue(timeZoneId, out var value)
+            => _systemDateTimeProviders.Value.TryGetValue(timeZoneId, out var value)
                 ? value
-                : throw new Exception($"The value provided is not a valid timeZoneId: {timeZoneId}");
+                : throw new InvalidTimeZoneException($"The value provided is not a valid timeZoneId: {timeZoneId}");
     }
 
-    private static readonly ReadOnlyDictionary<string, IDateTimeProvider> _systemDateTimeProviders = new(TimeZoneInfo.GetSystemTimeZones().ToDictionary<TimeZoneInfo, string, IDateTimeProvider>(t => t.Id, t => new DateTimeProvider(t)));
+    private static readonly Lazy<ReadOnlyDictionary<string, IDateTimeProvider>> _systemDateTimeProviders = new(() => new(TimeZoneInfo.GetSystemTimeZones().ToDictionary<TimeZoneInfo, string, IDateTimeProvider>(t => t.Id, t => new DateTimeProvider(t))));
 
-    public static IDictionary<string, IDateTimeProvider> GetSystemDateTimeProviders() => _systemDateTimeProviders;
+    public static IDictionary<string, IDateTimeProvider> GetSystemDateTimeProviders() => _systemDateTimeProviders.Value;
 }

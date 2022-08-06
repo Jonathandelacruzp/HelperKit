@@ -1,4 +1,4 @@
-namespace HelperKit.Test.Extensions;
+namespace HelperKit.Tests.Extensions;
 
 public class GenericComparableUnitTest
 {
@@ -64,6 +64,19 @@ public class GenericComparableUnitTest
         directoryInfo.CreateDirectory();
 
         var directoryInfoValid = new DirectoryInfo("./Test");
+
+        directoryInfoValid.Exists.Should().BeTrue();
+    }
+
+    [Fact]
+    public void CreateDirectory_CreatesNewDirectory()
+    {
+        var directoryName = "./Test" + Guid.NewGuid();
+        var directoryInfo = new DirectoryInfo(directoryName);
+
+        directoryInfo.CreateDirectory();
+
+        var directoryInfoValid = new DirectoryInfo(directoryName);
 
         directoryInfoValid.Exists.Should().BeTrue();
     }

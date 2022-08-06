@@ -1,6 +1,6 @@
 ﻿using TimeZoneConverter;
 
-namespace HelperKit.Test.Extensions;
+namespace HelperKit.Tests.Extensions;
 
 public class DateTimeExtensionsUnitTest
 {
@@ -82,6 +82,16 @@ public class DateTimeExtensionsUnitTest
     }
 
     [Fact]
+    public void GetWeekNumber_ReturnsCorrectValue()
+    {
+        var inputDateTime = new DateTime(2021, 07, 15);
+
+        var weekNumber = inputDateTime.GetWeekNumber();
+
+        weekNumber.Should().BeGreaterThan(1);
+    }
+
+    [Fact]
     public void VerifyFirstDateOfWeek_ReturnsCorrectValue()
     {
         var expected = DateTime.Parse("2021-01-03"); //First sunday and second week of the year
@@ -105,15 +115,7 @@ public class DateTimeExtensionsUnitTest
     }
 
     [Fact]
-    public void GetSystemTimeProviders_1()
-    {
-        var items = DateTimeProvider.GetSystemDateTimeProviders();
-
-        items.Should().NotBeEmpty();
-    }
-
-    [Fact]
-    public void GetSystemTimeProviders_2()
+    public void GetSystemTimeProviders()
     {
         var items = DateTimeProvider.GetSystemDateTimeProviders();
 

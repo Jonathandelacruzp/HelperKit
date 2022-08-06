@@ -79,7 +79,7 @@ public static partial class Extensions
             directory.Create();
     }
 
-    public static bool TryGetResult<T>(this IResult<T> value, out T result)
+    public static bool TryGet<T>(this IResult<T> value, out T result)
     {
         if (value.Value is null)
         {

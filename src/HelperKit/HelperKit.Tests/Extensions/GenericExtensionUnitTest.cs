@@ -1,4 +1,4 @@
-namespace HelperKit.Test.Extensions;
+namespace HelperKit.Tests.Extensions;
 
 public class GenericExtensionUnitTest
 {
@@ -39,7 +39,7 @@ public class GenericExtensionUnitTest
 
         var result = testClass.ToDictionary();
 
-        result.Should().HaveCount(5);
+        result.Should().HaveCount(6);
     }
 
     [Fact]
@@ -110,6 +110,9 @@ public class GenericExtensionUnitTest
     public void ToDataTable_ReturnsAValidDataTable()
     {
         var elements = TestClass.CreateElements(5);
+        var lst = elements.ToList();
+        lst.Add(null);
+        elements = lst.ToArray();
         var dataTable = elements.ToDataTable();
 
         dataTable.Should().NotBeNull();
@@ -202,11 +205,11 @@ public class GenericExtensionUnitTest
         original.Should().Be(shallowCopy);
         original.Should().NotBe(clone);
 
-        original.StringValue.Should().BeEquivalentTo(clone.StringValue);
-        original.IntValue.Should().Be(clone.IntValue);
-        original.BooleanValue.Should().Be(clone.BooleanValue);
-        original.IntArray.Should().BeEquivalentTo(clone.IntArray);
-        original.IntList.Should().BeEquivalentTo(clone.IntList);
+        clone.StringValue.Should().BeEquivalentTo(original.StringValue);
+        clone.IntValue.Should().Be(original.IntValue);
+        clone.BooleanValue.Should().Be(original.BooleanValue);
+        clone.IntArray.Should().BeEquivalentTo(original.IntArray);
+        clone.IntList.Should().BeEquivalentTo(original.IntList);
     }
 
     [Fact]
@@ -220,10 +223,10 @@ public class GenericExtensionUnitTest
         original.Should().Be(shallowCopy);
         original.Should().NotBe(clone);
 
-        original.StringValue.Should().BeEquivalentTo(clone.StringValue);
-        original.IntValue.Should().Be(clone.IntValue);
-        original.BooleanValue.Should().Be(clone.BooleanValue);
-        original.IntArray.Should().BeEquivalentTo(clone.IntArray);
-        original.IntList.Should().BeEquivalentTo(clone.IntList);
+        clone.StringValue.Should().BeEquivalentTo(original.StringValue);
+        clone.IntValue.Should().Be(original.IntValue);
+        clone.BooleanValue.Should().Be(original.BooleanValue);
+        clone.IntArray.Should().BeEquivalentTo(original.IntArray);
+        clone.IntList.Should().BeEquivalentTo(original.IntList);
     }
 }

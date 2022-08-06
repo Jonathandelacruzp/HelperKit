@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Contracts;
 
-namespace HelperKit;
+namespace HelperKit.Tests.Models;
 
 internal class Result : IResult
 {
@@ -17,10 +17,10 @@ internal class Result : IResult
     {
         Message = ex.Message;
         StatusCode = "500";
+        Detail = ex.InnerException?.Message;
     }
 
     [Pure]
-
     public static implicit operator Result(Exception ex) => new(ex);
 }
 
@@ -38,10 +38,9 @@ internal class Result<T> : Result, IResult<T>
     private Result(Exception ex) : base(ex) { }
 
     [Pure]
-
     public static implicit operator Result<T>(T result) => new(result);
-    [Pure]
 
+    [Pure]
     public static implicit operator Result<T>(Exception ex) => new(ex);
 
     [Pure]

@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace HelperKit.Test.Extensions;
+namespace HelperKit.Tests.Extensions;
 
 public class TaskExtensionsUnitTest
 {

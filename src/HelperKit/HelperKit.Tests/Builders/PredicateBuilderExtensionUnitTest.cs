@@ -1,6 +1,6 @@
 ﻿using HelperKit.Builders;
 
-namespace HelperKit.Test.Builders;
+namespace HelperKit.Tests.Builders;
 
 public class PredicateBuilderExtensionUnitTest
 {

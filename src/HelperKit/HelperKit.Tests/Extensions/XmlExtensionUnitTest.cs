@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace HelperKit.Test.Extensions;
+namespace HelperKit.Tests.Extensions;
 
 public class XmlExtensionUnitTest
 {

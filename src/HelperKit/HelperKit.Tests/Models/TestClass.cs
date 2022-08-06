@@ -1,4 +1,4 @@
-﻿namespace HelperKit.Test.Models;
+﻿namespace HelperKit.Tests.Models;
 
 public class TestClass
 {
@@ -7,6 +7,7 @@ public class TestClass
     public bool BooleanValue { get; set; }
     public int[] IntArray { get; set; }
     public List<int> IntList { get; set; }
+    public object NullObject { get; set; }
 
     public static IEnumerable<TestClass> CreateElements(int number)
     {

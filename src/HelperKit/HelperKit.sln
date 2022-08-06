@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31825.309
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperKit", "HelperKit\HelperKit.csproj", "{F4F3CA84-32FF-442A-A513-AA02B17C9821}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperKit.Test", "HelperKit.Test\HelperKit.Test.csproj", "{85D49136-2FBC-4D6C-BA12-B50097170573}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperKit.Tests", "HelperKit.Tests\HelperKit.Tests.csproj", "{85D49136-2FBC-4D6C-BA12-B50097170573}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperKit.Benchmark", "HelperKit.Benchmark\HelperKit.Benchmark.csproj", "{AAD5D4F0-FC89-4814-A1AB-54AD19A41B78}"
 EndProject

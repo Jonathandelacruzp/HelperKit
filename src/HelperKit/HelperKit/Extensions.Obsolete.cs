@@ -10,6 +10,7 @@ public static partial class Extensions
     /// <param name="param"></param>
     /// <returns></returns>
     [Obsolete("Use IsContainedIn instead")]
+    [ExcludeFromCodeCoverage]
     public static bool IsContainedOn<T>(this T value, params T[] param)
     {
         return IsContainedIn(value, param as IEnumerable<T>);
@@ -24,6 +25,7 @@ public static partial class Extensions
     ///  <exception cref="ArgumentNullException"></exception>
     ///  <returns></returns>
     [Obsolete]
+    [ExcludeFromCodeCoverage]
     public static string ToStringUtf8(this string val)
     {
         _ = val ?? throw new ArgumentNullException(nameof(val));

@@ -52,13 +52,13 @@ public static partial class Extensions
         var result = Activator.CreateInstance<T>();
         foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
         {
-            if (!property.CanWrite)
-                continue;
-
-            if (property.PropertyType.IsValueType || property.PropertyType.IsEnum || property.PropertyType.Equals(typeof(string)))
-                property.SetValue(result, property.GetValue(value, null), null);
-            else
-                property.SetValue(result, property.GetValue(value, null)?.CloneObject(), null);
+            if (property.CanWrite)
+            {
+                if (property.PropertyType.IsValueType || property.PropertyType.IsEnum || property.PropertyType == typeof(string))
+                    property.SetValue(result, property.GetValue(value, null), null);
+                else
+                    property.SetValue(result, property.GetValue(value, null)?.CloneObject(), null);
+            }
         }
         return result;
     }
@@ -123,12 +123,12 @@ public static partial class Extensions
     }
 
     /// <summary>
-    /// Converts to List of key value Pair
+    /// Converts object to List of key value Pair
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static IList<KeyValuePair<string, string>> ToKeyValuePair<T>(this T value) where T : class
+    public static IEnumerable<KeyValuePair<string, string>> ToKeyValuePair<T>(this T value) where T : class
     {
         var keyPairs = new List<KeyValuePair<string, string>>();
         foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(value))

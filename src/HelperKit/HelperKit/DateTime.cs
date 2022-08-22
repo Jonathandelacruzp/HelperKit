@@ -23,12 +23,12 @@ public static partial class Extensions
     /// <summary>
     /// Converts a value to DateTime
     /// </summary>
-    /// <param name="s"></param>
+    /// <param name="value"></param>
     /// <param name="def"></param>
     /// <returns></returns>
-    public static DateTime ToDateTime(this object s, DateTime def = default)
+    public static DateTime ToDateTime(this string value, DateTime def = default)
     {
-        return DateTime.TryParse(s.ToString(), out var result) ? result : def;
+        return DateTime.TryParse(value, out var result) ? result : def;
     }
 
     /// <summary>

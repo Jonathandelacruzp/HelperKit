@@ -9,9 +9,12 @@ public class ResultTests
 
         Result<TestClass> result = testClass;
 
+        TestClass resultClass = result;
+
         result.Should().NotBeNull();
         result.Should().As<IResult<TestClass>>();
         result.Value.Should().Be(testClass);
+        resultClass.Should().NotBeNull();
     }
 
     [Fact]
@@ -30,8 +33,6 @@ public class ResultTests
     [Fact]
     public void IResultTryGetValue_WithNullValue_ReturnsFailure()
     {
-        var testVlass = TestClass.Create();
-
         Result<TestClass> result = new Result<TestClass>();
 
         var success = result.TryGet(out var testClassResult);

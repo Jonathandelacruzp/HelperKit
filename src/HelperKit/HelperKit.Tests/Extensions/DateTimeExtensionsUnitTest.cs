@@ -74,7 +74,7 @@ public class DateTimeExtensionsUnitTest
     {
         var inputDateTime = new DateTime(2021, 07, 15);
 
-        var dateStr = inputDateTime.ToString(CultureInfo.InvariantCulture);
+        var dateStr = inputDateTime.ToString(CultureInfo.CurrentCulture);
 
         var resultDate = dateStr.ToDateTime();
 

@@ -38,5 +38,57 @@ public static partial class Extensions
     //public static string ToJson(this object value)
     //  => JsonConvert.SerializeObject(value, Formatting.Indented, new JsonSerializerSettings() { PreserveReferencesHandling = PreserveReferencesHandling.None, ReferenceLoopHandling = ReferenceLoopHandling.Ignore, ObjectCreationHandling = ObjectCreationHandling.Reuse });
 
+    /// <summary>
+    /// Deletes all slash / y backslash \ from string
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    [Obsolete("Use carefully, the stack limit is 256")]
+    public static string DeleteSlashAndBackslash(this ReadOnlySpan<char> value)
+    {
+        var length = value.Length;
+        var result = length <= MaxStackLimit
+            ? stackalloc char[length]
+            : new char[length];
+        var j = 0;
+
+        for (var i = 0; i < length; i++)
+        {
+            if (value[i] is Slash or BackSlash)
+                continue;
+
+            result[j] = value[i];
+            j++;
+        }
+
+        return result.Slice(0, j).ToString();
+    }
+
+    /// <summary>
+    /// Deletes all dot and commas of a string
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    [Obsolete("Use carefully, the stack limit is 256")]
+    public static string DeleteDotAndComma(this ReadOnlySpan<char> value)
+    {
+        var length = value.Length;
+        var result = length <= MaxStackLimit
+            ? stackalloc char[length]
+            : new char[length];
+        var j = 0;
+
+        for (var i = 0; i < length; i++)
+        {
+            if (value[i] is Dot or Comma)
+                continue;
+
+            result[j] = value[i];
+            j++;
+        }
+
+        return result.Slice(0, j).ToString();
+    }
+
     #endregion
 }

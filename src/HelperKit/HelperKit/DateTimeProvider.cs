@@ -45,12 +45,12 @@ public sealed class DateTimeProvider : IDateTimeProvider
 
         [ExcludeFromCodeCoverage]
         public static IDateTimeProvider Create(string timeZoneId)
-            => _systemDateTimeProviders.Value.TryGetValue(timeZoneId, out var value)
+            => SystemDateTimeProviders.Value.TryGetValue(timeZoneId, out var value)
                 ? value
                 : throw new InvalidTimeZoneException($"The value provided is not a valid timeZoneId: {timeZoneId}");
     }
 
-    private static readonly Lazy<ReadOnlyDictionary<string, IDateTimeProvider>> _systemDateTimeProviders = new(() => new(TimeZoneInfo.GetSystemTimeZones().ToDictionary<TimeZoneInfo, string, IDateTimeProvider>(t => t.Id, t => new DateTimeProvider(t))));
+    private static readonly Lazy<ReadOnlyDictionary<string, IDateTimeProvider>> SystemDateTimeProviders = new(() => new(TimeZoneInfo.GetSystemTimeZones().ToDictionary<TimeZoneInfo, string, IDateTimeProvider>(t => t.Id, t => new DateTimeProvider(t))));
 
-    public static IDictionary<string, IDateTimeProvider> GetSystemDateTimeProviders() => _systemDateTimeProviders.Value;
+    public static IDictionary<string, IDateTimeProvider> GetSystemDateTimeProviders() => SystemDateTimeProviders.Value;
 }

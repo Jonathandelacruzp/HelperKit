@@ -22,10 +22,9 @@ public static partial class Extensions
         var strBuilder = new StringBuilder();
         for (var i = 0; i < normalizedString.Length; i++)
         {
-            var character = normalizedString[i];
-            var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(character);
+            var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(normalizedString[i]);
             if (unicodeCategory != UnicodeCategory.NonSpacingMark)
-                strBuilder.Append(character);
+                strBuilder.Append(normalizedString[i]);
         }
 
         return strBuilder.ToString().Normalize(NormalizationForm.FormC);
@@ -54,30 +53,6 @@ public static partial class Extensions
         return value?.Replace("/", string.Empty).Replace(@"\", string.Empty);
     }
 
-    /// <summary>
-    /// Deletes all slash / y backslash \ from string
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public static string DeleteSlashAndBackslash(this ReadOnlySpan<char> value)
-    {
-        var length = value.Length;
-        var result = length <= MaxStackLimit
-            ? stackalloc char[length]
-            : new char[length];
-        var j = 0;
-
-        for (var i = 0; i < length; i++)
-        {
-            if (value[i] is Slash or BackSlash)
-                continue;
-
-            result[j] = value[i];
-            j++;
-        }
-
-        return result.Slice(0, j).ToString();
-    }
 
     /// <summary>
     /// Deletes all dot and commas of a string
@@ -87,31 +62,6 @@ public static partial class Extensions
     public static string DeleteDotAndComma(this string value)
     {
         return value?.Replace(".", string.Empty).Replace(",", string.Empty);
-    }
-
-    /// <summary>
-    /// Deletes all dot and commas of a string
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public static string DeleteDotAndComma(this ReadOnlySpan<char> value)
-    {
-        var length = value.Length;
-        var result = length <= MaxStackLimit
-            ? stackalloc char[length]
-            : new char[length];
-        var j = 0;
-
-        for (var i = 0; i < length; i++)
-        {
-            if (value[i] is Dot or Comma)
-                continue;
-
-            result[j] = value[i];
-            j++;
-        }
-
-        return result.Slice(0, j).ToString();
     }
 
     /// <summary>

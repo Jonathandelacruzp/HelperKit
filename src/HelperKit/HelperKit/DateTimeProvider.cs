@@ -52,5 +52,5 @@ public sealed class DateTimeProvider : IDateTimeProvider
 
     private static readonly Lazy<ReadOnlyDictionary<string, IDateTimeProvider>> SystemDateTimeProviders = new(() => new(TimeZoneInfo.GetSystemTimeZones().ToDictionary<TimeZoneInfo, string, IDateTimeProvider>(t => t.Id, t => new DateTimeProvider(t))));
 
-    public static IDictionary<string, IDateTimeProvider> GetSystemDateTimeProviders() => SystemDateTimeProviders.Value;
+    public static ReadOnlyDictionary<string, IDateTimeProvider> DateTimeProviders => SystemDateTimeProviders.Value;
 }

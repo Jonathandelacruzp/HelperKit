@@ -117,7 +117,7 @@ public class DateTimeExtensionsUnitTest
     [Fact]
     public void GetSystemTimeProviders()
     {
-        var items = DateTimeProvider.GetSystemDateTimeProviders();
+        var items = DateTimeProvider.DateTimeProviders;
 
         items.Should().NotBeEmpty();
     }
@@ -125,7 +125,7 @@ public class DateTimeExtensionsUnitTest
     [Fact]
     public void Create_FromGetSystemTimeProviders()
     {
-        var items = DateTimeProvider.GetSystemDateTimeProviders();
+        var items = DateTimeProvider.DateTimeProviders;
         var timeZone = TZConvert.GetTimeZoneInfo("Central Standard Time");
 
         var dateNow = items.TryGetValue(timeZone.Id, out var dateTimeProvider)

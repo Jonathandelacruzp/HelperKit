@@ -71,7 +71,7 @@ public class GenericComparableUnitTest
     [Fact]
     public void CreateDirectory_CreatesNewDirectory()
     {
-        var directoryName = "./Test" + Guid.NewGuid();
+        var directoryName = $"./Test-{Guid.NewGuid()}";
         var directoryInfo = new DirectoryInfo(directoryName);
 
         directoryInfo.CreateDirectory();

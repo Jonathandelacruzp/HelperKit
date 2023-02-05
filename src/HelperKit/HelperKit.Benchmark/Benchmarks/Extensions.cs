@@ -30,34 +30,34 @@ type specimen book. It has survived not only five centuries, but also the leap i
     {
         var text = _text.DeleteDotAndComma();
     }
-
-    [Benchmark]
-    public void SpanDeleteDotAndComma()
-    {
-        var text = _text.AsSpan().DeleteDotAndComma();
-    }
+    //
+    // [Benchmark]
+    // public void SpanDeleteDotAndComma()
+    // {
+    //     var text = _text.AsSpan().DeleteDotAndComma();
+    // }
 
     [Benchmark]
     public void DeleteDotAndComma2()
     {
         var text = _text2.DeleteDotAndComma();
     }
+    //
+    // [Benchmark]
+    // public void SpanDeleteDotAndComma2()
+    // {
+    //     var text = _text2.AsSpan().DeleteDotAndComma();
+    // }
 
-    [Benchmark]
-    public void SpanDeleteDotAndComma2()
-    {
-        var text = _text2.AsSpan().DeleteDotAndComma();
-    }
+    // [Benchmark]
+    // public void DeleteSlashAndBackslash()
+    // {
+    //     var text = _textSlash.DeleteSlashAndBackslash();
+    // }
 
-    [Benchmark]
-    public void DeleteSlashAndBackslash()
-    {
-        var text = _textSlash.DeleteSlashAndBackslash();
-    }
-
-    [Benchmark]
-    public void SpanDeleteSlashAndBackslash()
-    {
-        var text = _textSlash.AsSpan().DeleteSlashAndBackslash();
-    }
+    // [Benchmark]
+    // public void SpanDeleteSlashAndBackslash()
+    // {
+    //     var text = _textSlash.AsSpan().DeleteSlashAndBackslash();
+    // }
 }

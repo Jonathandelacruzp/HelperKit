@@ -44,7 +44,7 @@ public static partial class Extensions
     /// <param name="value"></param>
     /// <returns></returns>
     [Obsolete("Use carefully, the stack limit is 256")]
-    public static string DeleteSlashAndBackslash(this ReadOnlySpan<char> value)
+    internal static string DeleteSlashAndBackslash(this ReadOnlySpan<char> value)
     {
         var length = value.Length;
         var result = length <= MaxStackLimit
@@ -70,7 +70,7 @@ public static partial class Extensions
     /// <param name="value"></param>
     /// <returns></returns>
     [Obsolete("Use carefully, the stack limit is 256")]
-    public static string DeleteDotAndComma(this ReadOnlySpan<char> value)
+    internal static string DeleteDotAndComma(this ReadOnlySpan<char> value)
     {
         var length = value.Length;
         var result = length <= MaxStackLimit

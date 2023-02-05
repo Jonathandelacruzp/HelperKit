@@ -70,7 +70,7 @@ public static partial class Extensions
     }
 
     /// <summary>
-    /// Creates a new Directory
+    /// Creates a new Directory validating if the directory exist
     /// </summary>
     /// <param name="directory"></param>
     public static void CreateDirectory(this DirectoryInfo directory)

@@ -19,15 +19,15 @@ public static partial class Extensions
     public static string RemoveDiacritics(this string value)
     {
         var normalizedString = value.Normalize(NormalizationForm.FormD);
-        var strBuilder = new StringBuilder();
-        for (var i = 0; i < normalizedString.Length; i++)
+        var sb = new StringBuilder();
+        foreach (var c in normalizedString)
         {
-            var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(normalizedString[i]);
-            if (unicodeCategory != UnicodeCategory.NonSpacingMark)
-                strBuilder.Append(normalizedString[i]);
+            var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+            if (unicodeCategory is not UnicodeCategory.NonSpacingMark)
+                sb.Append(c);
         }
 
-        return strBuilder.ToString().Normalize(NormalizationForm.FormC);
+        return sb.ToString().Normalize(NormalizationForm.FormC);
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public static partial class Extensions
     }
 
     /// <summary>
-    /// Replace all the values set it on param with a empty string
+    /// Replace all the values set it on param with an empty string
     /// </summary>
     /// <param name="value"></param>
     /// <param name="param"></param>
@@ -91,4 +91,33 @@ public static partial class Extensions
     }
 
     #endregion
+
+    /// <summary>
+    /// Returns a string with safe mode
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="find"></param>
+    /// <returns>bool</returns>
+    public static bool EqualsIgnoreCase(this string value, string find)
+    {
+        if (value is null && find is null)
+            return true;
+
+        return (value ?? "").Equals(find, StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Returns a string with safe mode
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="find"></param>
+    /// <param name="sc"></param>
+    /// <returns>bool</returns>
+    public static bool ContainsValue(this string value, string find, StringComparison sc = StringComparison.OrdinalIgnoreCase)
+    {
+        if (value is null || find is null)
+            return false;
+
+        return value.IndexOf(find, sc) is not -1;
+    }
 }

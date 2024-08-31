@@ -6,9 +6,9 @@
 [ExcludeFromCodeCoverage]
 public static class MimeTypeMapHelper
 {
-    private static readonly Lazy<IDictionary<string, string>> Mappings = new(BuildMappings);
+    private static readonly Lazy<IReadOnlyDictionary<string, string>> Mappings = new(BuildMappings);
 
-    private static IDictionary<string, string> BuildMappings()
+    private static Dictionary<string, string> BuildMappings()
     {
         var mappings = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {

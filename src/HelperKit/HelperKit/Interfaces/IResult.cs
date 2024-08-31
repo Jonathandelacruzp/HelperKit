@@ -2,7 +2,7 @@
 
 public interface IResult
 {
-    string StatusCode { get; set; }
+    int StatusCode { get; set; }
     string Message { get; set; }
     string Detail { get; set; }
 }

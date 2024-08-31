@@ -2,7 +2,7 @@ namespace HelperKit.Tests.Extensions;
 
 public class GenericExtensionUnitTest
 {
-    private readonly int[] _intArray = { 1, 2, 3, 4 };
+    private readonly int[] _intArray = {1, 2, 3, 4};
 
     [Fact]
     public void EnumConvert_ReturnCorrectValue()
@@ -195,38 +195,53 @@ public class GenericExtensionUnitTest
     }
 
     [Fact]
-    public void CloneObject_WithClass_ReturnsSuccess()
+    public void ContainsDuplicate_WithDuplicateValues_ReturnsTrue()
     {
-        var original = TestClass.Create();
-        var shallowCopy = original;
+        string[] elements2 = ["dos","dos","tres"];
 
-        var clone = original.CloneObject();
+        var hasDuplicates = elements2.ContainsDuplicates();
 
-        original.Should().Be(shallowCopy);
-        original.Should().NotBe(clone);
-
-        clone.StringValue.Should().BeEquivalentTo(original.StringValue);
-        clone.IntValue.Should().Be(original.IntValue);
-        clone.BooleanValue.Should().Be(original.BooleanValue);
-        clone.IntArray.Should().BeEquivalentTo(original.IntArray);
-        clone.IntList.Should().BeEquivalentTo(original.IntList);
+        hasDuplicates.Should().BeTrue();
     }
 
     [Fact]
-    public void CloneObject_WithSerializableClass_ReturnsSuccess()
+    public void ContainsDuplicate_WithNonDuplicateValues_ReturnsFalse()
     {
-        var original = TestClassSerializable.Create();
-        var shallowCopy = original;
+        string[] elements2 = ["uno","dos","tres"];
 
-        var clone = original.CloneObject();
+        var hasDuplicates = elements2.ContainsDuplicates();
 
-        original.Should().Be(shallowCopy);
-        original.Should().NotBe(clone);
+        hasDuplicates.Should().BeFalse();
+    }
 
-        clone.StringValue.Should().BeEquivalentTo(original.StringValue);
-        clone.IntValue.Should().Be(original.IntValue);
-        clone.BooleanValue.Should().Be(original.BooleanValue);
-        clone.IntArray.Should().BeEquivalentTo(original.IntArray);
-        clone.IntList.Should().BeEquivalentTo(original.IntList);
+
+    [Fact]
+    public void ContainsDuplicate_predicate_WithNonDuplicateValues_ReturnsFalse()
+    {
+        var elements = TestClass.CreateElements(5);
+
+        var hasDuplicates = elements.ContainsDuplicates(x => x.IntValue);
+
+        hasDuplicates.Should().BeFalse();
+    }
+
+    [Fact]
+    public void ToDictionary_WithGroupBy_ReturnsGroupByDictionary()
+    {
+        var elements = TestClass.CreateElements(5);
+
+        var hasDuplicates = elements.GroupBy(x => x.BooleanValue).ToDictionary();
+
+        hasDuplicates.Should().HaveCountGreaterThan(0);
+    }
+
+    [Fact]
+    public void DistinctBy_WithGroupBy_ReturnsGroupByDictionary()
+    {
+        var elements = TestClass.CreateElements(5);
+
+        var hasDuplicates = elements.DistinctBy(x => x.BooleanValue);
+
+        hasDuplicates.Should().HaveCountLessThan(3);
     }
 }

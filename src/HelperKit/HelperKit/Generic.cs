@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Data;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml;
@@ -26,42 +25,13 @@ public static partial class Extensions
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    public static IDictionary<int, string> EnumNamedValues<T>() where T : Enum
+    public static Dictionary<int, string> EnumNamedValues<T>() where T : Enum
     {
         var values = Enum.GetValues(typeof(T));
         return values.Cast<int>().ToDictionary(x => x, x => Enum.GetName(typeof(T), x));
     }
 
     #endregion
-
-    /// <summary>
-    /// Clones an object creating a new instance with the same field values
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException"></exception>
-    public static T CloneObject<T>(this T value) where T : class
-    {
-        _ = value ?? throw new ArgumentNullException();
-
-        var type = typeof(T);
-        if (type.IsSerializable)
-            return CloneSerializableObject(value);
-
-        var result = Activator.CreateInstance<T>();
-        foreach (var property in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
-        {
-            if (property.CanWrite)
-            {
-                if (property.PropertyType.IsValueType || property.PropertyType.IsEnum || property.PropertyType == typeof(string))
-                    property.SetValue(result, property.GetValue(value, null), null);
-                else
-                    property.SetValue(result, property.GetValue(value, null)?.CloneObject(), null);
-            }
-        }
-        return result;
-    }
 
     private static T CloneSerializableObject<T>(this T value) where T : class
     {
@@ -128,7 +98,7 @@ public static partial class Extensions
     /// <typeparam name="T"></typeparam>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static IEnumerable<KeyValuePair<string, string>> ToKeyValuePair<T>(this T value) where T : class
+    public static IReadOnlyCollection<KeyValuePair<string, string>> ToKeyValuePair<T>(this T value) where T : class
     {
         var keyPairs = new List<KeyValuePair<string, string>>();
         foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(value))
@@ -146,47 +116,12 @@ public static partial class Extensions
     /// </summary>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static IDictionary<string, object> ToDictionary<T>(this T value) where T : class
+    public static Dictionary<string, object> ToDictionary<T>(this T value) where T : class
     {
         return value?.GetType()
             .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
             .Where(x => x.CanRead || x.CanWrite)
             .ToDictionary(x => x.Name, x => x.GetValue(value, null));
-    }
-
-    /// <summary>
-    /// Converts an IEnumerable object to Datatable
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="items"></param>
-    /// <returns></returns>
-    /// <exception cref="MissingFieldException"></exception>
-    public static DataTable ToDataTable<T>(this IEnumerable<T> items) where T : class
-    {
-        var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-        if (props.Length == 0)
-            throw new MissingFieldException("The implemented type doesn't have valid fields");
-
-        var dataTable = new DataTable(typeof(T).Name);
-        foreach (var prop in props)
-            dataTable.Columns.Add(prop.Name, prop.PropertyType);
-
-        if (items is null)
-            return dataTable;
-
-        foreach (var item in items)
-        {
-            if (item is null)
-                continue;
-
-            var values = new object[props.Length];
-            for (var i = 0; i < props.Length; i++)
-                values[i] = props[i].GetValue(item, null);
-
-            dataTable.Rows.Add(values);
-        }
-
-        return dataTable;
     }
 
     #endregion
@@ -218,7 +153,7 @@ public static partial class Extensions
     }
 
     /// <summary>
-    /// Deserialize an string to and object
+    /// Deserialize a string to and object
     /// </summary>
     /// <param name="xmlString"></param>
     /// <returns></returns>

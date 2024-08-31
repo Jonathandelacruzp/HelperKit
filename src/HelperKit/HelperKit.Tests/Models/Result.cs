@@ -2,21 +2,15 @@
 
 namespace HelperKit.Tests.Models;
 
-internal class Result : IResult
+internal  class Result(int statusCode = 200) : IResult
 {
-    public string StatusCode { get; set; }
+    public int StatusCode { get; set; } = statusCode;
     public string Message { get; set; }
     public string Detail { get; set; }
 
-    public Result(string statusCode = "200")
-    {
-        StatusCode = statusCode;
-    }
-
-    protected Result(Exception ex)
+    protected Result(Exception ex) : this(422)
     {
         Message = ex.Message;
-        StatusCode = "500";
         Detail = ex.InnerException?.Message;
     }
 
@@ -24,13 +18,13 @@ internal class Result : IResult
     public static implicit operator Result(Exception ex) => new(ex);
 }
 
-internal class Result<T> : Result, IResult<T>
+internal sealed class Result<T> : Result, IResult<T>
 {
     public T Value { get; set; }
 
-    public Result(string statusCode = "200") : base(statusCode) { }
+    public Result(int statusCode = 200) : base(statusCode) { }
 
-    private Result(T result, string statusCode = "200") : base(statusCode)
+    private Result(T result, int statusCode = 200) : base(statusCode)
     {
         Value = result;
     }

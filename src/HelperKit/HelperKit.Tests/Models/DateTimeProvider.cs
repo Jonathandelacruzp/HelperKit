@@ -12,14 +12,9 @@ public class LocalDateTimeProvider : IDateTimeProvider
     public TimeZoneInfo TimeZoneInfo => TimeZoneInfo.Local;
 }
 
-public class CustomDateTimeProvider : IDateTimeProvider
+public class CustomDateTimeProvider(DateTime date, TimeZoneInfo timeZoneInfo)
+    : IDateTimeProvider
 {
-    public DateTime Now { get; }
-    public TimeZoneInfo TimeZoneInfo { get; }
-
-    public CustomDateTimeProvider(DateTime date, TimeZoneInfo timeZoneInfo)
-    {
-        Now = DateTime.SpecifyKind(date, DateTimeKind.Unspecified);
-        TimeZoneInfo = timeZoneInfo;
-    }
+    public DateTime Now { get; } = DateTime.SpecifyKind(date, DateTimeKind.Unspecified);
+    public TimeZoneInfo TimeZoneInfo { get; } = timeZoneInfo;
 }

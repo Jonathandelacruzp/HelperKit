@@ -27,7 +27,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="System.Collections.Immutable" Version="7.0.*" />
+		<PackageReference Include="System.Collections.Immutable" Version="8.0.*" />
 		<PackageReference Include="System.Memory" Version="4.5.*" Condition="'$(TargetFramework)' == 'net462'" />
 	</ItemGroup>
 
@@ -66,6 +66,9 @@
 		</Compile>
 		<Compile Update="Task.cs">
 			<DependentUpon>Extensions.cs</DependentUpon>
+		</Compile>
+		<Compile Update="Enumerable.cs">
+		  <DependentUpon>Extensions.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
 

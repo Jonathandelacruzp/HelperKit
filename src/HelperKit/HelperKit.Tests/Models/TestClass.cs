@@ -25,7 +25,7 @@ public class TestClass
         return new TestClass
         {
             IntValue = random.Next(),
-            BooleanValue = random.Next(200) % 4 == 0,
+            BooleanValue = random.Next(200) % 2 == 0,
             IntArray = Enumerable.Repeat(0, arraySize).Select(_ => random.Next(0, 100)).ToArray(),
             IntList = Enumerable.Repeat(0, arraySize).Select(_ => random.Next(0, 100)).ToList(),
             StringValue = guid

@@ -23,7 +23,7 @@ public class ResultTests
         var testClass = TestClass.Create();
 
         Result<TestClass> result = testClass;
-        var success = result.TryGet(out var testClassResult);
+        var success = result.TryGetValue(out var testClassResult);
 
         success.Should().BeTrue();
         testClassResult.Should().NotBeNull();
@@ -35,7 +35,7 @@ public class ResultTests
     {
         Result<TestClass> result = new Result<TestClass>();
 
-        var success = result.TryGet(out var testClassResult);
+        var success = result.TryGetValue(out var testClassResult);
 
         success.Should().BeFalse();
         testClassResult.Should().BeNull();
@@ -48,7 +48,7 @@ public class ResultTests
 
         Result<TestClass> result = exception;
 
-        var success = result.TryGet(out var testClassResult);
+        var success = result.TryGetValue(out var testClassResult);
 
         success.Should().BeFalse();
         testClassResult.Should().BeNull();

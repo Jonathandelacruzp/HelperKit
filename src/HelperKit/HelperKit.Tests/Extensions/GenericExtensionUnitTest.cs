@@ -2,7 +2,7 @@ namespace HelperKit.Tests.Extensions;
 
 public class GenericExtensionUnitTest
 {
-    private readonly int[] _intArray = {1, 2, 3, 4};
+    private readonly int[] _intArray = [1, 2, 3, 4];
 
     [Fact]
     public void EnumConvert_ReturnCorrectValue()
@@ -197,7 +197,7 @@ public class GenericExtensionUnitTest
     [Fact]
     public void ContainsDuplicate_WithDuplicateValues_ReturnsTrue()
     {
-        string[] elements2 = ["dos","dos","tres"];
+        string[] elements2 = ["dos", "dos", "tres"];
 
         var hasDuplicates = elements2.ContainsDuplicates();
 
@@ -207,13 +207,12 @@ public class GenericExtensionUnitTest
     [Fact]
     public void ContainsDuplicate_WithNonDuplicateValues_ReturnsFalse()
     {
-        string[] elements2 = ["uno","dos","tres"];
+        string[] elements2 = ["uno", "dos", "tres"];
 
         var hasDuplicates = elements2.ContainsDuplicates();
 
         hasDuplicates.Should().BeFalse();
     }
-
 
     [Fact]
     public void ContainsDuplicate_predicate_WithNonDuplicateValues_ReturnsFalse()

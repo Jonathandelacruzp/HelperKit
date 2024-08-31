@@ -2,7 +2,7 @@
 
 namespace HelperKit.Tests.Models;
 
-internal  class Result(int statusCode = 200) : IResult
+internal class Result(int statusCode = 200) : IResult
 {
     public int StatusCode { get; set; } = statusCode;
     public string Message { get; set; }

@@ -2,34 +2,20 @@ namespace HelperKit;
 
 public static partial class Extensions
 {
-    /// <summary>
-    /// Validates if at least one item exist on other collection
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="value"></param>
-    /// <param name="param"></param>
-    /// <returns></returns>
-    [Obsolete("Use IsContainedIn instead")]
-    [ExcludeFromCodeCoverage]
-    public static bool IsContainedOn<T>(this T value, params T[] param)
-    {
-        return IsContainedIn(value, param as IEnumerable<T>);
-    }
-
     #region String
 
     ///  <summary>
     /// Converts to string UTF
     ///  </summary>
-    ///  <param name="val"></param>
+    ///  <param name="str"></param>
     ///  <exception cref="ArgumentNullException"></exception>
     ///  <returns></returns>
     [Obsolete]
     [ExcludeFromCodeCoverage]
-    public static string ToStringUtf8(this string val)
+    public static string ToStringUtf8(this string str)
     {
-        _ = val ?? throw new ArgumentNullException(nameof(val));
-        return Encoding.UTF8.GetString(Encoding.GetEncoding(1252).GetBytes(val));
+        _ = str ?? throw new ArgumentNullException(nameof(str));
+        return Encoding.UTF8.GetString(Encoding.GetEncoding(1252).GetBytes(str));
     }
 
     //[Obsolete]

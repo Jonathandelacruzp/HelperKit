@@ -2,18 +2,18 @@ namespace HelperKit.Tests.Extensions;
 
 public class GenericComparableUnitTest
 {
-    private readonly List<Color> _colorList = new()
-    {
+    private readonly List<Color> _colorList =
+    [
         Color.Blue,
         Color.Yellow,
         Color.Yellow
-    };
+    ];
 
-    private readonly List<Color> _colorListToFind = new()
-    {
+    private readonly List<Color> _colorListToFind =
+    [
         Color.Blue,
         Color.Red
-    };
+    ];
 
     [Fact]
     public void HasAnyExtension_ShouldReturn_Valid_Result()
@@ -26,34 +26,6 @@ public class GenericComparableUnitTest
     public void HasAnyExtension_ShouldReturn_Valid_False_Result()
     {
         _colorList.HasAny(Color.Red).Should().BeFalse();
-    }
-
-    [Fact]
-    public void IsContainedOnExtension_ShouldReturn_Valid_Result()
-    {
-        const Color colorBlue = Color.Blue;
-
-        var paramTest = colorBlue.IsContainedIn(Color.Blue, Color.Yellow, Color.Red);
-        paramTest.Should().BeTrue();
-
-        var enumerableTest = colorBlue.IsContainedIn(_colorListToFind);
-        enumerableTest.Should().BeTrue();
-    }
-
-    [Fact]
-    public void IsContainedOnExtension_ShouldTrowAnArgumentException()
-    {
-        var action = () => _colorListToFind.IsContainedIn(_colorList);
-
-        action.Should().Throw<ArgumentException>();
-    }
-
-    [Fact]
-    public void IsContainedOnExtension_ShouldTrowAnArgumentNUllException()
-    {
-        var nullAction = () => ((string)null).IsContainedIn("rojo", "verde");
-
-        nullAction.Should().Throw<ArgumentNullException>();
     }
 
     [Fact]

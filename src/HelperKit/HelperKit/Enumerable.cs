@@ -68,7 +68,7 @@ public static partial class Extensions
     public static DataTable ToDataTable<T>(this IEnumerable<T> items) where T : class
     {
         var props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-        if (props.Length == 0)
+        if (props is {Length: 0})
             throw new MissingFieldException("The implemented type doesn't have valid fields");
 
         var dataTable = new DataTable(typeof(T).Name);

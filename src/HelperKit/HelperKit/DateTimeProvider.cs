@@ -52,8 +52,8 @@ public sealed class DateTimeProvider : IDateTimeProvider
                 : throw new InvalidTimeZoneException($"The value provided is not a valid timeZoneId: {timeZoneId}");
     }
 
-    private static readonly Lazy<ImmutableDictionary<string, IDateTimeProvider>> SystemDateTimeProviders = new(() =>
+    private static readonly Lazy<IImmutableDictionary<string, IDateTimeProvider>> SystemDateTimeProviders = new(() =>
         TimeZoneInfo.GetSystemTimeZones().ToDictionary<TimeZoneInfo, string, IDateTimeProvider>(t => t.Id, t => new DateTimeProvider(t)).ToImmutableDictionary());
 
-    public static ImmutableDictionary<string, IDateTimeProvider> DateTimeProviders => SystemDateTimeProviders.Value;
+    public static IImmutableDictionary<string, IDateTimeProvider> DateTimeProviders => SystemDateTimeProviders.Value;
 }

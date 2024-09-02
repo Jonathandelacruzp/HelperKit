@@ -21,36 +21,6 @@ public static partial class Extensions
         return param.Any(items.Contains);
     }
 
-    /// <summary>
-    /// Validates if at least one item exist on other collection
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="value"></param>
-    /// <param name="items"></param>
-    /// <returns></returns>
-    /// <exception cref="ArgumentNullException">Thrown when value is null</exception>
-    /// <exception cref="ArgumentException">Thrown when obj is null</exception>
-    public static bool IsContainedIn<T>(this T value, IEnumerable<T> items)
-    {
-        _ = value ?? throw new ArgumentNullException(nameof(value));
-
-        return typeof(T).GetInterface("IEnumerable") is null
-            ? items?.Any(x => x.Equals(value)) == true
-            : throw new ArgumentException("Requested value could not be an Enumerable.");
-    }
-
-    /// <summary>
-    /// Validates if at least one item exist on other collection
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="value"></param>
-    /// <param name="param"></param>
-    /// <returns></returns>
-    public static bool IsContainedIn<T>(this T value, params T[] param)
-    {
-        return IsContainedIn(value, param as IEnumerable<T>);
-    }
-
     #endregion
 
     /// <summary>

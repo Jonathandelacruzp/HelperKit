@@ -14,11 +14,11 @@ public static partial class Extensions
     /// <summary>
     /// Removes diacritics
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="str"></param>
     /// <returns></returns>
-    public static string RemoveDiacritics(this string value)
+    public static string RemoveDiacritics(this string str)
     {
-        var normalizedString = value.Normalize(NormalizationForm.FormD);
+        var normalizedString = str.Normalize(NormalizationForm.FormD);
         var sb = new StringBuilder();
         foreach (var c in normalizedString)
         {
@@ -33,46 +33,45 @@ public static partial class Extensions
     /// <summary>
     /// Replace all NonBreaking Space (char 160) to a simple space
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="str"></param>
     /// <param name="def"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
-    public static string ReplaceNonBreakingSpace(this string value, string def = " ")
+    public static string ReplaceNonBreakingSpace(this string str, string def = " ")
     {
-        _ = value ?? throw new ArgumentNullException(nameof(value));
-        return value.Replace(Nbsp, def);
+        _ = str ?? throw new ArgumentNullException(nameof(str));
+        return str.Replace(Nbsp, def);
     }
 
     /// <summary>
     /// Deletes all slash / y backslash \ from string
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="str"></param>
     /// <returns></returns>
-    public static string DeleteSlashAndBackslash(this string value)
+    public static string DeleteSlashAndBackslash(this string str)
     {
-        return value?.Replace("/", string.Empty).Replace(@"\", string.Empty);
+        return str?.Replace("/", string.Empty).Replace(@"\", string.Empty);
     }
-
 
     /// <summary>
     /// Deletes all dot and commas of a string
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="str"></param>
     /// <returns></returns>
-    public static string DeleteDotAndComma(this string value)
+    public static string DeleteDotAndComma(this string str)
     {
-        return value?.Replace(".", string.Empty).Replace(",", string.Empty);
+        return str?.Replace(".", string.Empty).Replace(",", string.Empty);
     }
 
     /// <summary>
     /// Replace all the values set it on param with an empty string
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="str"></param>
     /// <param name="param"></param>
     /// <returns></returns>
-    public static string CustomReplaceOn(this string value, params string[] param)
+    public static string CustomReplaceOn(this string str, params string[] param)
     {
-        return param.Aggregate(value, (current, item) => current.Replace(item, string.Empty));
+        return param.Aggregate(str, (current, item) => current.Replace(item, string.Empty));
     }
 
     #endregion
@@ -82,12 +81,12 @@ public static partial class Extensions
     /// <summary>
     /// Returns a string with safe mode
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="obj"></param>
     /// <param name="def"></param>
     /// <returns>string</returns>
-    public static string ToSafeString(this object value, string def = "")
+    public static string ToSafeString(this object obj, string def = "")
     {
-        return (value ?? def).ToString();
+        return (obj ?? def).ToString();
     }
 
     #endregion
@@ -95,29 +94,29 @@ public static partial class Extensions
     /// <summary>
     /// Returns a string with safe mode
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="str"></param>
     /// <param name="find"></param>
     /// <returns>bool</returns>
-    public static bool EqualsIgnoreCase(this string value, string find)
+    public static bool EqualsIgnoreCase(this string str, string find)
     {
-        if (value is null && find is null)
+        if (str is null && find is null)
             return true;
 
-        return (value ?? "").Equals(find, StringComparison.OrdinalIgnoreCase);
+        return (str ?? "").Equals(find, StringComparison.OrdinalIgnoreCase);
     }
 
     /// <summary>
     /// Returns a string with safe mode
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="str"></param>
     /// <param name="find"></param>
     /// <param name="sc"></param>
     /// <returns>bool</returns>
-    public static bool ContainsValue(this string value, string find, StringComparison sc = StringComparison.OrdinalIgnoreCase)
+    public static bool ContainsValue(this string str, string find, StringComparison sc = StringComparison.OrdinalIgnoreCase)
     {
-        if (value is null || find is null)
+        if (string.IsNullOrEmpty(str) || string.IsNullOrEmpty(find))
             return false;
 
-        return value.IndexOf(find, sc) is not -1;
+        return str.IndexOf(find, sc) >= 0;
     }
 }

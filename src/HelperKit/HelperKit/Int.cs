@@ -7,12 +7,23 @@ public static partial class Extensions
     /// <summary>
     /// Converts an object to int
     /// </summary>
-    /// <param name="s"></param>
+    /// <param name="obj">object value</param>
     /// <param name="def"></param>
     /// <returns>Int32</returns>
-    public static int ToInteger(this object s, int def = 0)
+    public static int ToInteger(this object obj, int def = 0)
     {
-        return int.TryParse(s?.ToString(), out var result) ? result : def;
+        return obj is null ? def : ToInteger(obj.ToString(), def);
+    }
+
+    /// <summary>
+    /// Converts a string to int
+    /// </summary>
+    /// <param name="str">string value</param>
+    /// <param name="def"></param>
+    /// <returns>Int32</returns>
+    public static int ToInteger(this string str, int def = 0)
+    {
+        return int.TryParse(str, out var result) ? result : def;
     }
 
     #endregion

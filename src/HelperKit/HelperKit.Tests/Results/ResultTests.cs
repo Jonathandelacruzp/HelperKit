@@ -33,7 +33,7 @@ public class ResultTests
     [Fact]
     public void IResultTryGetValue_WithNullValue_ReturnsFailure()
     {
-        Result<TestClass> result = new Result<TestClass>();
+        var result = new Result<TestClass>();
 
         var success = result.TryGetValue(out var testClassResult);
 

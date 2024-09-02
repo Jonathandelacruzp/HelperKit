@@ -30,19 +30,20 @@ public class DecimalExtensionUnitTest
     [Fact]
     public void DecimalExtension_ReturnZeroFromNonNumericStringValue()
     {
-        var stringFalse = "5F".ToDecimal();
+        var strFalse = "5F".ToDecimal();
 
-        stringFalse.Should().Be(0);
+        strFalse.Should().Be(0);
     }
 
     [Fact]
     public void LongExtension_GivesTheCorrectValue()
     {
-        const long floatValue = 5;
+        const long longValue = 5;
         var decimalValue = new decimal(5);
 
+        "5".ToLong().Should().Be(longValue);
         decimalValue.ToLong().Should<long>();
-        decimalValue.ToLong().Should().Be(floatValue);
+        decimalValue.ToLong().Should().Be(longValue);
     }
 
     [Fact]

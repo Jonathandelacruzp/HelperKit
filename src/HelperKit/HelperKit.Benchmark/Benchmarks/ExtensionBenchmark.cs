@@ -3,7 +3,7 @@ using BenchmarkDotNet.Attributes;
 namespace HelperKit.Benchmark.Benchmarks;
 
 [MemoryDiagnoser]
-public class Extensions
+public class ExtensionBenchmark
 {
     private readonly string _textSlash;
     private readonly string _text;
@@ -11,11 +11,12 @@ public class Extensions
     //private readonly string _stringWithDiacritics;
     //private readonly string _withNbsp;
 
-    public Extensions()
+    public ExtensionBenchmark()
     {
-        _text =
-            @"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a 
-type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
+        _text = """
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a 
+                type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                """;
 
         _text2 = _text[..200];
 
@@ -60,4 +61,21 @@ type specimen book. It has survived not only five centuries, but also the leap i
     // {
     //     var text = _textSlash.AsSpan().DeleteSlashAndBackslash();
     // }
+
+
+    private readonly object _stringObject = "9999999";
+
+    private readonly string _stringRaw = "9999999";
+
+    [Benchmark]
+    public void StringObject_ToInteger()
+    {
+        var text = _stringObject.ToInteger();
+    }
+
+    [Benchmark]
+    public void RawString_ToInteger()
+    {
+        var text = _stringRaw.ToInteger();
+    }
 }

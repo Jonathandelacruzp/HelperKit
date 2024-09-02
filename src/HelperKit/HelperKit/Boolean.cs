@@ -7,12 +7,12 @@ public static partial class Extensions
     /// <summary>
     /// Converts to Boolean
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="str"></param>
     /// <param name="def"></param>
     /// <returns></returns>
-    public static bool ToBoolean(this string value, bool def = false)
+    public static bool ToBoolean(this string str, bool def = false)
     {
-        return bool.TryParse(value, out var result) ? result : def;
+        return bool.TryParse(str, out var result) ? result : def;
     }
 
     #endregion

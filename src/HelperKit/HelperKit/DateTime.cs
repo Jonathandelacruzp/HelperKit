@@ -7,13 +7,13 @@ public static partial class Extensions
     /// <summary>
     /// Validates if the given date is between 2 dates
     /// </summary>
-    /// <param name="val"></param>
+    /// <param name="date"></param>
     /// <param name="start"></param>
     /// <param name="end"></param>
     /// <returns></returns>
-    public static bool IsBetween(this DateTime val, DateTime start, DateTime end)
+    public static bool IsBetween(this DateTime date, DateTime start, DateTime end)
     {
-        return val >= start && val <= end;
+        return date >= start && date <= end;
     }
 
     #endregion
@@ -23,12 +23,12 @@ public static partial class Extensions
     /// <summary>
     /// Converts a value to DateTime
     /// </summary>
-    /// <param name="value"></param>
+    /// <param name="str"></param>
     /// <param name="def"></param>
     /// <returns></returns>
-    public static DateTime ToDateTime(this string value, DateTime def = default)
+    public static DateTime ToDateTime(this string str, DateTime def = default)
     {
-        return DateTime.TryParse(value, out var result) ? result : def;
+        return DateTime.TryParse(str, out var result) ? result : def;
     }
 
     /// <summary>

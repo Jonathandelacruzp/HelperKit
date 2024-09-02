@@ -3,4 +3,4 @@
 using BenchmarkDotNet.Running;
 using HelperKit.Benchmark.Benchmarks;
 
-_ = BenchmarkRunner.Run<Extensions>();
+_ = BenchmarkRunner.Run<ExtensionBenchmark>();

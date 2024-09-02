@@ -85,7 +85,7 @@ public static partial class Extensions
         foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(value))
         {
             var propertyValue = prop.GetValue(value)?.ToString();
-            if (propertyValue != null)
+            if (propertyValue is not null)
                 nameValueCollection.Add(prop.Name, propertyValue);
         }
 
@@ -98,13 +98,13 @@ public static partial class Extensions
     /// <typeparam name="T"></typeparam>
     /// <param name="value"></param>
     /// <returns></returns>
-    public static IReadOnlyCollection<KeyValuePair<string, string>> ToKeyValuePair<T>(this T value) where T : class
+    public static List<KeyValuePair<string, string>> ToKeyValuePair<T>(this T value) where T : class
     {
         var keyPairs = new List<KeyValuePair<string, string>>();
         foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(value))
         {
             var objValue = prop.GetValue(value)?.ToString();
-            if (objValue != null)
+            if (objValue is not null)
                 keyPairs.Add(new KeyValuePair<string, string>(prop.Name, objValue));
         }
 

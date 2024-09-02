@@ -30,15 +30,15 @@ public static class HashHelper
     /// <summary>
     /// Computes MD5 Hash
     /// </summary>
-    /// <param name="rawData"></param>
+    /// <param name="txt"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException">Throws an exception if rawData is null</exception>
-    public static string ComputeMd5Hash(string rawData)
+    public static string ComputeMd5Hash(string txt)
     {
-        _ = rawData ?? throw new ArgumentNullException(nameof(rawData));
+        _ = txt ?? throw new ArgumentNullException(nameof(txt));
 
         using var md5 = new MD5CryptoServiceProvider();
-        return md5.GenerateHashString(rawData);
+        return md5.GenerateHashString(txt);
     }
 
     /// <summary>
@@ -55,15 +55,15 @@ public static class HashHelper
     /// <summary>
     /// Computes Sha256 Hash
     /// </summary>
-    /// <param name="rawData"></param>
+    /// <param name="txt"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentNullException">Throws an exception if rawData is null</exception>
-    public static string ComputeSha256Hash(string rawData)
+    public static string ComputeSha256Hash(string txt)
     {
-        _ = rawData ?? throw new ArgumentNullException(nameof(rawData));
+        _ = txt ?? throw new ArgumentNullException(nameof(txt));
 
         using var sha256Hash = SHA256.Create();
-        return sha256Hash.GenerateHashString(rawData);
+        return sha256Hash.GenerateHashString(txt);
     }
 
     /// <summary>

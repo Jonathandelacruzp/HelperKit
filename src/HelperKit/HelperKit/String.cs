@@ -92,7 +92,7 @@ public static partial class Extensions
     #endregion
 
     /// <summary>
-    /// Returns a string with safe mode
+    /// Determine if a specified value have the same value ignoring the casing
     /// </summary>
     /// <param name="str"></param>
     /// <param name="find"></param>
@@ -106,7 +106,7 @@ public static partial class Extensions
     }
 
     /// <summary>
-    /// Returns a string with safe mode
+    /// Determine if a specified value contains has any occurence in a string value
     /// </summary>
     /// <param name="str"></param>
     /// <param name="find"></param>

@@ -2,12 +2,7 @@
 
 public static partial class Extensions
 {
-    private const char Slash = '/';
-    private const char BackSlash = '\\';
-    private const char Dot = '.';
-    private const char Comma = ',';
     private const string Nbsp = @"\u00A0";
-    private const int MaxStackLimit = 256;
 
     #region String
 

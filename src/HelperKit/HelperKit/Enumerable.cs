@@ -39,11 +39,7 @@ public static partial class Extensions
     public static IEnumerable<T> DistinctBy<T, TKey>(this IEnumerable<T> items, Func<T, TKey> predicate)
     {
         HashSet<TKey> set = [];
-        foreach (var item in items)
-        {
-            if (set.Add(predicate(item)))
-                yield return item;
-        }
+        return items.Where(x => set.Add(predicate(x)));
     }
 
     /// <summary>

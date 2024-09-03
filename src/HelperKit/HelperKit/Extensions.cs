@@ -18,7 +18,7 @@ public static partial class Extensions
     public static bool HasAny<T>(this IEnumerable<T> items, params T[] param)
     {
         _ = items ?? throw new ArgumentNullException(nameof(items));
-        return param.Any(items.Contains);
+        return Array.Exists(param, items.Contains);
     }
 
     #endregion

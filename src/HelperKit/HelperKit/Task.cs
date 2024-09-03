@@ -12,7 +12,9 @@ public static partial class Extensions
     /// <param name="onException"></param>
     /// <param name="configureAwait"></param>
     /// <typeparam name="TException"></typeparam>
+#pragma warning disable S3168
     public static async void SafeFireAndForget<TException>(this Task task, Action<TException> onException = null, bool configureAwait = true) where TException : Exception
+#pragma warning restore S3168
     {
         try
         {

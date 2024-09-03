@@ -64,7 +64,7 @@ public static partial class Extensions
     public static DateTime FirstDateOfWeek(this DateTime _, int year, int weekOfYear, CultureInfo cultureInfo = null)
     {
         cultureInfo ??= CultureInfo.CurrentCulture;
-        var jan1 = new DateTime(year, 1, 1);
+        var jan1 = new DateTime(year, 1, 1, 0, 0, 0, DateTimeKind.Unspecified);
         var daysOffset = (int)cultureInfo.DateTimeFormat.FirstDayOfWeek - (int)jan1.DayOfWeek;
         var firstWeekDay = jan1.AddDays(daysOffset);
         var firstWeek = cultureInfo.Calendar.GetWeekOfYear(jan1, cultureInfo.DateTimeFormat.CalendarWeekRule, cultureInfo.DateTimeFormat.FirstDayOfWeek);

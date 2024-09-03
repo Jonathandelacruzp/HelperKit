@@ -171,18 +171,6 @@ public class GenericExtensionUnitTest
     }
 
     [Fact]
-    [Obsolete("ConvertObjectToXmlString obsolete")]
-    public void ConvertObjectToXmlString_WithClass_ReturnsSuccess()
-    {
-        const string regexStr = @"<StringValue>[\s\S]*?<\/StringValue>";
-
-        var elements = TestClass.Create();
-        var xmlstring = elements.ConvertObjectToXmlString();
-
-        xmlstring.Should().MatchRegex(regexStr);
-    }
-
-    [Fact]
     public void DeserializeXmlToObject_WithClass_ReturnsSuccess()
     {
         var elements = TestClass.Create();

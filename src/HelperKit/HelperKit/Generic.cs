@@ -61,18 +61,6 @@ public static partial class Extensions
             : (T)Activator.CreateInstance(typeof(T));
     }
 
-    // /// <summary>
-    // ///
-    // /// </summary>
-    // /// <param name="nameValueCollection"></param>
-    // /// <param name="name"></param>
-    // /// <param name="def"></param>
-    // /// <returns></returns>
-    // public static string GetValue(this NameValueCollection nameValueCollection, string name, string def = "")
-    // {
-    //     return nameValueCollection[name] ?? def;
-    // }
-
     /// <summary>
     /// Converts an object to named value collection
     /// </summary>
@@ -142,7 +130,6 @@ public static partial class Extensions
 
         using var xmlStream = new MemoryStream();
         var xmlns = new XmlSerializerNamespaces();
-        //xmlns.Add(string.Empty, string.Empty);
 
         xmlSerializer.Serialize(xmlStream, value, xmlns);
         xmlStream.Position = 0;
@@ -162,31 +149,6 @@ public static partial class Extensions
         var xmlSerializer = new XmlSerializer(typeof(T));
         using var reader = new StringReader(xmlString);
         return (T)xmlSerializer.Deserialize(reader);
-    }
-
-    /// <summary>
-    /// Converts an object to xml text
-    /// </summary>
-    /// <param name="value"></param>
-    /// <typeparam name="T"></typeparam>
-    /// <returns></returns>
-    [Obsolete("Use SerializeObjectToXml<T> instead")]
-    public static string ConvertObjectToXmlString<T>(this T value) where T : class
-    {
-        var typeName = value.GetType().Name;
-        var propertyInfos = value.GetType().GetProperties();
-
-        var strBuilder = new StringBuilder();
-        strBuilder.Append('<').Append(typeName).Append('>');
-        foreach (var propertyInfo in propertyInfos.Where(x => x.CanRead))
-        {
-            strBuilder.Append('<').Append(propertyInfo.Name).Append('>')
-                .Append(propertyInfo.GetValue(value, null)?.ToString() ?? string.Empty)
-                .Append("</").Append(propertyInfo.Name).Append('>');
-        }
-
-        strBuilder.Append("</").Append(typeName).Append('>');
-        return strBuilder.ToString();
     }
 
     #endregion
